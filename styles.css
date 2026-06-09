@@ -102,7 +102,6 @@ h3 {
   right: 0;
   z-index: 100;
   display: flex;
-  width: 100vw;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
@@ -129,8 +128,19 @@ h3 {
 .brand-logo {
   height: 75px;
   width: auto;
+  aspect-ratio: 904 / 336;
   object-fit: contain;
   transition: height 180ms ease;
+}
+
+main {
+  padding-top: 120px;
+}
+
+@media (max-width: 920px) {
+  main {
+    padding-top: 95px;
+  }
 }
 
 .nav-links {
