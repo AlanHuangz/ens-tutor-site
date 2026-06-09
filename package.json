@@ -1,0 +1,12 @@
+{
+  "name": "ens-tutor-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official website and lightweight booking admin for ENS AI learning companion.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

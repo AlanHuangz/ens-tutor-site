@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>觀點隨筆 — 願意學｜先懂孩子，再懂數學</title>
+    <meta
+      name="description"
+      content="在願意學自學引導的陪伴路途中，關於教育、大腦科學、親子關係的隨筆觀察與實地引導紀錄。"
+    />
+    <link rel="stylesheet" href="styles.css?v=4.0" />
+  </head>
+  <body class="articles-page" style="background: var(--paper);">
+    <header class="site-header is-scrolled" aria-label="主選單">
+      <a class="brand" href="index.html" aria-label="願意學首頁">
+        <img src="assets/logo.png" alt="願意學 LOGO" class="brand-logo" />
+      </a>
+      <button class="nav-toggle" type="button" aria-label="開啟選單" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" aria-label="網站導覽">
+        <a href="index.html">首頁</a>
+        <a href="articles.html" class="is-active">教育觀</a>
+        <a href="booking.html">報名方式</a>
+      </nav>
+    </header>
+
+    <main style="padding-top: 120px; min-height: 80vh;">
+      <section class="section" aria-labelledby="articles-page-title" style="padding-bottom: 40px;">
+        <div class="section-heading" style="text-align: center;">
+          <p class="eyebrow">Essays & thoughts</p>
+          <h1 id="articles-page-title" style="font-family: 'Noto Serif TC', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--teal-dark); margin-bottom: 16px; font-weight: 900;">
+            觀點隨筆
+          </h1>
+          <p style="font-size: 1.08rem; max-width: 600px; margin: 0 auto; color: var(--muted);">
+            記錄一些教學現場的觀察、親子陪讀時常見的困難，以及我對 AI 輔助學習的實際想法。
+          </p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="articles-grid" id="allArticlesGrid" style="max-width: 1120px; margin: 0 auto; padding: 0 24px;">
+          <!-- 動態載入所有文章 -->
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--muted);">
+            正在載入文章隨筆...
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" style="background: var(--night); color: rgba(250,246,240,0.65); padding: 60px clamp(20px, 5vw, 64px); border-top: 1px solid rgba(250,246,240,0.1); display: flex; flex-direction: column; gap: 20px; align-items: center; text-align: center;">
+      <span>© <span id="year"></span> 願意學</span>
+      <div style="display: flex; gap: 24px;">
+        <a href="https://line.me/R/ti/p/@197nqpdg" target="_blank" rel="noreferrer" style="color: var(--coral);">官方 LINE：@197nqpdg</a>
+        <a href="index.html" style="color: rgba(250,246,240,0.85);">回首頁</a>
+      </div>
+    </footer>
+
+    <!-- 文章閱讀 Modal -->
+    <div id="readModal" class="article-modal" role="dialog" aria-hidden="true">
+      <div class="article-modal-backdrop"></div>
+      <div class="article-modal-container">
+        <button type="button" class="article-modal-close" aria-label="關閉閱讀">&times;</button>
+        <div class="article-modal-content">
+          <article>
+            <header class="article-modal-header">
+              <h2 id="readModalTitle">文章標題</h2>
+              <div class="article-card-meta">
+                <span id="readModalDate">發佈日期</span>
+                <div id="readModalTags" class="article-card-tags"></div>
+              </div>
+            </header>
+            <div id="readModalBody" class="article-modal-body">
+              <!-- 文章內文 -->
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 簡單的 Header Scroll 控制與手機端 Menu 切換
+      const header = document.querySelector(".site-header");
+      const toggle = document.querySelector(".nav-toggle");
+      const year = document.querySelector("#year");
+      if (year) year.textContent = new Date().getFullYear();
+
+      if (toggle && header) {
+        toggle.addEventListener("click", () => {
+          const isOpen = header.classList.toggle("nav-open");
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      // 載入文章資料
+      let articles = [];
+
+      async function loadArticles() {
+        const grid = document.querySelector("#allArticlesGrid");
+        try {
+          const response = await fetch("/api/articles");
+          if (!response.ok) throw new Error("無法取得文章");
+          articles = await response.json();
+
+          if (!articles.length) {
+            grid.innerHTML = `
+              <div style="grid-column: 1 / -1; text-align: center; padding: 60px; border: 1px dashed var(--line); border-radius: var(--radius); background: var(--surface);">
+                <p style="color: var(--muted); margin: 0;">目前尚無文章。請至後台撰寫並發佈隨筆觀點！</p>
+              </div>
+            `;
+            return;
+          }
+
+          grid.innerHTML = articles
+            .map((art) => {
+              const tagsHtml = (art.tags || [])
+                .map((tag) => `<span class="article-tag">${tag}</span>`)
+                .join("");
+              const dateStr = new Date(art.createdAt).toLocaleDateString("zh-TW", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+
+              return `
+                <article class="article-card" data-id="${art.id}">
+                  <div>
+                    <div class="article-card-meta">
+                      <span>${dateStr}</span>
+                    </div>
+                    <h2 class="article-card-title">${art.title}</h2>
+                    <p class="article-card-summary">${art.summary}</p>
+                  </div>
+                  <div class="article-card-tags">
+                    ${tagsHtml}
+                  </div>
+                </article>
+              `;
+            })
+            .join("");
+
+          // 綁定點擊事件
+          document.querySelectorAll(".article-card").forEach((card) => {
+            card.addEventListener("click", () => {
+              const id = card.getAttribute("data-id");
+              openArticle(id);
+            });
+          });
+
+        } catch (error) {
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #c62828;">
+              載入文章時發生錯誤：${error.message}
+            </div>
+          `;
+        }
+      }
+
+      const modal = document.querySelector("#readModal");
+      const modalClose = document.querySelector(".article-modal-close");
+      const modalBackdrop = document.querySelector(".article-modal-backdrop");
+
+      function openArticle(id) {
+        const art = articles.find((a) => a.id === id);
+        if (!art) return;
+
+        document.querySelector("#readModalTitle").textContent = art.title;
+        document.querySelector("#readModalDate").textContent = new Date(art.createdAt).toLocaleDateString("zh-TW", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+        // 標籤
+        const tagsContainer = document.querySelector("#readModalTags");
+        tagsContainer.innerHTML = (art.tags || [])
+          .map((tag) => `<span class="article-tag">${tag}</span>`)
+          .join("");
+
+        // 內文渲染：將換行或段落做簡單轉換
+        const bodyContainer = document.querySelector("#readModalBody");
+        // 如果內文含有段落標籤就直接放，否則按換行分段
+        if (art.content.includes("<p>")) {
+          bodyContainer.innerHTML = art.content;
+        } else {
+          bodyContainer.innerHTML = art.content
+            .split("\n")
+            .filter((p) => p.trim())
+            .map((p) => `<p>${p}</p>`)
+            .join("");
+        }
+
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeArticle() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      modalClose.addEventListener("click", closeArticle);
+      modalBackdrop.addEventListener("click", closeArticle);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) {
+          closeArticle();
+        }
+      });
+
+      loadArticles();
+    </script>
+  </body>
+</html>

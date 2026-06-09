@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>後台｜學習陪伴與觀點管理</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Local admin</p>
+        <h1>預約與行程後台</h1>
+      </div>
+      <nav class="admin-nav" aria-label="後台導覽">
+        <a class="button ghost" href="/">回前台</a>
+        <button class="button primary" id="refreshData" type="button">重新整理</button>
+      </nav>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-panel status-panel" aria-labelledby="status-title">
+        <h2 id="status-title">目前接案規則</h2>
+        <div class="status-grid" id="settingsOutput"></div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="block-title">
+        <div class="panel-heading">
+          <h2 id="block-title">標記不可預約時段</h2>
+          <p>遊程講師、離職交接、家庭行程都可以先擋起來，前台會自動顯示為已保留。</p>
+        </div>
+        <form class="admin-form" id="blockForm">
+          <label>
+            日期
+            <input id="blockDate" type="date" min="2026-07-01" required />
+          </label>
+          <label>
+            時間
+            <select id="blockTime" required>
+              <option value="">請選擇</option>
+              <option>09:00</option>
+              <option>10:30</option>
+              <option>14:00</option>
+              <option>15:30</option>
+              <option>19:00</option>
+              <option>20:30</option>
+            </select>
+          </label>
+          <label>
+            原因
+            <input id="blockReason" type="text" placeholder="例如：遊程講師 case" required />
+          </label>
+          <button class="button primary" type="submit">加入不可預約</button>
+        </form>
+        <div class="list" id="unavailableList"></div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="inquiry-title">
+        <div class="panel-heading">
+          <h2 id="inquiry-title">家長諮詢名單</h2>
+          <p>送出的候選時段會出現在這裡。先檢查是否與遊程或其他工作強碰，再決定回覆。</p>
+        </div>
+        <div class="inquiry-grid" id="inquiryList"></div>
+      </section>
+
+      <section class="admin-panel assistant-panel" aria-labelledby="assistant-title">
+        <div class="panel-heading">
+          <h2 id="assistant-title">回覆小助理</h2>
+          <p>第一版先用你的規則產生回覆草稿；正式上線時可再接真正的 AI 模型。</p>
+        </div>
+        <label>
+          回覆草稿
+          <textarea id="replyDraft" rows="9" placeholder="點選諮詢卡片中的回覆草稿"></textarea>
+        </label>
+        <button class="button ghost" id="copyReply" type="button">複製回覆</button>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="article-title">
+        <div class="panel-heading">
+          <h2 id="article-title">文章發佈與管理</h2>
+          <p>您可以在這裡撰寫並發佈隨筆或教育觀點文章。發佈後，前台的「文章專區」會自動更新。</p>
+        </div>
+        <form class="admin-form" id="articleForm">
+          <label>
+            文章標題
+            <input id="articleTitle" type="text" placeholder="請輸入文章標題..." required />
+          </label>
+          <label>
+            標籤 (多個標籤請用半形逗號隔開)
+            <input id="articleTags" type="text" placeholder="例如：學習心態, 大腦科學, 親子關係" />
+          </label>
+          <label>
+            簡短摘要
+            <textarea id="articleSummary" rows="2" placeholder="簡短說明文章大意，會顯示在清單卡片上..." required></textarea>
+          </label>
+          <label>
+            文章內文 (可用 &lt;p&gt; 分段)
+            <textarea id="articleContent" rows="12" placeholder="請輸入文章內容，可使用 &lt;p&gt;段落&lt;/p&gt; 來進行分段..." required></textarea>
+          </label>
+          <button class="button primary" type="submit">發佈文章</button>
+        </form>
+        <div class="list" id="articleList" style="margin-top: 24px;"></div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

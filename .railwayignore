@@ -1,0 +1,13 @@
+.tools/
+.chrome-test/
+.edge-profile-test/
+upload-to-github/
+antigravity-skill/
+antigravity-skill.zip
+preview-desktop-new.png
+preview-logo-mobile.png
+preview-mobile-long.png
+preview-mobile-new.png
+server.err.log
+server.out.log
+data.json
