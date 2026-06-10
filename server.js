@@ -245,7 +245,7 @@ async function handleApi(request, response, requestUrl) {
   return false;
 }
 
-function serveStatic(response, requestUrl) {
+function serveStatic(request, response, requestUrl) {
   const redirects = {
     "/belief": "/",
     "/belief.html": "/",
@@ -341,7 +341,7 @@ const server = http.createServer(async (request, response) => {
       }
       return;
     }
-    serveStatic(response, requestUrl);
+    serveStatic(request, response, requestUrl);
   } catch (error) {
     sendJson(response, 500, { error: error.message });
   }
