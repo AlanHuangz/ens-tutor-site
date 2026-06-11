@@ -2,9 +2,32 @@
 
 // 場景清單設定 (路徑、名稱、與備用預期播放毫秒數)
 const sceneConfig = [
-  { url: 'scenes/scene1.html', name: '第一幕：品牌起點', duration: 5500 },
-  { url: 'scenes/scene2.html', name: '第二幕：痛點與同理', duration: 6500 },
-  { url: 'scenes/scene3.html', name: '第三幕：自學引導陪伴', duration: 7500 }
+  { url: 'scenes/scene1.html', name: '第 1 幕：你是否也聽過  ...', duration: 5500 },
+  { url: 'scenes/scene2.html', name: '第 2 幕：但我不這麼認為', duration: 4000 },
+  { url: 'scenes/scene3.html', name: '第 3 幕：我相信每個時代的...', duration: 7000 },
+  { url: 'scenes/scene4.html', name: '第 4 幕：我們熟悉的教育樣...', duration: 5500 },
+  { url: 'scenes/scene5.html', name: '第 5 幕：它曾經回應那個時...', duration: 5500 },
+  { url: 'scenes/scene6.html', name: '第 6 幕：但我們距離工業時...', duration: 5500 },
+  { url: 'scenes/scene7.html', name: '第 7 幕：以前的成功學常說...', duration: 5500 },
+  { url: 'scenes/scene8.html', name: '第 8 幕：但現代腦科學提醒...', duration: 5500 },
+  { url: 'scenes/scene9.html', name: '第 9 幕：每個人吸收知識的...', duration: 5500 },
+  { url: 'scenes/scene10.html', name: '第 10 幕：可是在教育現場 ...', duration: 5500 },
+  { url: 'scenes/scene11.html', name: '第 11 幕：老師們已經很努力...', duration: 5500 },
+  { url: 'scenes/scene12.html', name: '第 12 幕：只是要同時顧進度...', duration: 5500 },
+  { url: 'scenes/scene13.html', name: '第 13 幕：自我決定論提到 ...', duration: 5500 },
+  { url: 'scenes/scene14.html', name: '第 14 幕：自主感  我想怎...', duration: 5500 },
+  { url: 'scenes/scene15.html', name: '第 15 幕：勝任感  在還沒...', duration: 5500 },
+  { url: 'scenes/scene16.html', name: '第 16 幕：歸屬感  我挫折...', duration: 5500 },
+  { url: 'scenes/scene17.html', name: '第 17 幕：AI 能夠配合孩...', duration: 5500 },
+  { url: 'scenes/scene18.html', name: '第 18 幕：有了更多選擇  ...', duration: 5500 },
+  { url: 'scenes/scene19.html', name: '第 19 幕：AI 能夠拆解步...', duration: 5500 },
+  { url: 'scenes/scene20.html', name: '第 20 幕：隨時想問就問沒有...', duration: 5500 },
+  { url: 'scenes/scene21.html', name: '第 21 幕：孩子漸漸得到勝任...', duration: 4000 },
+  { url: 'scenes/scene22.html', name: '第 22 幕：而前面兩項都被滿...', duration: 5500 },
+  { url: 'scenes/scene23.html', name: '第 23 幕：也有餘裕照顧孩子...', duration: 4000 },
+  { url: 'scenes/scene24.html', name: '第 24 幕：因此孩子有了最重...', duration: 4000 },
+  { url: 'scenes/scene25.html', name: '第 25 幕：所以孩子不是學不...', duration: 5500 },
+  { url: 'scenes/scene26.html', name: '第 26 幕：讓我們一起陪孩子...', duration: 7000 }
 ];
 
 let currentIndex = 0;
