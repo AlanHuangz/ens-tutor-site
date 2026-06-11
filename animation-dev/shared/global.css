@@ -199,10 +199,46 @@ body {
   }
 }
 
-/* 全域防止語句被瀏覽器隨意折行 */
+/* 全域防止語句被瀏覽器隨意折行 (預設桌機端) */
 .animate-line {
   white-space: nowrap !important;
+  word-break: break-word;
   color: var(--color-text-main) !important;
+}
+
+/* 行動端與窄小螢幕適配：改為垂直堆疊以拉大圖形，並允許文字合理換行 */
+@media (max-width: 600px) {
+  .scene-split-container {
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 3vw !important;
+    padding: 1vw !important;
+  }
+  
+  .text-side {
+    flex: none !important;
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .visual-side {
+    flex: none !important;
+    width: 100% !important;
+    margin-top: 1vw !important;
+  }
+  
+  .text-side .animate-line {
+    font-size: 4.8vw !important; /* 行動端文字字級微調 */
+    text-align: center !important;
+    margin: 1vw 0 !important;
+    white-space: normal !important; /* 行動端解開強制不換行，允許自然折行 */
+  }
+  
+  .scene-img {
+    max-height: 42vw !important; /* 行動端圖片適度放大，確保清晰 */
+    max-width: 85% !important;
+  }
 }
 
 

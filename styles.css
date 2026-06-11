@@ -1015,4 +1015,7 @@ textarea {
   br.desktop-only {
     display: none;
   }
+  .video-container {
+    aspect-ratio: 1 / 1 !important; /* 行動端使用 1:1 比例，為 Iframe 文字動畫預留充足垂直空間，防止圖形被截斷或縮小 */
+  }
 }

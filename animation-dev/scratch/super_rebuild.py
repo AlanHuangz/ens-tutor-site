@@ -1639,37 +1639,33 @@ def rebuild():
 }"""
         },
         
-        # 31. 願意學 (大圖 + 太陽冉冉升起發光效果)
+        # 31. 願意學 (最後一頁：換成主 LOGO 並將背景色設為純白，周圍加入亮色門縫呼吸光效)
         31: {
             'type': 'split',
             'visual': """      <div class="visual-side fade-in delay-2s">
-        <div class="image-wrapper">
-          <img src="../assets/willing_to_learn.png" class="scene-img willing-img" alt="願意學">
-          <div class="sun-glow-back"></div>
+        <div class="image-wrapper logo-wrapper">
+          <img src="../assets/logo.png" class="scene-img final-logo-img" alt="願意學 LOGO">
         </div>
       </div>""",
             'css': """
-.image-wrapper { position: relative; display: inline-block; }
-.willing-img { animation: sunRise 7s ease-in-out infinite !important; position: relative; z-index: 2; }
-.sun-glow-back {
-  position: absolute;
-  bottom: 0%;
-  left: 20%;
-  width: 60%;
-  height: 60%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(220,168,66,0.35) 0%, rgba(255,255,255,0) 70%);
-  animation: sunGlowRising 7s ease-in-out infinite;
-  z-index: 1;
-  pointer-events: none;
+body {
+  background: #FFFFFF !important; /* 與 Logo 的白色背景完美融合，不留邊界 */
 }
-@keyframes sunRise {
-  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 1.5vw 3vw rgba(82, 133, 140, 0.1)); }
-  50% { transform: translateY(-0.8vw) scale(1.015); filter: drop-shadow(0 2.5vw 4.5vw rgba(82, 133, 140, 0.22)); }
+.image-wrapper.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
-@keyframes sunGlowRising {
-  0%, 100% { transform: translateY(1vw) scale(0.9); opacity: 0.4; }
-  50% { transform: translateY(-1.5vw) scale(1.2); opacity: 1; }
+.final-logo-img {
+  max-width: 100%;
+  max-height: 25vw !important; /* 限制最大高度，防止 Logo 過大擠壓 */
+  object-fit: contain;
+  animation: finalLogoGlow 5s ease-in-out infinite !important;
+}
+@keyframes finalLogoGlow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0.5vw 1.2vw rgba(255, 110, 64, 0.15)); }
+  50% { transform: scale(1.03); filter: drop-shadow(0 1vw 2.4vw rgba(255, 110, 64, 0.35)); }
 }"""
         }
     }
