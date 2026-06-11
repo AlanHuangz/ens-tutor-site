@@ -1,10 +1,10 @@
 /* player.css - 播放器外殼與控制面板樣式 */
 
 :root {
-  --player-bg: #ECEADB; /* 象牙白，與場景底色融為一體 */
+  --player-bg: #FFFFFF; /* 純白，與官網一致 */
   --control-bg: rgba(255, 255, 255, 0.85); /* 溫和的白色半透明背景 */
-  --active-color: #638666; /* 品牌抹茶綠 */
-  --text-main: #2E2E2E; /* 墨黑文字色 */
+  --active-color: #52858C; /* 翠綠色，品牌主色 */
+  --text-main: #2C3D4D; /* 墨藍灰色 */
   --white: #FFFFFF;
 }
 
@@ -33,10 +33,10 @@ body {
   width: min(960px, 100%);
   aspect-ratio: 16 / 9; /* 鎖定標準 16:9 比例 */
   background: var(--player-bg);
-  box-shadow: 0 24px 70px rgba(46, 46, 46, 0.12); /* 溫和軟陰影 */
+  box-shadow: 0 24px 70px rgba(44, 61, 77, 0.12); /* 溫和軟陰影 */
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(99, 134, 102, 0.15); /* 細緻的品牌綠邊框 */
+  border: 1px solid rgba(82, 133, 140, 0.15); /* 細緻的翠綠邊框 */
 }
 
 /* 嵌入網頁分幕 */
@@ -73,7 +73,7 @@ body {
 .timeline-container {
   width: 120px;
   height: 4px;
-  background: rgba(46, 46, 46, 0.1);
+  background: rgba(44, 61, 77, 0.1);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -105,9 +105,9 @@ body {
   align-items: center;
   gap: 16px;
   z-index: 10;
-  border: 1px solid rgba(99, 134, 102, 0.2);
-  box-shadow: 0 10px 30px rgba(46, 46, 46, 0.08);
-  opacity: 0.3; /* 預設半透明隱藏 */
+  border: 1px solid rgba(82, 133, 140, 0.2);
+  box-shadow: 0 10px 30px rgba(44, 61, 77, 0.08);
+  opacity: 0.55; /* 提升預設透明度為 0.55，讓操作按鈕更醒目 */
   transition: opacity 300ms ease;
 }
 
@@ -132,7 +132,7 @@ body {
 
 .control-btn:hover {
   opacity: 1;
-  background: rgba(99, 134, 102, 0.1);
+  background: rgba(82, 133, 140, 0.1);
   transform: scale(1.05);
 }
 
@@ -152,7 +152,7 @@ body {
 }
 
 .control-btn.play:hover {
-  background: #507053; /* 稍深的抹茶綠 */
+  background: #3C6267; /* 稍深的翠綠 */
   transform: scale(1.1);
 }
 

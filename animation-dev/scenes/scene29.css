@@ -18,15 +18,59 @@ body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
-/* 守護陪伴發光小樹苗動態 */
-.image-wrapper {
+.haven-container {
   position: relative;
-  display: inline-block;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.guide-img {
-  animation: seedlingGrow 6s ease-in-out infinite !important;
+.haven-house {
+  font-size: 6.5rem;
+  animation: housePulse 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 25px rgba(82, 133, 140, 0.15));
 }
-@keyframes seedlingGrow {
-  0%, 100% { transform: translateY(0) scale(1); filter: brightness(1) drop-shadow(0 15px 25px rgba(192, 169, 145, 0.15)); }
-  50% { transform: translateY(-5px) scale(1.01); filter: brightness(1.06) drop-shadow(0 22px 35px rgba(192, 169, 145, 0.25)); }
+@keyframes housePulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.06); filter: brightness(1.08) drop-shadow(0 15px 35px rgba(82, 133, 140, 0.25)); }
+}
+.haven-heart {
+  position: absolute;
+  font-size: 1.8rem;
+  opacity: 0;
+  user-select: none;
+}
+.haven-heart-1 {
+  top: 35%;
+  left: 20%;
+  animation: floatUpHeart1 6s ease-in-out infinite;
+}
+.haven-heart-2 {
+  top: 25%;
+  right: 20%;
+  animation: floatUpHeart2 7s ease-in-out infinite;
+}
+.haven-heart-3 {
+  top: 15%;
+  left: 45%;
+  animation: floatUpHeart3 5s ease-in-out infinite;
+}
+@keyframes floatUpHeart1 {
+  0% { transform: translateY(20px) scale(0.6); opacity: 0; }
+  30% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-50px) scale(1.1) rotate(-15deg); opacity: 0; }
+}
+@keyframes floatUpHeart2 {
+  0% { transform: translateY(30px) scale(0.5); opacity: 0; }
+  40% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translateY(-60px) scale(1) rotate(15deg); opacity: 0; }
+}
+@keyframes floatUpHeart3 {
+  0% { transform: translateY(15px) scale(0.7); opacity: 0; }
+  30% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: translateY(-45px) scale(1.2) rotate(10deg); opacity: 0; }
 }

@@ -7,22 +7,51 @@ body {
   justify-content: center;
 }
 
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 900px;
-  text-align: center;
-}
-
-.text-wrapper .animate-line {
+.text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.7rem; /* 純文字幕字級稍微放大，聚焦核心文案 */
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 18px 0;
-  letter-spacing: 0.06em;
+  margin: 16px 0;
+  letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.juggling-container {
+  position: relative;
+  width: 250px;
+  height: 220px;
+}
+.juggling-ball {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+}
+.ball-a { background: var(--color-primary); animation: juggleA 4s ease-in-out infinite; }
+.ball-b { background: var(--color-secondary); animation: juggleB 4s ease-in-out infinite; }
+.ball-c { background: var(--color-accent); color: var(--color-text-main); border: 1px solid rgba(82, 133, 140, 0.15); animation: juggleC 4s ease-in-out infinite; }
+@keyframes juggleA {
+  0%, 100% { bottom: 10px; left: 20px; }
+  33% { bottom: 140px; left: 90px; }
+  66% { bottom: 10px; left: 160px; }
+}
+@keyframes juggleB {
+  0%, 100% { bottom: 10px; left: 160px; }
+  33% { bottom: 10px; left: 20px; }
+  66% { bottom: 140px; left: 90px; }
+}
+@keyframes juggleC {
+  0%, 100% { bottom: 140px; left: 90px; }
+  33% { bottom: 10px; left: 160px; }
+  66% { bottom: 10px; left: 20px; }
 }

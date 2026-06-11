@@ -19,29 +19,24 @@ body {
 }
 
 /* 焦慮懊惱情境動態 */
-.image-wrapper {
-  position: relative;
-  display: inline-block;
-}
-.anxiety-img {
-  animation: swayAnxiety 6s ease-in-out infinite !important;
-}
+.image-wrapper { position: relative; display: inline-block; }
+.anxiety-img { animation: swayAnxiety 6s ease-in-out infinite !important; }
 @keyframes swayAnxiety {
   0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
   50% { transform: translateY(-8px) rotate(-1.5deg) scale(1.015); }
 }
 .bubble {
   position: absolute;
-  background: rgba(99, 134, 102, 0.08);
+  background: rgba(82, 133, 140, 0.08);
   color: var(--color-primary);
-  border: 1.5px solid rgba(99, 134, 102, 0.25);
+  border: 1.5px solid rgba(82, 133, 140, 0.25);
   font-family: "Noto Sans TC", sans-serif;
   font-weight: 900;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(99, 134, 102, 0.05);
+  box-shadow: 0 8px 24px rgba(82, 133, 140, 0.05);
   user-select: none;
 }
 .bubble-1 { width: 50px; height: 50px; font-size: 1.5rem; top: 15%; left: -5%; animation: bubbleFloat1 8s ease-in-out infinite; }

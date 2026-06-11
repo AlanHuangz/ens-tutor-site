@@ -7,22 +7,49 @@ body {
   justify-content: center;
 }
 
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 900px;
-  text-align: center;
-}
-
-.text-wrapper .animate-line {
+.text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.7rem; /* 純文字幕字級稍微放大，聚焦核心文案 */
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 18px 0;
-  letter-spacing: 0.06em;
+  margin: 16px 0;
+  letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.balloon-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+.hot-balloon {
+  position: absolute;
+  font-size: 5.5rem;
+  top: 30%;
+  left: 35%;
+  user-select: none;
+  animation: balloonFloat 6s ease-in-out infinite;
+}
+.cloud-dec {
+  position: absolute;
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 0.7;
+}
+.cloud-1 { top: 15%; left: 10%; animation: cloudMove1 12s linear infinite; }
+.cloud-2 { top: 55%; right: 10%; animation: cloudMove2 9s linear infinite; }
+@keyframes balloonFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(3deg); }
+}
+@keyframes cloudMove1 {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(15px); }
+  100% { transform: translateX(0); }
+}
+@keyframes cloudMove2 {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-12px); }
+  100% { transform: translateX(0); }
 }

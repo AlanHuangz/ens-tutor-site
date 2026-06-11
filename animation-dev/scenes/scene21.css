@@ -7,22 +7,61 @@ body {
   justify-content: center;
 }
 
-.text-wrapper {
+.text-side .animate-line {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 16px 0;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.click-demo-container {
+  position: relative;
+  width: 250px;
+  height: 220px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(82, 133, 140, 0.1);
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 900px;
-  text-align: center;
+  gap: 20px;
 }
-
-.text-wrapper .animate-line {
+.click-btn {
+  padding: 8px 24px;
+  background: #FFFFFF;
+  border: 2px solid rgba(82, 133, 140, 0.15);
+  border-radius: 20px;
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.7rem; /* 純文字幕字級稍微放大，聚焦核心文案 */
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 18px 0;
-  letter-spacing: 0.06em;
-  line-height: 1.5;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
+}
+.click-hand {
+  position: absolute;
+  font-size: 2.8rem;
+  bottom: 10px;
+  right: 40px;
+  user-select: none;
+  animation: simulateClick 4s ease-in-out infinite;
+}
+@keyframes simulateClick {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-30px, -70px) scale(1); }
+  50% { transform: translate(-30px, -70px) scale(0.85); } /* 點按下去的縮放 */
+  60% { transform: translate(-30px, -70px) scale(1); }
+}
+/* 配合手勢，在第50%秒高亮按鈕B */
+.btn-b {
+  animation: btnHighlight 4s linear infinite;
+}
+@keyframes btnHighlight {
+  0%, 45%, 70%, 100% { border-color: rgba(82, 133, 140, 0.15); background: #FFFFFF; }
+  50%, 65% { border-color: var(--color-primary); background: rgba(82, 133, 140, 0.08); box-shadow: 0 0 10px rgba(82, 133, 140, 0.2); }
 }

@@ -16,9 +16,39 @@
         <p class="animate-line fade-in-up delay-1s">學習，開始有了更多選擇。</p>
       </div>
       <div class="visual-side fade-in delay-2s">
-        <div class="image-wrapper">
-          <img src="../assets/ai_mentor.png" class="scene-img ai-img" alt="AI陪伴學習">
+        <div class="media-choices-wrapper">
+          <div class="media-card card-visual" onclick="showMediaTip('visual')">
+            <div class="media-icon">🎨</div>
+            <span>圖像</span>
+            <div class="click-badge">點選</div>
+          </div>
+          <div class="media-card card-video" onclick="showMediaTip('video')">
+            <div class="media-icon">🎬</div>
+            <span>影像</span>
+            <div class="click-badge">點選</div>
+          </div>
+          <div class="media-card card-audio" onclick="showMediaTip('audio')">
+            <div class="media-icon">🎵</div>
+            <span>聽覺</span>
+            <div class="click-badge">點選</div>
+          </div>
+          <div id="media-tip-popup" class="media-tip-popup" style="display: none;"></div>
         </div>
+        <script>
+          function showMediaTip(type) {
+            const popup = document.getElementById('media-tip-popup');
+            const tips = {
+              visual: '🎨 <b>圖像學習</b>：心智圖、插圖與顏色對比，最容易在大腦留下直覺的結構記憶！',
+              video: '🎬 <b>影像學習</b>：動畫步驟、3D 圖形、動態原理拆解，讓概念躍然紙上！',
+              audio: '🎵 <b>聽覺學習</b>：同理心口語解說、陪伴式語音反饋，極大增強對話溫暖與歸屬感！'
+            };
+            popup.innerHTML = tips[type];
+            popup.style.display = 'block';
+            popup.classList.remove('fade-in');
+            void popup.offsetWidth;
+            popup.classList.add('fade-in');
+          }
+        </script>
       </div>
     </div>
   </div>

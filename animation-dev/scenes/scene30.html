@@ -10,9 +10,47 @@
 </head>
 <body>
   <div class="scene-container">
-    <div class="text-wrapper">
-      <p class="animate-line fade-in-up">所以，很多時候孩子不是「學不會」，</p>
+    <div class="scene-split-container">
+      <div class="text-side">
+        <p class="animate-line fade-in-up">所以，很多時候孩子不是「學不會」，</p>
         <p class="animate-line fade-in-up delay-1s">而是，他們「不願意」。</p>
+      </div>
+      <div class="visual-side fade-in delay-2s" onclick="toggleBatteryCharge()">
+        <div class="battery-wrapper" style="cursor: pointer;">
+          <div class="battery-body">
+            <div class="battery-fill" id="bat-fill"></div>
+          </div>
+          <div class="battery-tip"></div>
+          <span class="charge-label" id="bat-label">動力不足</span>
+          <div class="click-badge" style="bottom: 0px;">點擊充電 ⚡</div>
+        </div>
+        <script>
+          let isCharged = false;
+          function toggleBatteryCharge() {
+            const fill = document.getElementById('bat-fill');
+            const label = document.getElementById('bat-label');
+            
+            fill.style.animation = 'none';
+            label.style.animation = 'none';
+            void fill.offsetWidth;
+            
+            isCharged = !isCharged;
+            if (isCharged) {
+              fill.style.width = '100%';
+              fill.style.background = 'var(--color-primary)';
+              fill.style.boxShadow = '0 0 12px var(--color-primary)';
+              label.textContent = '動力充滿！';
+              label.style.color = 'var(--color-primary)';
+            } else {
+              fill.style.width = '0%';
+              fill.style.background = '#E26D5C';
+              fill.style.boxShadow = 'none';
+              label.textContent = '動力不足';
+              label.style.color = '#E26D5C';
+            }
+          }
+        </script>
+      </div>
     </div>
   </div>
 

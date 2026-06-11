@@ -7,22 +7,46 @@ body {
   justify-content: center;
 }
 
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 900px;
-  text-align: center;
-}
-
-.text-wrapper .animate-line {
+.text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.7rem; /* 純文字幕字級稍微放大，聚焦核心文案 */
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 18px 0;
-  letter-spacing: 0.06em;
+  margin: 16px 0;
+  letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.ladder-wrapper {
+  position: relative;
+  width: 200px;
+  height: 220px;
+}
+.ladder-step {
+  position: absolute;
+  width: 60px;
+  height: 10px;
+  background: var(--color-secondary);
+  opacity: 0.5;
+  border-radius: 4px;
+}
+.step-1 { bottom: 20px; left: 20px; }
+.step-2 { bottom: 80px; left: 70px; }
+.step-3 { bottom: 140px; left: 120px; }
+.climbing-dot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 12px var(--color-primary);
+  animation: climbSteps 4s ease-in-out infinite;
+}
+@keyframes climbSteps {
+  0% { bottom: 35px; left: 40px; transform: scale(1); }
+  30% { bottom: 95px; left: 90px; transform: scale(1.1); }
+  60% { bottom: 155px; left: 140px; transform: scale(1); }
+  85% { bottom: 155px; left: 140px; opacity: 1; }
+  100% { bottom: 155px; left: 140px; opacity: 0; transform: scale(0.6); }
 }

@@ -1,9 +1,10 @@
 :root {
-  --color-text-main: #2E2E2E;
-  --color-primary: #638666;
-  --color-secondary: #C0A991;
-  --color-accent: #E5CAAC;
-  --color-bg-light: #ECEADB;
+  --color-text-main: #2C3D4D; /* 墨藍灰色，官網 ink 文字色 */
+  --color-primary: #52858C; /* 品牌翠綠 */
+  --color-secondary: #2A4449; /* 深藍綠色 */
+  --color-accent: #EEF4F5; /* 淺藍綠色，不再發黃 */
+  --color-bg-light: #FFFFFF; /* 純白背景 */
+  --color-highlight-accent: #DCA842; /* 黃金品牌亮色 */
 }
 
 body {
@@ -24,10 +25,50 @@ body {
   color: var(--color-text-main);
 }
 
+/* 全域引導動畫 */
+.glow-pulse {
+  animation: glowPulse 2.5s infinite alternate !important;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(82, 133, 140, 0.08), 0 0 0 0px rgba(82, 133, 140, 0.2);
+  }
+  100% {
+    box-shadow: 0 12px 28px rgba(82, 133, 140, 0.2), 0 0 0 8px rgba(82, 133, 140, 0);
+  }
+}
+
+.guide-hand {
+  display: inline-block;
+  animation: handWiggle 1.5s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes handWiggle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(-15deg); }
+}
+
+/* 提示使用者點擊的文字 */
+.interactive-guide-label {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-highlight-accent) !important;
+  margin: 12px 0;
+  letter-spacing: 0.05em;
+  animation: pulseGuide 2s ease-in-out infinite;
+}
+
+@keyframes pulseGuide {
+  0%, 100% { opacity: 0.6; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
 
 /* 強調文字樣式（換色） */
 .highlight {
-  color: var(--color-primary) !important;
+  color: var(--color-secondary) !important;
   font-weight: 900 !important;
   position: relative;
   display: inline-block;
@@ -41,7 +82,7 @@ body {
   left: 0;
   width: 100%;
   height: 8px;
-  background-color: rgba(99, 134, 102, 0.18);
+  background-color: rgba(220, 168, 66, 0.25); /* 黃金底色 */
   z-index: -1;
   border-radius: 2px;
 }
