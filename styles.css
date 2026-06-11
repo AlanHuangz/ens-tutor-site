@@ -133,6 +133,71 @@ h3 {
   transition: height 180ms ease;
 }
 
+.brand-slogan {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 2px solid var(--teal);
+  font-family: "Noto Sans TC", sans-serif;
+  text-align: left;
+  animation: slideSlogan 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transition: border-color 0.22s ease;
+}
+
+@keyframes slideSlogan {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slogan-line-1 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--teal-dark);
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+  transition: color 0.22s ease;
+}
+
+.slogan-line-2 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--coral-dark);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+.brand:hover .brand-slogan {
+  border-left-color: var(--coral);
+}
+
+.brand:hover .slogan-line-1 {
+  color: var(--teal);
+}
+
+@media (max-width: 640px) {
+  .brand-slogan {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left-width: 1px;
+  }
+  .slogan-line-1 {
+    font-size: 0.75rem;
+  }
+  .slogan-line-2 {
+    font-size: 0.62rem;
+  }
+}
+
 main {
   padding-top: 120px;
 }

@@ -29,13 +29,13 @@ body {
 }
 .final-logo-img {
   max-width: 100%;
-  max-height: 20vw !important; /* 新版 Logo 橫幅較寬，保留呼吸空間 */
+  max-height: 25vw !important; /* 限制最大高度，防止 Logo 過大擠壓 */
   object-fit: contain;
   animation: finalLogoGlow 5s ease-in-out infinite !important;
 }
 @keyframes finalLogoGlow {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0.6vw 1.4vw rgba(7, 27, 70, 0.14)); }
-  50% { transform: scale(1.025); filter: drop-shadow(0 1vw 2.4vw rgba(255, 107, 99, 0.22)); }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0.5vw 1.2vw rgba(255, 110, 64, 0.15)); }
+  50% { transform: scale(1.03); filter: drop-shadow(0 1vw 2.4vw rgba(255, 110, 64, 0.35)); }
 }
 .text-side .animate-line:nth-child(2) {
   font-family: "Noto Serif TC", serif;
