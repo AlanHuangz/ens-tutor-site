@@ -1,7 +1,7 @@
 /* scene4.css - 第 4 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #F9FAFB 0%, #EEF2F6 100%);
+  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,24 +25,18 @@ body {
 }
 
 .industrial-img {
-  /* 覆蓋 global.css 的 float 動作，改用模擬傳送帶機械的微幅高頻上下微震動 */
   animation: machineVibrate 4s ease-in-out infinite !important;
 }
 
 @keyframes machineVibrate {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-4px) scale(0.995);
-  }
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(0.995); }
 }
 
-/* 旋轉齒輪 */
 .gear {
   position: absolute;
   font-size: 4.5rem;
-  color: rgba(42, 68, 73, 0.25); /* 鋼鐵半透明綠灰色 */
+  color: rgba(42, 68, 73, 0.25);
   line-height: 1;
   user-select: none;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
@@ -71,5 +65,3 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(-360deg); }
 }
-
-

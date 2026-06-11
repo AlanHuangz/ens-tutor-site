@@ -25,23 +25,17 @@ body {
 }
 
 .anxiety-img {
-  /* 覆蓋 global.css 的 float 動作，改用針對焦慮情境的呼吸微搖擺 */
   animation: swayAnxiety 6s ease-in-out infinite !important;
 }
 
 @keyframes swayAnxiety {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-  }
-  50% {
-    transform: translateY(-8px) rotate(-1.5deg) scale(1.015);
-  }
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-8px) rotate(-1.5deg) scale(1.015); }
 }
 
-/* 焦慮裝飾氣泡 */
 .bubble {
   position: absolute;
-  background: rgba(220, 168, 66, 0.12); /* 願意學品牌黃 */
+  background: rgba(220, 168, 66, 0.12);
   color: #DCA842;
   border: 2px solid rgba(220, 168, 66, 0.35);
   font-family: "Noto Sans TC", sans-serif;
@@ -95,5 +89,3 @@ body {
   0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.75; }
   50% { transform: translateY(-20px) rotate(10deg) scale(1.1); opacity: 1; }
 }
-
-

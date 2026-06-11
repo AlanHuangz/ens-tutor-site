@@ -1,27 +1,67 @@
 /* scene8.css - 第 8 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #F9FAFB 0%, #EEF2F6 100%);
+  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 800px;
-}
-
-.animate-line {
+.text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: 700;
   color: #2C3D4D;
-  margin: 12px 0;
+  margin: 16px 0;
   letter-spacing: 0.05em;
-  line-height: 1.4;
+  line-height: 1.5;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+/* 工業時代情境動態 */
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.industrial-img {
+  animation: machineVibrate 4s ease-in-out infinite !important;
+}
+
+@keyframes machineVibrate {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(0.995); }
+}
+
+.gear {
+  position: absolute;
+  font-size: 4.5rem;
+  color: rgba(42, 68, 73, 0.25);
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
+}
+
+.gear-large {
+  top: 18%;
+  left: 14%;
+  font-size: 5.5rem;
+  animation: spinClockwise 12s linear infinite;
+}
+
+.gear-small {
+  top: 36%;
+  left: 24%;
+  font-size: 3.8rem;
+  animation: spinCounterClockwise 8s linear infinite;
+}
+
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
