@@ -11,8 +11,7 @@
 <body>
   <div class="scene-container">
     <div class="text-wrapper">
-      <p class="animate-line fade-in-up">但我們距離工業時期，已經很遠了。</p>
-      <p class="animate-line fade-in-up delay-1s">科技快速前進，授課方式卻沒有跟上。</p>
+      <p class="animate-line fade-in-up">但，我們距離工業時期，已經很遠了。</p>
     </div>
   </div>
 
@@ -20,7 +19,7 @@
     // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 4000);
   </script>
 </body>
 </html>
