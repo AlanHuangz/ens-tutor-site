@@ -1,0 +1,78 @@
+/* scene2.css - 第二幕專屬樣式 */
+
+body {
+  background: linear-gradient(135deg, #F9FAFB 0%, #EEF2F6 100%); /* 稍冷色調的背景，代表學習瓶頸的迷茫 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+}
+
+.pain-line {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2C3D4D;
+  margin: 10px 0;
+  letter-spacing: 0.05em;
+}
+
+/* 關鍵防禦詞彙樣式 */
+.defense-keywords {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #D25B45; /* 赤紅色，代表焦慮/防禦的關鍵字 */
+  margin: 16px 0;
+  letter-spacing: 0.05em;
+  text-shadow: 0 4px 12px rgba(210, 91, 69, 0.1);
+}
+
+.defense-keywords .connector {
+  font-size: 1.5rem;
+  color: #5D7285;
+  font-weight: 700;
+  margin: 0 10px;
+}
+
+/* 黃金高亮線條 */
+.highlight-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 8px;
+  background: rgba(220, 168, 66, 0.3); /* 金黃色半透明底線 */
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: revealLine 0.6s ease forwards;
+  animation-delay: 2.5s;
+}
+
+@keyframes revealLine {
+  to { transform: scaleX(1); }
+}
+
+/* 解法提示橫框 */
+.solution-hint {
+  font-family: "Noto Sans TC", sans-serif;
+  margin-top: 30px;
+  font-size: 1.15rem;
+  color: #2A4449;
+  background: #EEF4F5; /* 淺藍綠色外框，帶有放鬆與舒緩感 */
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  border-left: 5px solid #52858C; /* 品牌綠色邊條 */
+  letter-spacing: 0.05em;
+  box-shadow: 0 8px 20px rgba(82, 133, 140, 0.08);
+}

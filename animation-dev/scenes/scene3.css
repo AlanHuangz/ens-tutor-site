@@ -1,0 +1,96 @@
+/* scene3.css - 第三幕專屬樣式 */
+
+body {
+  background: linear-gradient(135deg, #FCFAF5 0%, #EEF4F5 100%); /* 品牌溫暖黃到清新綠色調，代表自學解惑後的開朗 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+}
+
+.intro-lead {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.3rem;
+  color: #5D7285;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.08em;
+}
+
+.core-statement {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #2A4449;
+  margin: 0 0 30px 0;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+}
+
+.core-statement .highlight {
+  color: #52858C; /* 品牌綠色高亮 */
+}
+
+/* Logo 容器 */
+.logo-container {
+  margin-bottom: 36px;
+  background: #ffffff;
+  padding: 16px 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(44, 61, 77, 0.06);
+  border: 1px solid rgba(82, 133, 140, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* 行動呼籲按鈕 */
+.cta-button {
+  display: inline-block;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #DCA842; /* 品牌金黃色/橘色 */
+  padding: 16px 36px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(220, 168, 66, 0.3);
+  transition: all 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  letter-spacing: 0.05em;
+  animation: pulseButton 2s infinite;
+}
+
+.cta-button:hover {
+  background: #B98B2D;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(220, 168, 66, 0.4);
+}
+
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 10px 24px rgba(220, 168, 66, 0.3);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 14px 30px rgba(220, 168, 66, 0.45);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 24px rgba(220, 168, 66, 0.3);
+  }
+}

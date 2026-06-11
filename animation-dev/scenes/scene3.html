@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>第三幕 - 品牌方案與引導</title>
+  <link rel="stylesheet" href="../shared/reset.css">
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="scene3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap">
+</head>
+<body>
+  <div class="scene-container">
+    <div class="cta-wrapper">
+      <!-- 導言淡入 -->
+      <p class="intro-lead fade-in-up">透過 AI 輔助與專業對話引導</p>
+      
+      <!-- 核心理念放大彈出 -->
+      <h1 class="core-statement scale-in delay-500ms">
+        培養孩子「<span class="highlight">帶得走的自學力</span>」
+      </h1>
+
+      <!-- LOGO 圖片淡入並稍微放大 -->
+      <div class="logo-container fade-in delay-1500ms">
+        <img class="brand-logo" src="../assets/logo.png" alt="願意學 LOGO">
+      </div>
+
+      <!-- 行動呼籲按鈕 (CTA) 彈出 -->
+      <div class="action-container scale-in delay-2500ms">
+        <a href="../booking.html" target="_parent" class="cta-button">開啟孩子「願意」的第一步 →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 7.5 秒後主動通知播放器切換至下一幕 (回到第一幕循環)
+    setTimeout(() => {
+      window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+    }, 7000);
+  </script>
+</body>
+</html>

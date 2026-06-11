@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>願意學 — 文字動畫展示播放器</title>
+  <link rel="stylesheet" href="shared/reset.css">
+  <link rel="stylesheet" href="css/player.css">
+</head>
+<body>
+  <div class="player-outer">
+    <div class="player-container">
+      <!-- 嵌入分幕場景的 iframe -->
+      <iframe id="scene-frame" src="scenes/scene1.html" frameborder="0" scrolling="no"></iframe>
+      
+      <!-- 頂部進度條與場景狀態 -->
+      <div class="player-header">
+        <span class="scene-indicator">載入中...</span>
+        <div class="timeline-container">
+          <div class="timeline-bar">
+            <div id="timeline-progress"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部懸浮控制面板 -->
+      <div class="player-controls">
+        <button id="prev-btn" class="control-btn" title="上一幕">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L18 6v12z"/></svg>
+        </button>
+        
+        <button id="play-btn" class="control-btn play" title="暫停/播放">
+          <!-- 暫停 Icon -->
+          <svg id="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <!-- 播放 Icon -->
+          <svg id="play-icon" viewBox="0 0 24 24" style="display: none;"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        
+        <button id="next-btn" class="control-btn" title="下一幕">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg>
+        </button>
+
+        <button id="music-btn" class="control-btn music muted" title="靜音/開音效">
+          <!-- 靜音 Icon -->
+          <svg id="mute-icon" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-11 7.77v2h4l5 5v-14l-5 5H3z"/></svg>
+          <!-- 有聲 Icon -->
+          <svg id="sound-icon" viewBox="0 0 24 24" style="display: none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 背景音樂 (若無音樂檔案，預設為靜音播放) -->
+  <audio id="bg-music" src="" loop></audio>
+
+  <script src="js/player.js"></script>
+</body>
+</html>

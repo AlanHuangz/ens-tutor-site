@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>第二幕 - 痛點與同理</title>
+  <link rel="stylesheet" href="../shared/reset.css">
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="scene2.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap">
+</head>
+<body>
+  <div class="scene-container">
+    <div class="text-wrapper">
+      <!-- 第一行痛點陳述 -->
+      <h2 class="pain-line fade-in-up">
+        當孩子總是習慣用
+      </h2>
+      
+      <!-- 特大號關鍵字，伴隨縮放與紅色警示感 -->
+      <h1 class="defense-keywords scale-in delay-1s">
+        「我不會」 <span class="connector">與</span> 「沒想法」
+      </h1>
+      
+      <!-- 結尾句，轉折 -->
+      <h2 class="pain-line fade-in-up delay-2s">
+        來<span class="highlight-text">防禦學習</span>...
+      </h2>
+      
+      <!-- 暖色底色裝飾框，在最後彈出，代表我們的引導 -->
+      <div class="solution-hint fade-in delay-3s">
+        我們引導孩子卸下防禦，找回學習的自控力。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 6.5 秒後主動通知播放器切換至下一幕
+    setTimeout(() => {
+      window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+    }, 6000);
+  </script>
+</body>
+</html>
