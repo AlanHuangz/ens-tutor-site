@@ -9,36 +9,50 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .image-wrapper { position: relative; display: inline-block; }
 .guide-img { animation: seedlingGrow 6s ease-in-out infinite !important; }
+.water-drop {
+  position: absolute;
+  top: 10%;
+  left: 45%;
+  font-size: 2vw;
+  animation: dropWater 4s ease-in infinite;
+  opacity: 0;
+}
 @keyframes seedlingGrow {
-  0%, 100% { transform: translateY(0) scale(1); filter: brightness(1) drop-shadow(0 15px 25px rgba(192, 169, 145, 0.15)); }
-  50% { transform: translateY(-5px) scale(1.01); filter: brightness(1.06) drop-shadow(0 22px 35px rgba(192, 169, 145, 0.25)); }
+  0%, 100% { transform: translateY(0) scale(1); filter: brightness(1) drop-shadow(0 1.5vw 2.5vw rgba(82, 133, 140, 0.15)); }
+  50% { transform: translateY(-0.5vw) scale(1.01); filter: brightness(1.06) drop-shadow(0 2.2vw 3.5vw rgba(82, 133, 140, 0.25)); }
+}
+@keyframes dropWater {
+  0% { top: 5%; opacity: 0; transform: scale(0.5); }
+  30% { opacity: 0.9; transform: scale(1); }
+  60% { top: 50%; opacity: 0; transform: scale(0.6); }
+  100% { top: 5%; opacity: 0; }
 }
 .back-btn {
   background: var(--color-primary);
   color: #FFFFFF;
   border: none;
-  padding: 10px 22px;
-  border-radius: 25px;
+  padding: 1vw 2.2vw;
+  border-radius: 2.5vw;
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.6vw;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(82, 133, 140, 0.25);
+  box-shadow: 0 0.6vw 2vw rgba(82, 133, 140, 0.25);
   transition: all 0.2s ease;
 }
 .back-btn:hover {
   background: var(--color-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(82, 133, 140, 0.35);
+  transform: translateY(-0.2vw);
+  box-shadow: 0 0.8vw 2.5vw rgba(82, 133, 140, 0.35);
 }

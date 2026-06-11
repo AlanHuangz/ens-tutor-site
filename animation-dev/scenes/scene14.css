@@ -9,43 +9,45 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .puzzle-wrapper {
   position: relative;
-  width: 250px;
-  height: 220px;
+  width: 25vw;
+  height: 22vw;
 }
 .puzzle-part {
   position: absolute;
-  font-size: 5rem;
+  font-size: 6vw;
   transition: all 0.3s ease;
   user-select: none;
 }
 .part-left {
-  top: 40px;
-  left: 20px;
-  animation: floatPuzzleLeft 6s ease-in-out infinite;
+  top: 4vw;
+  left: 2vw;
+  animation: floatPuzzleLeft 5s ease-in-out infinite;
 }
 .part-right {
-  top: 60px;
-  right: 20px;
+  top: 6vw;
+  right: 2vw;
   transform: rotate(180deg);
-  filter: hue-rotate(50deg);
-  animation: floatPuzzleRight 6s ease-in-out infinite;
+  filter: hue-rotate(90deg);
+  animation: floatPuzzleRight 5s ease-in-out infinite;
 }
 @keyframes floatPuzzleLeft {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(18px, -8px) rotate(5deg); }
+  45% { transform: translate(4.5vw, 1vw) rotate(5deg); }
+  55% { transform: translate(4.5vw, 1vw) rotate(5deg); }
 }
 @keyframes floatPuzzleRight {
   0%, 100% { transform: translate(0, 0) rotate(180deg); }
-  50% { transform: translate(-18px, 8px) rotate(175deg); }
+  45% { transform: translate(-4.5vw, -1vw) rotate(175deg); }
+  55% { transform: translate(-4.5vw, -1vw) rotate(175deg); }
 }

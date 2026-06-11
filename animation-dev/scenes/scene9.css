@@ -9,18 +9,34 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .image-wrapper { position: relative; display: inline-block; }
-.neuro-img { animation: brainPulse 5s ease-in-out infinite !important; }
+.neuro-img { animation: brainPulse 5s ease-in-out infinite !important; z-index: 2; position: relative; }
+.brain-glow {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220,168,66,0.3) 0%, rgba(82,133,140,0) 70%);
+  animation: waveGlow 5s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
 @keyframes brainPulse {
-  0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 15px 30px rgba(82, 133, 140, 0.08)); }
-  50% { transform: scale(1.025) translateY(-5px); filter: drop-shadow(0 20px 45px rgba(82, 133, 140, 0.22)); }
+  0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 1vw 2vw rgba(82, 133, 140, 0.08)); }
+  50% { transform: scale(1.04) translateY(-0.6vw); filter: drop-shadow(0 1.8vw 3vw rgba(82, 133, 140, 0.2)); }
+}
+@keyframes waveGlow {
+  0%, 100% { transform: scale(0.9); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
 }

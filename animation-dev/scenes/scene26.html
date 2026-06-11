@@ -16,12 +16,35 @@
       </div>
       <div class="visual-side fade-in delay-1s">
         <div class="progress-box">
-          <span class="progress-title">勝任感充能</span>
+          <span class="progress-title" id="charge-title">勝任感充能</span>
           <div class="progress-bg">
-            <div class="progress-fill"></div>
+            <div class="progress-fill" id="bar-fill"></div>
           </div>
-          <span class="percent-label">99%</span>
+          <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; margin-top: 0.5vw;">
+            <span class="percent-label" id="percent-label">99%</span>
+            <button class="charge-btn glow-pulse" onclick="manualCharge()">⚡ 充能</button>
+          </div>
         </div>
+        <script>
+          function manualCharge() {
+            const bar = document.getElementById('bar-fill');
+            const percent = document.getElementById('percent-label');
+            const title = document.getElementById('charge-title');
+            
+            bar.style.animation = 'none';
+            percent.style.animation = 'none';
+            void bar.offsetWidth;
+            
+            bar.style.width = '100%';
+            bar.style.background = 'var(--color-highlight-accent)';
+            bar.style.boxShadow = '0 0 1.5vw var(--color-highlight-accent)';
+            
+            percent.textContent = '100%';
+            percent.style.color = 'var(--color-highlight-accent)';
+            title.innerHTML = '勝任感滿足！🎉';
+            title.style.color = 'var(--color-highlight-accent)';
+          }
+        </script>
       </div>
     </div>
   </div>

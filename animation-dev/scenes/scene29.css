@@ -9,37 +9,55 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .haven-container {
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 25vw;
+  height: 25vw;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .haven-house {
-  font-size: 6.5rem;
+  font-size: 6.5vw;
   animation: housePulse 4s ease-in-out infinite;
-  filter: drop-shadow(0 10px 25px rgba(82, 133, 140, 0.15));
+  filter: drop-shadow(0 1vw 2.5vw rgba(82, 133, 140, 0.15));
+  position: relative;
+  z-index: 2;
+}
+.haven-smoke {
+  position: absolute;
+  top: 15%;
+  right: 25%;
+  font-size: 1.5vw;
+  opacity: 0;
+  animation: chimneySmoke 4s ease-in-out infinite;
+  z-index: 1;
 }
 @keyframes housePulse {
   0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.06); filter: brightness(1.08) drop-shadow(0 15px 35px rgba(82, 133, 140, 0.25)); }
+  50% { transform: scale(1.06); filter: brightness(1.08) drop-shadow(0 1.5vw 3.5vw rgba(82, 133, 140, 0.25)); }
+}
+@keyframes chimneySmoke {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  30% { opacity: 0.7; }
+  80% { opacity: 0; }
+  100% { transform: translateY(-3vw) scale(1.5); opacity: 0; }
 }
 .haven-heart {
   position: absolute;
-  font-size: 1.8rem;
+  font-size: 1.8vw;
   opacity: 0;
   user-select: none;
+  z-index: 3;
 }
 .haven-heart-1 {
   top: 35%;
@@ -57,20 +75,20 @@ body {
   animation: floatUpHeart3 5s ease-in-out infinite;
 }
 @keyframes floatUpHeart1 {
-  0% { transform: translateY(20px) scale(0.6); opacity: 0; }
+  0% { transform: translateY(2vw) scale(0.6); opacity: 0; }
   30% { opacity: 0.8; }
   90% { opacity: 0.8; }
-  100% { transform: translateY(-50px) scale(1.1) rotate(-15deg); opacity: 0; }
+  100% { transform: translateY(-5vw) scale(1.1) rotate(-15deg); opacity: 0; }
 }
 @keyframes floatUpHeart2 {
-  0% { transform: translateY(30px) scale(0.5); opacity: 0; }
+  0% { transform: translateY(3vw) scale(0.5); opacity: 0; }
   40% { opacity: 0.9; }
   90% { opacity: 0.9; }
-  100% { transform: translateY(-60px) scale(1) rotate(15deg); opacity: 0; }
+  100% { transform: translateY(-6vw) scale(1) rotate(15deg); opacity: 0; }
 }
 @keyframes floatUpHeart3 {
-  0% { transform: translateY(15px) scale(0.7); opacity: 0; }
+  0% { transform: translateY(1.5vw) scale(0.7); opacity: 0; }
   30% { opacity: 0.95; }
   90% { opacity: 0.95; }
-  100% { transform: translateY(-45px) scale(1.2) rotate(10deg); opacity: 0; }
+  100% { transform: translateY(-4.5vw) scale(1.2) rotate(10deg); opacity: 0; }
 }

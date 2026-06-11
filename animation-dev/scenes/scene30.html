@@ -22,13 +22,15 @@
           </div>
           <div class="battery-tip"></div>
           <span class="charge-label" id="bat-label">動力不足</span>
-          <div class="click-badge" style="bottom: 0px;">點擊充電 ⚡</div>
+          <div class="click-badge" style="bottom: 0vw;">點擊充電 ⚡</div>
+          <div class="spark-sparkle" id="bat-spark">⚡</div>
         </div>
         <script>
           let isCharged = false;
           function toggleBatteryCharge() {
             const fill = document.getElementById('bat-fill');
             const label = document.getElementById('bat-label');
+            const spark = document.getElementById('bat-spark');
             
             fill.style.animation = 'none';
             label.style.animation = 'none';
@@ -38,15 +40,17 @@
             if (isCharged) {
               fill.style.width = '100%';
               fill.style.background = 'var(--color-primary)';
-              fill.style.boxShadow = '0 0 12px var(--color-primary)';
+              fill.style.boxShadow = '0 0 1.2vw var(--color-primary)';
               label.textContent = '動力充滿！';
               label.style.color = 'var(--color-primary)';
+              spark.style.display = 'block';
             } else {
               fill.style.width = '0%';
               fill.style.background = '#E26D5C';
               fill.style.boxShadow = 'none';
               label.textContent = '動力不足';
               label.style.color = '#E26D5C';
+              spark.style.display = 'none';
             }
           }
         </script>

@@ -9,13 +9,13 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .progress-box {
@@ -23,40 +23,60 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  width: 280px;
-  height: 200px;
+  gap: 1.6vw;
+  width: 28vw;
+  height: 20vw;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 16px;
-  border: 1px solid rgba(82, 133, 140, 0.15);
-  padding: 24px;
+  border-radius: 1.6vw;
+  border: 0.15vw solid rgba(82, 133, 140, 0.15);
+  padding: 2.4vw;
 }
 .progress-title {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.95vw;
   font-weight: 700;
   color: var(--color-text-main);
+  transition: all 0.3s ease;
 }
 .progress-bg {
   width: 100%;
-  height: 16px;
-  background: rgba(46, 46, 46, 0.08);
-  border-radius: 8px;
+  height: 1.6vw;
+  background: rgba(44, 61, 77, 0.08);
+  border-radius: 0.8vw;
   overflow: hidden;
 }
 .progress-fill {
   width: 0%;
   height: 100%;
   background: var(--color-primary);
-  border-radius: 8px;
+  border-radius: 0.8vw;
   animation: fillProgress 4s ease-in-out infinite;
+  transition: all 0.3s ease;
 }
 .percent-label {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.2vw;
   font-weight: 900;
   color: var(--color-primary);
   animation: countUp 4s linear infinite;
+  transition: all 0.3s ease;
+}
+.charge-btn {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border: none;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 0.8vw;
+  font-weight: 700;
+  padding: 0.4vw 1.2vw;
+  border-radius: 1.2vw;
+  cursor: pointer;
+  box-shadow: 0 0.4vw 1vw rgba(82, 133, 140, 0.2);
+  transition: all 0.2s ease;
+}
+.charge-btn:hover {
+  background: var(--color-secondary);
+  transform: scale(1.05);
 }
 @keyframes fillProgress { 0% { width: 0%; } 80%, 100% { width: 99%; } }
 @keyframes countUp {

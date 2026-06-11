@@ -83,4 +83,21 @@ body {
   background: #507053;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(99, 134, 102, 0.3);
-}
+}\n
+.interactive-btn {
+  padding: 0.8vw 1.8vw !important;
+  border-radius: 2vw !important;
+  font-size: 1.1vw !important;
+  margin-top: 1.6vw !important;
+  border-width: 0.2vw !important;
+}
+.color-ai {
+  font-size: 2.1vw !important;
+  line-height: 1.6 !important;
+}
+.continue-btn {
+  padding: 1vw 2.4vw !important;
+  border-radius: 2vw !important;
+  font-size: 1.2vw !important;
+  margin-top: 1.6vw !important;
+}

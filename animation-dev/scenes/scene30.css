@@ -9,13 +9,13 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .battery-wrapper {
@@ -24,38 +24,38 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 220px;
-  gap: 20px;
+  width: 25vw;
+  height: 22vw;
+  gap: 2vw;
 }
 .battery-body {
   position: relative;
-  width: 140px;
-  height: 70px;
-  border: 4px solid var(--color-secondary);
-  border-radius: 8px;
-  padding: 4px;
+  width: 14vw;
+  height: 7vw;
+  border: 0.4vw solid var(--color-secondary);
+  border-radius: 0.8vw;
+  padding: 0.4vw;
 }
 .battery-tip {
   position: absolute;
-  top: calc(50% - 18px);
-  right: 43px;
-  width: 8px;
-  height: 20px;
+  top: calc(50% - 1.8vw);
+  right: 4.3vw;
+  width: 0.8vw;
+  height: 2vw;
   background: var(--color-secondary);
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 0.4vw 0.4vw 0;
 }
 .battery-fill {
   width: 0%;
   height: 100%;
   background: var(--color-secondary);
-  border-radius: 4px;
+  border-radius: 0.4vw;
   animation: chargeBattery 4s cubic-bezier(0.12, 0, 0.39, 0) infinite;
   transition: all 0.3s ease;
 }
 .charge-label {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.95vw;
   font-weight: 700;
   color: var(--color-text-main);
   animation: changeLabel 4s step-end infinite;
@@ -63,14 +63,23 @@ body {
 }
 .click-badge {
   position: absolute;
-  bottom: 0px;
+  bottom: 0vw;
   background: var(--color-highlight-accent);
   color: #FFFFFF;
-  font-size: 0.65rem;
+  font-size: 0.7vw;
   font-weight: 900;
-  padding: 2px 6px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(220, 168, 66, 0.3);
+  padding: 0.2vw 0.6vw;
+  border-radius: 0.8vw;
+  box-shadow: 0 0.2vw 0.6vw rgba(220, 168, 66, 0.3);
+}
+.spark-sparkle {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  font-size: 2vw;
+  color: var(--color-highlight-accent);
+  display: none;
+  animation: sparkleFlash 1.5s ease-in-out infinite alternate;
 }
 @keyframes chargeBattery {
   0% { width: 0%; background: #E26D5C; }
@@ -80,4 +89,8 @@ body {
 @keyframes changeLabel {
   0%, 69% { content: '動力不足'; color: #E26D5C; }
   70%, 100% { content: '動力充滿！'; color: var(--color-primary); }
+}
+@keyframes sparkleFlash {
+  from { transform: scale(0.8) rotate(0deg); filter: brightness(1); }
+  to { transform: scale(1.2) rotate(15deg); filter: brightness(1.3); }
 }

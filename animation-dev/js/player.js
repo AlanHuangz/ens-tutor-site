@@ -94,23 +94,28 @@ function init() {
 function loadScene(index) {
   if (index < 0 || index >= sceneConfig.length) return;
   
-  currentIndex = index;
-  duration = sceneConfig[currentIndex].duration;
-  elapsed = 0;
+  // 1. 觸發淡出動畫
+  iframe.classList.add('fade-out');
   
-  // 更新狀態文字
-  indicator.textContent = `${sceneConfig[currentIndex].name} (${currentIndex + 1}/${sceneConfig.length})`;
-  
-  // 更新 iframe 網址
-  iframe.src = sceneConfig[currentIndex].url;
-  
-  // 重設進度條與定時器
-  progress.style.width = '0%';
-  resetTimer();
-  
-  if (isPlaying) {
-    startTimer();
-  }
+  setTimeout(() => {
+    currentIndex = index;
+    duration = sceneConfig[currentIndex].duration;
+    elapsed = 0;
+    
+    // 更新狀態文字
+    indicator.textContent = `${sceneConfig[currentIndex].name} (${currentIndex + 1}/${sceneConfig.length})`;
+    
+    // 更新 iframe 網址
+    iframe.src = sceneConfig[currentIndex].url;
+    
+    // 重設進度條與定時器
+    progress.style.width = '0%';
+    resetTimer();
+    
+    if (isPlaying) {
+      startTimer();
+    }
+  }, 250); // 250ms 淡出延時
 }
 
 // 計時器邏輯：驅動進度條與備用切換
@@ -119,6 +124,14 @@ function startTimer() {
   
   function updateProgress() {
     if (!isPlaying) return;
+    
+    // 如果處於互動模式（如卡片展開或 Mario Kart 解釋中），凍結進度條並不進行自動換幕
+    const isInteractiveMode = sessionStorage.getItem('is_interactive_mode') === 'true';
+    if (isInteractiveMode) {
+      startTime = Date.now() - elapsed; // 不斷更新起始點，避免時間累積
+      timer = requestAnimationFrame(updateProgress);
+      return;
+    }
     
     elapsed = Date.now() - startTime;
     const percent = Math.min((elapsed / duration) * 100, 100);
@@ -179,9 +192,16 @@ function setIframePlayState(state) {
   }
 }
 
-// 當 Iframe 加載完成，確保其動畫狀態與主播放器一致
+// 當 Iframe 加載完成，確保其動畫狀態與主播放器一致，並解除淡出、播放淡入
 iframe.addEventListener('load', () => {
   setIframePlayState(isPlaying ? 'running' : 'paused');
+  
+  // 移除淡出，加入淡入
+  iframe.classList.remove('fade-out');
+  iframe.classList.add('fade-in');
+  setTimeout(() => {
+    iframe.classList.remove('fade-in');
+  }, 250);
 });
 
 // 切換至上一幕

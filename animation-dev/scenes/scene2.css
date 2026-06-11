@@ -9,37 +9,37 @@ body {
 
 .text-side .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 3.8vw; /* 採用響應式 vw，避免在行動端因為 font-size 不縮放導致圖形被擠壓卡掉 */
   font-weight: 700;
   color: var(--color-text-main);
-  margin: 16px 0;
+  margin: 1.5vw 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.02);
 }
 
 .css-illustration-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 260px;
-  height: 260px;
+  width: 25vw;
+  height: 25vw;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.6);
-  border: 3px dashed var(--color-primary);
+  border: 0.3vw dashed var(--color-primary);
   animation: pulseBg 4s ease-in-out infinite;
 }
 .flip-symbol {
-  font-size: 3.5rem;
+  font-size: 3.5vw;
   font-weight: 900;
   color: var(--color-primary);
   animation: flipText 5s ease-in-out infinite;
 }
 @keyframes pulseBg {
-  0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(82, 133, 140, 0.05); }
-  50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(82, 133, 140, 0.15); }
+  0%, 100% { transform: scale(1); box-shadow: 0 1vw 3vw rgba(82, 133, 140, 0.05); }
+  50% { transform: scale(1.05); box-shadow: 0 1.5vw 4vw rgba(82, 133, 140, 0.15); border-color: var(--color-highlight-accent); }
 }
 @keyframes flipText {
-  0%, 100% { transform: rotateY(0deg); }
-  50% { transform: rotateY(180deg); color: var(--color-secondary); }
+  0%, 100% { transform: rotateY(0deg) scale(1); color: var(--color-primary); }
+  45%, 55% { transform: rotateY(180deg) scale(1.15); color: var(--color-highlight-accent); }
 }

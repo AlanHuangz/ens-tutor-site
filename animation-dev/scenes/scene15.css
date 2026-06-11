@@ -118,4 +118,35 @@ body {
   background: #507053;
   transform: scale(1.02);
   box-shadow: 0 8px 24px rgba(99, 134, 102, 0.3);
-}
+}\n
+/* 已在 html 覆蓋，保留樣式，轉換單位為 vw */
+.text-wrapper .animate-line {
+  font-size: 3.8vw !important;
+}
+.interactive-cards {
+  gap: 2.5vw !important;
+  margin-top: 3vw !important;
+  min-width: unset !important;
+  max-width: 90% !important;
+}
+.card {
+  padding: 2vw 1.5vw !important;
+  border-radius: 1.5vw !important;
+  border-width: 0.2vw !important;
+}
+.card-icon {
+  font-size: 4vw !important;
+}
+.card h3 {
+  font-size: 2.2vw !important;
+}
+.status-badge {
+  font-size: 1.3vw !important;
+  padding: 0.4vw 1.2vw !important;
+  border-radius: 1.2vw !important;
+}
+.continue-btn {
+  padding: 1vw 2.8vw !important;
+  border-radius: 2.5vw !important;
+  font-size: 1.8vw !important;
+}
