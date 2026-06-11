@@ -1,4 +1,15 @@
-/* global.css - 共享動畫預設庫，可以直接在 HTML 元素套用 class */
+:root {
+  --color-text-main: #2E2E2E;
+  --color-primary: #638666;
+  --color-secondary: #C0A991;
+  --color-accent: #E5CAAC;
+  --color-bg-light: #ECEADB;
+}
+
+body {
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%) !important;
+  color: var(--color-text-main) !important;
+}
 
 /* 基礎版框樣式 */
 .scene-container {
@@ -10,7 +21,31 @@
   height: 100%;
   padding: 24px;
   text-align: center;
+  color: var(--color-text-main);
 }
+
+
+/* 強調文字樣式（換色） */
+.highlight {
+  color: var(--color-primary) !important;
+  font-weight: 900 !important;
+  position: relative;
+  display: inline-block;
+}
+
+/* 優雅的下底線微幅塗刷視覺效果 */
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(99, 134, 102, 0.18);
+  z-index: -1;
+  border-radius: 2px;
+}
+
 
 /* 延遲時間 Class (簡化開發) */
 .delay-1s { animation-delay: 1s !important; }
@@ -124,6 +159,8 @@
 /* 全域防止語句被瀏覽器隨意折行 */
 .animate-line {
   white-space: nowrap !important;
+  color: var(--color-text-main) !important;
 }
+
 
 
