@@ -303,7 +303,7 @@ body .scene-container .card-belonging .card-icon::after {
   }
 
   .scene-split-container {
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: center;
     gap: 20px;
     min-height: auto;
@@ -314,6 +314,7 @@ body .scene-container .card-belonging .card-icon::after {
     align-items: center;
     text-align: center;
     width: 100%;
+    margin-bottom: 12px;
   }
 
   body .scene-container .animate-line {
@@ -324,7 +325,7 @@ body .scene-container .card-belonging .card-icon::after {
   .visual-side {
     min-width: 0;
     width: 100%;
-    margin-bottom: 24px; /* 給下方的文字留出間距 */
+    margin-bottom: 0;
   }
 
   .scene-img {
