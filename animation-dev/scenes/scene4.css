@@ -18,3 +18,58 @@ body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
+/* 工業時代情境動態 */
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.industrial-img {
+  /* 覆蓋 global.css 的 float 動作，改用模擬傳送帶機械的微幅高頻上下微震動 */
+  animation: machineVibrate 4s ease-in-out infinite !important;
+}
+
+@keyframes machineVibrate {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(0.995);
+  }
+}
+
+/* 旋轉齒輪 */
+.gear {
+  position: absolute;
+  font-size: 4.5rem;
+  color: rgba(42, 68, 73, 0.25); /* 鋼鐵半透明綠灰色 */
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
+}
+
+.gear-large {
+  top: 18%;
+  left: 14%;
+  font-size: 5.5rem;
+  animation: spinClockwise 12s linear infinite;
+}
+
+.gear-small {
+  top: 36%;
+  left: 24%;
+  font-size: 3.8rem;
+  animation: spinCounterClockwise 8s linear infinite;
+}
+
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+
