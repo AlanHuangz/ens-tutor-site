@@ -1,3 +1,4 @@
+// codex-write-check
 const sceneConfig = [
   { url: 'scenes/scene1.html', name: '第 1 幕：你是否也常聽人說', duration: 7400 },
   { url: 'scenes/scene2.html', name: '第 2 幕：但我並不這麼認為', duration: 5200 },
