@@ -133,69 +133,87 @@ h3 {
   transition: height 180ms ease;
 }
 
-.brand-slogan {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.brand-slogan-ticker {
+  height: 40px; /* 限制高度只顯示一行 */
+  overflow: hidden;
   margin-left: 16px;
   padding-left: 16px;
   border-left: 2px solid var(--teal);
   font-family: "Noto Sans TC", sans-serif;
-  text-align: left;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.22s ease;
   animation: slideSlogan 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
-  transition: border-color 0.22s ease;
 }
 
 @keyframes slideSlogan {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.slogan-line-1 {
+.ticker-wrapper {
+  display: flex;
+  flex-direction: column;
+  animation: sloganTicker 8s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+.ticker-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
   font-size: 0.95rem;
   font-weight: 800;
-  color: var(--teal-dark);
   letter-spacing: 0.05em;
-  line-height: 1.35;
   transition: color 0.22s ease;
 }
 
-.slogan-line-2 {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--coral-dark);
-  letter-spacing: 0.05em;
-  margin-top: 2px;
-  line-height: 1.35;
+.slogan-line-1 {
+  color: var(--teal-dark);
 }
 
-.brand:hover .brand-slogan {
+.slogan-line-2 {
+  color: var(--coral-dark);
+}
+
+.brand:hover .brand-slogan-ticker {
   border-left-color: var(--coral);
 }
 
-.brand:hover .slogan-line-1 {
+.brand:hover .ticker-item {
   color: var(--teal);
 }
 
+/* 跑馬燈桌機滾動動畫 */
+@keyframes sloganTicker {
+  0%, 45% { transform: translateY(0); }
+  50%, 95% { transform: translateY(-40px); }
+  100% { transform: translateY(0); }
+}
+
+/* 跑馬燈手機適配 */
 @media (max-width: 640px) {
-  .brand-slogan {
+  .brand-slogan-ticker {
+    height: 30px;
     margin-left: 10px;
     padding-left: 10px;
     border-left-width: 1px;
   }
-  .slogan-line-1 {
-    font-size: 0.75rem;
+  .ticker-wrapper {
+    animation: sloganTickerMobile 8s cubic-bezier(0.76, 0, 0.24, 1) infinite;
   }
-  .slogan-line-2 {
-    font-size: 0.62rem;
+  .ticker-item {
+    height: 30px;
+    font-size: 0.78rem !important;
   }
+}
+
+/* 跑馬燈手機滾動動畫 */
+@keyframes sloganTickerMobile {
+  0%, 45% { transform: translateY(0); }
+  50%, 95% { transform: translateY(-30px); }
+  100% { transform: translateY(0); }
 }
 
 main {
