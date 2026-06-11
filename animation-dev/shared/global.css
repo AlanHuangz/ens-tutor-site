@@ -124,7 +124,7 @@ body {
 }
 
 .text-side {
-  flex: 1.4; /* 提高文字區寬度佔比，確保不折行 */
+  flex: 1; /* 50/50 黃金比例，文字側 */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,7 +133,7 @@ body {
 }
 
 .visual-side {
-  flex: 0.6; /* 降低圖片區佔比 */
+  flex: 1; /* 50/50 黃金比例，圖片側，使插圖更顯眼大氣 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,11 +141,12 @@ body {
 
 .scene-img {
   max-width: 100%;
-  max-height: 70vh;
+  max-height: 75vh; /* 提高最大高度，使圖片看起來更大 */
   object-fit: contain;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.08));
   animation: floatImage 5s ease-in-out infinite;
 }
+
 
 @keyframes floatImage {
   0%, 100% {
