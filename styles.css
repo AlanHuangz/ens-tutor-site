@@ -1016,6 +1016,134 @@ textarea {
     display: none;
   }
   .video-container {
-    aspect-ratio: 1 / 1 !important; /* 行動端使用 1:1 比例，為 Iframe 文字動畫預留充足垂直空間，防止圖形被截斷或縮小 */
+    height: 500px !important; /* 手機端提供 500px 固定高度，預留充足空間給上下排列的簡報圖文 */
+    aspect-ratio: auto !important;
   }
+}
+
+/* Pricing Section */
+.pricing-section {
+  padding: 80px 24px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-container {
+  width: min(960px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto 30px;
+}
+
+.pricing-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 36px 30px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 220ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(82, 133, 140, 0.3);
+}
+
+.pricing-card.highlighted {
+  border-color: var(--teal);
+  box-shadow: 0 12px 35px rgba(82, 133, 140, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #EEF4F5 100%);
+}
+
+.pricing-card.highlighted::before {
+  content: "推薦方案";
+  position: absolute;
+  top: 12px;
+  right: -30px;
+  background: var(--teal);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 30px;
+  transform: rotate(45deg);
+}
+
+.pricing-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+  color: var(--teal-dark);
+  font-weight: 700;
+}
+
+.pricing-card .price-value {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--coral-dark);
+  margin-bottom: 15px;
+}
+
+.pricing-card .price-value small {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-weight: normal;
+}
+
+.pricing-card .price-desc {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pricing-notes {
+  width: 100%;
+  max-width: 800px;
+  background: var(--teal-light);
+  border-left: 4px solid var(--teal);
+  padding: 24px;
+  border-radius: 8px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.pricing-notes p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--teal-dark);
+}
+
+/* LINE CTA Button Style */
+.line-cta-btn {
+  background: #06C755 !important;
+  color: #ffffff !important;
+  border-color: #06C755 !important;
+  box-shadow: 0 4px 12px rgba(6, 199, 85, 0.2) !important;
+  font-size: 1.1rem !important;
+  padding: 12px 32px !important;
+  border-radius: 30px !important;
+  font-weight: 700;
+}
+
+.line-cta-btn:hover {
+  background: #05b04b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(6, 199, 85, 0.3) !important;
 }
