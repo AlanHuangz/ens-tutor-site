@@ -10,17 +10,41 @@
 </head>
 <body>
   <div class="scene-container">
-    <div class="text-wrapper">
-      <p class="animate-line fade-in-up">第一是<span class="highlight">「自主感」</span>：</p>
+    <div class="scene-split-container">
+      <div class="text-side">
+        <p class="animate-line fade-in-up">第一是<span class="highlight">「自主感」</span>：</p>
         <p class="animate-line fade-in-up delay-1s">我想怎麼學習，是我自己可以決定的。</p>
+      </div>
+      <div class="visual-side fade-in delay-2s">
+        <div class="image-wrapper">
+          <img src="../assets/autonomy.png" class="scene-img autonomy-img" alt="自主感">
+        </div>
+      </div>
+    </div>
+    
+    <!-- 返回選單按鈕，預設隱藏 -->
+    <div id="back-to-menu-container" class="fade-in delay-3s" style="display: none; position: absolute; bottom: 20px; left: 40px; z-index: 100;">
+      <button class="back-btn" onclick="backToMenu()">↩ 返回核心需求選單</button>
     </div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
-    setTimeout(() => {
-      window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    function backToMenu() {
+      window.parent.postMessage({ type: 'GO_TO_SCENE', index: 14 }, '*'); // 跳回 scene15 (index 14)
+    }
+
+    // 檢查是否是互動模式
+    const isInteractive = sessionStorage.getItem('is_interactive_mode') === 'true';
+
+    if (isInteractive) {
+      // 顯示返回按鈕，不自動跳下一幕
+      document.getElementById('back-to-menu-container').style.display = 'block';
+    } else {
+      // 自動播放模式：時間到自動跳下一幕
+      setTimeout(() => {
+        window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+      }, 5500);
+    }
   </script>
 </body>
 </html>

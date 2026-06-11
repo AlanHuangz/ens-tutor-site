@@ -30,3 +30,57 @@ body {
   0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 15px 30px rgba(99, 134, 102, 0.06)); }
   50% { transform: translateY(-7px) rotate(0.6deg); filter: drop-shadow(0 22px 40px rgba(99, 134, 102, 0.18)); }
 }
+
+/* 互動按鈕樣式 */
+.interactive-btn {
+  background: var(--color-accent);
+  color: var(--color-text-main);
+  border: 2px dashed var(--color-primary);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.interactive-btn:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(99, 134, 102, 0.2);
+}
+
+.color-ai {
+  color: var(--color-primary) !important;
+  font-style: italic;
+  font-size: 2.1rem !important;
+  line-height: 1.6 !important;
+}
+
+/* 繼續按鈕樣式 */
+.continue-btn {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+  box-shadow: 0 6px 18px rgba(99, 134, 102, 0.2);
+  transition: all 0.2s ease;
+}
+
+.continue-btn:hover {
+  background: #507053;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 134, 102, 0.3);
+}

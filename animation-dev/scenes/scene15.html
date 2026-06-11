@@ -12,15 +12,84 @@
   <div class="scene-container">
     <div class="text-wrapper">
       <p class="animate-line fade-in-up">心理學的「自我決定論」提到，</p>
-        <p class="animate-line fade-in-up delay-1s">學習的驅動力，來自三種核心感受：</p>
+      <p class="animate-line fade-in-up delay-500ms">學習的驅動力，來自三種核心感受：</p>
+      
+      <!-- 互動式大卡片 -->
+      <div class="interactive-cards fade-in delay-1500ms">
+        <div class="card card-autonomy" onclick="selectCard(15)">
+          <div class="card-icon">🧭</div>
+          <h3>自主感</h3>
+          <span class="status-badge">點擊探索</span>
+        </div>
+        <div class="card card-competence" onclick="selectCard(16)">
+          <div class="card-icon">🏆</div>
+          <h3>勝任感</h3>
+          <span class="status-badge">點擊探索</span>
+        </div>
+        <div class="card card-belonging" onclick="selectCard(17)">
+          <div class="card-icon">🤝</div>
+          <h3>歸屬感</h3>
+          <span class="status-badge">點擊探索</span>
+        </div>
+      </div>
+      
+      <!-- 繼續動作按鈕 -->
+      <div class="continue-action fade-in delay-2s" style="display: none; margin-top: 24px;">
+        <button class="continue-btn" onclick="continueSlides()">探索 AI 如何陪伴 ➔</button>
+      </div>
     </div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
-    setTimeout(() => {
-      window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    function selectCard(sceneIndex) {
+      sessionStorage.setItem('is_interactive_mode', 'true');
+      
+      // 標記為已探索
+      let explored = JSON.parse(sessionStorage.getItem('explored_cards') || '[]');
+      if (!explored.includes(sceneIndex)) {
+        explored.push(sceneIndex);
+        sessionStorage.setItem('explored_cards', JSON.stringify(explored));
+      }
+      
+      window.parent.postMessage({ type: 'GO_TO_SCENE', index: sceneIndex }, '*');
+    }
+
+    function continueSlides() {
+      sessionStorage.setItem('is_interactive_mode', 'false');
+      // 直接前進到第 19 幕 (index 18)
+      window.parent.postMessage({ type: 'GO_TO_SCENE', index: 18 }, '*');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let explored = JSON.parse(sessionStorage.getItem('explored_cards') || '[]');
+      
+      if (explored.includes(15)) {
+        document.querySelector('.card-autonomy').classList.add('explored');
+        document.querySelector('.card-autonomy .status-badge').textContent = '已探索 ✓';
+      }
+      if (explored.includes(16)) {
+        document.querySelector('.card-competence').classList.add('explored');
+        document.querySelector('.card-competence .status-badge').textContent = '已探索 ✓';
+      }
+      if (explored.includes(17)) {
+        document.querySelector('.card-belonging').classList.add('explored');
+        document.querySelector('.card-belonging .status-badge').textContent = '已探索 ✓';
+      }
+      
+      // 如果看過任何一個，就顯示繼續前進按鈕
+      if (explored.length > 0) {
+        document.querySelector('.continue-action').style.display = 'block';
+      }
+
+      // 如果尚未有任何互動（自動播放模式）：時間到自動跳下一幕
+      const isInteractive = sessionStorage.getItem('is_interactive_mode') === 'true';
+      if (!isInteractive) {
+        // 自動播放：定時器前進到自主感 (index 15)
+        setTimeout(() => {
+          window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+        }, 6500);
+      }
+    });
   </script>
 </body>
 </html>

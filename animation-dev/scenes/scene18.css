@@ -30,3 +30,24 @@ body {
   0%, 100% { transform: translateY(0) scale(1); filter: brightness(1) drop-shadow(0 15px 25px rgba(192, 169, 145, 0.15)); }
   50% { transform: translateY(-5px) scale(1.01); filter: brightness(1.06) drop-shadow(0 22px 35px rgba(192, 169, 145, 0.25)); }
 }
+
+/* 返回按鈕樣式 */
+.back-btn {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(99, 134, 102, 0.25);
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #507053;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 134, 102, 0.35);
+}

@@ -66,12 +66,26 @@ function init() {
   nextBtn.addEventListener('click', nextScene);
   musicBtn.addEventListener('click', toggleMusic);
 
-  // 監聽來自 Iframe 分幕的動畫播畢事件
+  // 監聽背景音樂加載失敗 (若本地下載未就緒，切換至備用雲端 URL)
+  bgMusic.addEventListener('error', () => {
+    console.log("本地背景音樂加載失敗或尚未下載完成，切換至雲端備用音訊源...");
+    const fallbackUrl = 'https://assets.mixkit.co/music/preview/mixkit-warm-lights-347.mp3';
+    if (bgMusic.src !== fallbackUrl) {
+      bgMusic.src = fallbackUrl;
+      bgMusic.load();
+    }
+  });
+
+  // 監聽來自 Iframe 分幕的動畫播畢與互動跳轉事件
   window.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'SCENE_COMPLETE') {
-      console.log(`收到 Iframe 通知：第 ${currentIndex + 1} 幕播放完畢`);
-      // 切換下一幕
-      nextScene();
+    if (event.data) {
+      if (event.data.type === 'SCENE_COMPLETE') {
+        console.log(`收到 Iframe 通知：第 ${currentIndex + 1} 幕播放完畢`);
+        nextScene();
+      } else if (event.data.type === 'GO_TO_SCENE') {
+        console.log(`收到 Iframe 互動跳轉要求，目標索引：${event.data.index}`);
+        loadScene(event.data.index);
+      }
     }
   });
 }
