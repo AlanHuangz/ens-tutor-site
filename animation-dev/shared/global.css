@@ -290,20 +290,16 @@ body .scene-container .card-belonging .card-icon::after {
 
 @media (max-width: 760px) {
   .scene-container {
-    padding: 48px 30px;
-    background-size: 48px 48px, 48px 48px, auto;
+    padding: 20px 20px;
+    background-size: 36px 36px, 36px 36px, auto;
   }
 
   .scene-container::before {
-    top: 18px;
-    left: 22px;
-    font-size: 14px;
+    display: none !important;
   }
 
   .scene-container::after {
-    bottom: 18px;
-    left: 22px;
-    font-size: 11px;
+    display: none !important;
   }
 
   .scene-split-container {
