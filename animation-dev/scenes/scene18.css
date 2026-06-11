@@ -1,7 +1,7 @@
 /* scene18.css - 第 18 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@ body {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
-  color: #2C3D4D;
+  color: var(--color-text-main);
   margin: 16px 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
@@ -23,19 +23,10 @@ body {
   position: relative;
   display: inline-block;
 }
-
 .guide-img {
-  /* 溫暖呵護的微微起伏與光暈亮度呼吸 */
   animation: seedlingGrow 6s ease-in-out infinite !important;
 }
-
 @keyframes seedlingGrow {
-  0%, 100% { 
-    transform: translateY(0) scale(1); 
-    filter: brightness(1) drop-shadow(0 15px 25px rgba(192, 169, 145, 0.15)); 
-  }
-  50% { 
-    transform: translateY(-6px) scale(1.015); 
-    filter: brightness(1.08) drop-shadow(0 22px 35px rgba(192, 169, 145, 0.3)); 
-  }
+  0%, 100% { transform: translateY(0) scale(1); filter: brightness(1) drop-shadow(0 15px 25px rgba(192, 169, 145, 0.15)); }
+  50% { transform: translateY(-5px) scale(1.01); filter: brightness(1.06) drop-shadow(0 22px 35px rgba(192, 169, 145, 0.25)); }
 }

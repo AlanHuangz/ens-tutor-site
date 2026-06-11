@@ -1,7 +1,7 @@
 /* scene4.css - 第 4 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@ body {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
-  color: #2C3D4D;
+  color: var(--color-text-main);
   margin: 16px 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
@@ -23,44 +23,26 @@ body {
   position: relative;
   display: inline-block;
 }
-
 .industrial-img {
   animation: machineVibrate 4s ease-in-out infinite !important;
 }
-
 @keyframes machineVibrate {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-4px) scale(0.995); }
 }
-
 .gear {
   position: absolute;
   font-size: 4.5rem;
-  color: rgba(42, 68, 73, 0.25);
+  color: rgba(99, 134, 102, 0.2);
   line-height: 1;
   user-select: none;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
 }
-
-.gear-large {
-  top: 18%;
-  left: 14%;
-  font-size: 5.5rem;
-  animation: spinClockwise 12s linear infinite;
-}
-
-.gear-small {
-  top: 36%;
-  left: 24%;
-  font-size: 3.8rem;
-  animation: spinCounterClockwise 8s linear infinite;
-}
-
+.gear-large { top: 18%; left: 14%; font-size: 5.5rem; animation: spinClockwise 12s linear infinite; }
+.gear-small { top: 36%; left: 24%; font-size: 3.8rem; animation: spinCounterClockwise 8s linear infinite; }
 @keyframes spinClockwise {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 @keyframes spinCounterClockwise {
   from { transform: rotate(0deg); }
   to { transform: rotate(-360deg); }

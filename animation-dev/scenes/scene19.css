@@ -1,7 +1,7 @@
 /* scene19.css - 第 19 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@ body {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
-  color: #2C3D4D;
+  color: var(--color-text-main);
   margin: 16px 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
@@ -23,19 +23,10 @@ body {
   position: relative;
   display: inline-block;
 }
-
 .ai-img {
-  /* 機器人與孩子的微幅漂浮 */
   animation: aiFloat 5.5s ease-in-out infinite !important;
 }
-
 @keyframes aiFloat {
-  0%, 100% { 
-    transform: translateY(0) rotate(0deg); 
-    filter: drop-shadow(0 15px 30px rgba(99, 134, 102, 0.08));
-  }
-  50% { 
-    transform: translateY(-8px) rotate(0.8deg); 
-    filter: drop-shadow(0 22px 40px rgba(99, 134, 102, 0.22));
-  }
+  0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 15px 30px rgba(99, 134, 102, 0.06)); }
+  50% { transform: translateY(-7px) rotate(0.6deg); filter: drop-shadow(0 22px 40px rgba(99, 134, 102, 0.18)); }
 }

@@ -1,41 +1,28 @@
 /* scene28.css - 第 28 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.text-side .animate-line {
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  text-align: center;
+}
+
+.text-wrapper .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 2.7rem; /* 純文字幕字級稍微放大，聚焦核心文案 */
   font-weight: 700;
-  color: #2C3D4D;
-  margin: 16px 0;
-  letter-spacing: 0.05em;
+  color: var(--color-text-main);
+  margin: 18px 0;
+  letter-spacing: 0.06em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-}
-
-/* 願意學自信孩童朝向陽光動態 */
-.image-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.willing-img {
-  /* 向著陽光與未來前進的昂揚動態 */
-  animation: sunRise 7s ease-in-out infinite !important;
-}
-
-@keyframes sunRise {
-  0%, 100% { 
-    transform: translateY(0) scale(1); 
-    filter: drop-shadow(0 15px 30px rgba(192, 169, 145, 0.12));
-  }
-  50% { 
-    transform: translateY(-10px) scale(1.02); 
-    filter: drop-shadow(0 25px 45px rgba(192, 169, 145, 0.28));
-  }
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
 }

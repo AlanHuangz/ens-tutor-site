@@ -1,91 +1,28 @@
 /* scene3.css - 第 3 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.text-side .animate-line {
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  text-align: center;
+}
+
+.text-wrapper .animate-line {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 2.3rem;
+  font-size: 2.7rem; /* 純文字幕字級稍微放大，聚焦核心文案 */
   font-weight: 700;
-  color: #2C3D4D;
-  margin: 16px 0;
-  letter-spacing: 0.05em;
+  color: var(--color-text-main);
+  margin: 18px 0;
+  letter-spacing: 0.06em;
   line-height: 1.5;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-}
-
-/* 焦慮懊惱情境動態 */
-.image-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.anxiety-img {
-  animation: swayAnxiety 6s ease-in-out infinite !important;
-}
-
-@keyframes swayAnxiety {
-  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-  50% { transform: translateY(-8px) rotate(-1.5deg) scale(1.015); }
-}
-
-.bubble {
-  position: absolute;
-  background: rgba(220, 168, 66, 0.12);
-  color: #DCA842;
-  border: 2px solid rgba(220, 168, 66, 0.35);
-  font-family: "Noto Sans TC", sans-serif;
-  font-weight: 900;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 24px rgba(220, 168, 66, 0.1);
-  user-select: none;
-}
-
-.bubble-1 {
-  width: 52px;
-  height: 52px;
-  font-size: 1.6rem;
-  top: 15%;
-  left: -5%;
-  animation: bubbleFloat1 8s ease-in-out infinite;
-}
-
-.bubble-2 {
-  width: 42px;
-  height: 42px;
-  font-size: 1.3rem;
-  top: 30%;
-  right: -2%;
-  animation: bubbleFloat2 10s ease-in-out infinite;
-}
-
-.bubble-3 {
-  width: 48px;
-  height: 48px;
-  font-size: 1.4rem;
-  bottom: 20%;
-  left: 5%;
-  animation: bubbleFloat3 9s ease-in-out infinite;
-}
-
-@keyframes bubbleFloat1 {
-  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
-  50% { transform: translateY(-16px) rotate(15deg) scale(1.08); opacity: 1; }
-}
-
-@keyframes bubbleFloat2 {
-  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.6; }
-  50% { transform: translateY(-12px) rotate(-15deg) scale(0.92); opacity: 0.9; }
-}
-
-@keyframes bubbleFloat3 {
-  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.75; }
-  50% { transform: translateY(-20px) rotate(10deg) scale(1.1); opacity: 1; }
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
 }

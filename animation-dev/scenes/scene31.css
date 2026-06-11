@@ -1,7 +1,7 @@
 /* scene31.css - 第 31 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, #FCFAF5 0%, #F5F1E6 100%);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@ body {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
-  color: #2C3D4D;
+  color: var(--color-text-main);
   margin: 16px 0;
   letter-spacing: 0.05em;
   line-height: 1.5;
@@ -23,32 +23,22 @@ body {
   position: relative;
   display: inline-block;
 }
-
 .willing-img {
-  /* 向著陽光與未來前進的昂揚動態 */
   animation: sunRise 7s ease-in-out infinite !important;
 }
-
 @keyframes sunRise {
-  0%, 100% { 
-    transform: translateY(0) scale(1); 
-    filter: drop-shadow(0 15px 30px rgba(192, 169, 145, 0.12));
-  }
-  50% { 
-    transform: translateY(-10px) scale(1.02); 
-    filter: drop-shadow(0 25px 45px rgba(192, 169, 145, 0.28));
-  }
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 15px 30px rgba(192, 169, 145, 0.1)); }
+  50% { transform: translateY(-8px) scale(1.015); filter: drop-shadow(0 25px 45px rgba(192, 169, 145, 0.22)); }
 }
-
 .text-side .animate-line:nth-child(2) {
   font-family: "Noto Serif TC", serif;
   font-size: 2.8rem;
-  color: var(--color-primary);
+  color: var(--color-primary) !important;
   font-weight: 900;
   margin-top: 24px;
 }
 .text-side .animate-line:nth-child(3) {
   font-size: 1.5rem;
-  color: var(--color-secondary);
+  color: var(--color-secondary) !important;
   font-weight: 700;
 }
