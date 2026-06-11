@@ -1,7 +1,7 @@
 /* scene15.css - 第 15 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
+  background: transparent !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +118,8 @@ body {
   background: #507053;
   transform: scale(1.02);
   box-shadow: 0 8px 24px rgba(99, 134, 102, 0.3);
-}\n
+}
+\n
 /* 已在 html 覆蓋，保留樣式，轉換單位為 vw */
 .text-wrapper .animate-line {
   font-size: 3.8vw !important;

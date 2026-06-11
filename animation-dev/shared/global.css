@@ -8,7 +8,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%) !important;
+  background: transparent !important; /* 使分幕背景透明，完美融合主網站底色 */
   color: var(--color-text-main) !important;
 }
 

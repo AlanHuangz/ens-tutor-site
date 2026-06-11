@@ -43,7 +43,11 @@ let startTime = 0;
 let elapsed = 0; // 當前場景已播放時間
 let duration = sceneConfig[0].duration;
 
-const iframe = document.getElementById('scene-frame');
+const iframe1 = document.getElementById('scene-frame-1');
+const iframe2 = document.getElementById('scene-frame-2');
+let activeIframe = iframe1;
+let inactiveIframe = iframe2;
+
 const indicator = document.querySelector('.scene-indicator');
 const progress = document.getElementById('timeline-progress');
 const playBtn = document.getElementById('play-btn');
@@ -58,7 +62,20 @@ const bgMusic = document.getElementById('bg-music');
 
 // 初始化
 function init() {
-  loadScene(0);
+  activeIframe = iframe1;
+  inactiveIframe = iframe2;
+
+  // 監聽第一幕 (預設載入) 的完成
+  activeIframe.onload = function() {
+    setIframePlayState(activeIframe, isPlaying ? 'running' : 'paused');
+    activeIframe.onload = null;
+    if (isPlaying) {
+      startTimer();
+    }
+  };
+
+  // 更新狀態文字
+  indicator.textContent = `${sceneConfig[0].name} (1/${sceneConfig.length})`;
 
   // 監聽按鈕事件
   playBtn.addEventListener('click', togglePlay);
@@ -80,42 +97,83 @@ function init() {
   window.addEventListener('message', (event) => {
     if (event.data) {
       if (event.data.type === 'SCENE_COMPLETE') {
-        console.log(`收到 Iframe 通知：第 ${currentIndex + 1} 幕播放完畢`);
-        nextScene();
+        // 關鍵安全檢查：只有當前作用中的 iframe 發出的完成訊號才受理，防止舊頁面延遲訊號干擾
+        if (event.source === activeIframe.contentWindow) {
+          console.log(`收到 Iframe 通知：第 ${currentIndex + 1} 幕播放完畢`);
+          nextScene();
+        } else {
+          console.log(`忽略非作用中 Iframe 的完成訊號`);
+        }
       } else if (event.data.type === 'GO_TO_SCENE') {
-        console.log(`收到 Iframe 互動跳轉要求，目標索引：${event.data.index}`);
-        loadScene(event.data.index);
+        if (event.source === activeIframe.contentWindow) {
+          console.log(`收到 Iframe 互動跳轉要求，目標索引：${event.data.index}`);
+          loadScene(event.data.index);
+        }
       }
     }
   });
 }
 
-// 載入指定場景
+// 載入指定場景 (雙緩衝無縫切換，徹底消除加載時的白閃與停頓)
 function loadScene(index) {
   if (index < 0 || index >= sceneConfig.length) return;
   
-  // 1. 觸發淡出動畫
-  iframe.classList.add('fade-out');
+  const targetUrl = sceneConfig[index].url;
+  currentIndex = index;
+  duration = sceneConfig[currentIndex].duration;
+  elapsed = 0;
   
-  setTimeout(() => {
-    currentIndex = index;
-    duration = sceneConfig[currentIndex].duration;
-    elapsed = 0;
+  // 更新狀態文字
+  indicator.textContent = `${sceneConfig[currentIndex].name} (${currentIndex + 1}/${sceneConfig.length})`;
+  
+  // 重設進度條與定時器
+  progress.style.width = '0%';
+  resetTimer();
+  
+  let hasLoaded = false;
+  
+  // 1. 在背景 iframe 載入目標頁面
+  inactiveIframe.onload = function() {
+    if (hasLoaded) return;
+    hasLoaded = true;
     
-    // 更新狀態文字
-    indicator.textContent = `${sceneConfig[currentIndex].name} (${currentIndex + 1}/${sceneConfig.length})`;
+    // 確保新 iframe 內部播放狀態與主播放器同步
+    setIframePlayState(inactiveIframe, isPlaying ? 'running' : 'paused');
     
-    // 更新 iframe 網址
-    iframe.src = sceneConfig[currentIndex].url;
+    // 2. 進行淡入淡出樣式切換
+    activeIframe.className = 'scene-frame incoming';
+    inactiveIframe.className = 'scene-frame active';
     
-    // 重設進度條與定時器
-    progress.style.width = '0%';
-    resetTimer();
+    // 3. 交換雙緩衝指標
+    const temp = activeIframe;
+    activeIframe = inactiveIframe;
+    inactiveIframe = temp;
     
+    // 4. 清除舊 onload，並延遲清空 src 避免淡出動畫期間變白
+    inactiveIframe.onload = null;
+    const oldIframe = inactiveIframe;
+    setTimeout(() => {
+      if (oldIframe === inactiveIframe) {
+        oldIframe.src = 'about:blank';
+      }
+    }, 500);
+    
+    // 5. 啟動計時器
     if (isPlaying) {
       startTimer();
     }
-  }, 250); // 250ms 淡出延時
+  };
+  
+  // 設置 3 秒超時保護，防範加載異常導致卡屏
+  const timeoutId = setTimeout(() => {
+    if (!hasLoaded) {
+      console.warn("Iframe 加載超合，強制切換幕");
+      inactiveIframe.onload();
+    }
+  }, 3000);
+  
+  // 觸發載入
+  inactiveIframe.src = targetUrl;
 }
 
 // 計時器邏輯：驅動進度條與備用切換
@@ -125,7 +183,7 @@ function startTimer() {
   function updateProgress() {
     if (!isPlaying) return;
     
-    // 如果處於互動模式（如卡片展開或 Mario Kart 解釋中），凍結進度條並不進行自動換幕
+    // 如果處於互動模式（如卡片展開或充電中），凍結進度條並不進行自動換幕
     const isInteractiveMode = sessionStorage.getItem('is_interactive_mode') === 'true';
     if (isInteractiveMode) {
       startTime = Date.now() - elapsed; // 不斷更新起始點，避免時間累積
@@ -161,13 +219,13 @@ function togglePlay() {
     resetTimer();
     playIcon.style.display = 'block';
     pauseIcon.style.display = 'none';
-    setIframePlayState('paused');
+    setIframePlayState(activeIframe, 'paused');
     if (!isMuted) bgMusic.pause();
   } else {
     isPlaying = true;
     playIcon.style.display = 'none';
     pauseIcon.style.display = 'block';
-    setIframePlayState('running');
+    setIframePlayState(activeIframe, 'running');
     startTimer();
     if (!isMuted && bgMusic.paused) {
       bgMusic.play().catch(e => console.log('音樂自動播放失敗：', e));
@@ -176,9 +234,9 @@ function togglePlay() {
 }
 
 // 控制 Iframe 內部 CSS 動畫播放狀態
-function setIframePlayState(state) {
+function setIframePlayState(targetIframe, state) {
   try {
-    const iframeBody = iframe.contentDocument || iframe.contentWindow.document;
+    const iframeBody = targetIframe.contentDocument || targetIframe.contentWindow.document;
     if (iframeBody && iframeBody.body) {
       iframeBody.body.style.setProperty('--play-state', state);
       // 對所有元素套用 play state
@@ -191,18 +249,6 @@ function setIframePlayState(state) {
     console.log('無法控制 Iframe 內動畫狀態 (跨域或尚未加載)：', err);
   }
 }
-
-// 當 Iframe 加載完成，確保其動畫狀態與主播放器一致，並解除淡出、播放淡入
-iframe.addEventListener('load', () => {
-  setIframePlayState(isPlaying ? 'running' : 'paused');
-  
-  // 移除淡出，加入淡入
-  iframe.classList.remove('fade-out');
-  iframe.classList.add('fade-in');
-  setTimeout(() => {
-    iframe.classList.remove('fade-in');
-  }, 250);
-});
 
 // 切換至上一幕
 function prevScene() {

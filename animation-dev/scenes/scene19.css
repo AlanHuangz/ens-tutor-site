@@ -1,7 +1,7 @@
 /* scene19.css - 第 19 幕專屬樣式 */
 
 body {
-  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-accent) 100%);
+  background: transparent !important;
   display: flex;
   align-items: center;
   justify-content: center;

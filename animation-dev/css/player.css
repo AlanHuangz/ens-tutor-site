@@ -1,7 +1,7 @@
 /* player.css - 播放器外殼與控制面板樣式 */
 
 :root {
-  --player-bg: #FFFFFF; /* 純白，與官網一致 */
+  --player-bg: transparent; /* 透明背景 */
   --control-bg: rgba(255, 255, 255, 0.85); /* 溫和的白色半透明背景 */
   --active-color: #52858C; /* 翠綠色，品牌主色 */
   --text-main: #2C3D4D; /* 墨藍灰色 */
@@ -9,7 +9,7 @@
 }
 
 body {
-  background: var(--player-bg);
+  background: transparent !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,37 +25,43 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--player-bg);
+  background: transparent;
 }
 
 .player-container {
   position: relative;
   width: min(960px, 100%);
   aspect-ratio: 16 / 9; /* 鎖定標準 16:9 比例 */
-  background: var(--player-bg);
-  box-shadow: 0 24px 70px rgba(44, 61, 77, 0.12); /* 溫和軟陰影 */
-  border-radius: 16px;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
   overflow: hidden;
-  border: 1px solid rgba(82, 133, 140, 0.15); /* 細緻的翠綠邊框 */
+  border: none;
 }
 
-/* 嵌入網頁分幕 */
-#scene-frame {
+/* 嵌入網頁分幕 - 雙 Iframe 重疊與淡入淡出過場樣式 */
+.scene-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: block;
   border: none;
   background: transparent;
-  transition: opacity 250ms ease-in-out;
-  opacity: 1;
+  transition: opacity 400ms ease-in-out; /* 400ms 淡入淡出，保證無縫過場 */
 }
 
-#scene-frame.fade-out {
+.scene-frame.active {
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto; /* 只有作用中的 iframe 能接受滑鼠互動 */
+}
+
+.scene-frame.incoming {
   opacity: 0;
-}
-
-#scene-frame.fade-in {
-  opacity: 1;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* 頂部進度列 */

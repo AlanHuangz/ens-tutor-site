@@ -10,8 +10,9 @@
 <body>
   <div class="player-outer">
     <div class="player-container">
-      <!-- 嵌入分幕場景的 iframe -->
-      <iframe id="scene-frame" src="scenes/scene1.html" frameborder="0" scrolling="no"></iframe>
+      <!-- 嵌入分幕場景的雙 Iframe (雙緩衝無縫過場，徹底消除加載時的白閃與停頓) -->
+      <iframe id="scene-frame-1" class="scene-frame active" src="scenes/scene1.html" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+      <iframe id="scene-frame-2" class="scene-frame incoming" src="about:blank" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
       
       <!-- 頂部進度條與場景狀態 -->
       <div class="player-header">
