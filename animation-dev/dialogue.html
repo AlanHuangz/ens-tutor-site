@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>願意學 - 對話版首頁影片</title>
+  <link rel="stylesheet" href="shared/reset.css">
+  <link rel="stylesheet" href="css/film-player.css?v=dialogue-20260611b">
+</head>
+<body>
+  <main class="film" aria-label="願意學首頁影片">
+    <img class="brand-logo" src="assets/logo.png" alt="願意學">
+    <img class="logo-mark" src="assets/logo.png" alt="">
+
+    <div class="atmosphere" aria-hidden="true">
+      <span class="light light-a"></span>
+      <span class="light light-b"></span>
+      <span class="door-shadow"></span>
+      <span class="motion-line line-a"></span>
+      <span class="motion-line line-b"></span>
+    </div>
+
+    <div id="metaphor" class="metaphor" aria-hidden="true"></div>
+    <div id="wordCloud" class="word-cloud" aria-hidden="true"></div>
+
+    <section id="scene" class="scene">
+      <p id="kicker" class="kicker"></p>
+      <h1 id="headline" class="headline"></h1>
+      <p id="support" class="support"></p>
+    </section>
+
+    <p class="tagline-mini">先懂孩子，再懂數學</p>
+
+    <div class="progress-shell" aria-hidden="true">
+      <div id="progress" class="progress-bar"></div>
+    </div>
+
+    <nav class="controls" aria-label="影片控制">
+      <button id="prevBtn" type="button" aria-label="上一幕">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L18 6v12z"/></svg>
+      </button>
+      <button id="playBtn" type="button" aria-label="播放或暫停">
+        <svg id="pauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button id="nextBtn" type="button" aria-label="下一幕">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg>
+      </button>
+    </nav>
+  </main>
+
+  <script src="js/film-player.js?v=dialogue-20260611b"></script>
+</body>
+</html>
