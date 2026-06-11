@@ -142,7 +142,7 @@ h3 {
   border-left: 2px solid var(--teal);
   font-family: "Noto Sans TC", sans-serif;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   transition: border-color 0.22s ease;
   animation: slideSlogan 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
