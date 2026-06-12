@@ -3,46 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 16 幕：第一是自主感  ...</title>
+  <title>第 16 幕：自主感</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene16.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">第一是<span class="highlight">「自主感」</span>：</p>
-        <p class="animate-line fade-in-up delay-1s">我想怎麼學習，是我自己可以決定的。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">第一是「自主感」：</p>
+        <p class="animate-line fade-in-up delay-500ms">我可以選擇</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">怎麼學。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="image-wrapper">
-          <img src="../assets/autonomy.png" class="scene-img autonomy-img" alt="自主感">
-        </div>
-        <div id="back-to-menu-container" style="display: none; position: absolute; bottom: 2vw; right: 2vw; z-index: 100;">
-          <button class="back-btn" onclick="backToMenu()">返回選單 ↩</button>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-16">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/autonomy.png" class="scene-img photo-img" alt="孩子握著方向盤選擇自己的學習路徑">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    function backToMenu() {
-      window.parent.postMessage({ type: 'GO_TO_SCENE', index: 14 }, '*'); // 跳回 scene15 (index 14)
-    }
-
-    // 檢查是否是互動模式
-    const isInteractive = sessionStorage.getItem('is_interactive_mode') === 'true';
-
-    if (isInteractive) {
-      // 顯示返回按鈕，不自動跳下一幕
-      document.getElementById('back-to-menu-container').style.display = 'block';
-    } else {
-      // 自動播放模式：時間到自動跳下一幕
-      setTimeout(() => {
-        window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-      }, 5500);
+    setTimeout(() => {
+      window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
     }
   </script>
 </body>

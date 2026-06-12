@@ -3,47 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 17 幕：第二是勝任感  ...</title>
+  <title>第 17 幕：勝任感</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene17.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">第二是<span class="highlight">「勝任感」</span>：</p>
-        <p class="animate-line fade-in-up delay-1s">在還沒開始學之前，我就深信自己做得到。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">第二是「勝任感」：</p>
+        <p class="animate-line fade-in-up delay-500ms">我相信自己</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">做得到。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="image-wrapper">
-          <img src="../assets/competence.png" class="scene-img competence-img" alt="勝任感">
-          <div class="trophy-sparkle">✨</div>
-        </div>
-        <div id="back-to-menu-container" style="display: none; position: absolute; bottom: 2vw; right: 2vw; z-index: 100;">
-          <button class="back-btn" onclick="backToMenu()">返回選單 ↩</button>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-17">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/competence.png" class="scene-img photo-img" alt="孩子一步一步完成挑戰建立勝任感">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    function backToMenu() {
-      window.parent.postMessage({ type: 'GO_TO_SCENE', index: 14 }, '*'); // 跳回 scene15 (index 14)
-    }
-
-    // 檢查是否是互動模式
-    const isInteractive = sessionStorage.getItem('is_interactive_mode') === 'true';
-
-    if (isInteractive) {
-      // 顯示返回按鈕，不自動跳下一幕
-      document.getElementById('back-to-menu-container').style.display = 'block';
-    } else {
-      // 自動播放模式：時間到自動跳下一幕
-      setTimeout(() => {
-        window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-      }, 5500);
+    setTimeout(() => {
+      window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
     }
   </script>
 </body>

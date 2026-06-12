@@ -3,34 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 27 幕：當孩子的自主與勝...</title>
+  <title>第 27 幕：老師家長有餘裕</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene27.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">當孩子的自主與勝任感被滿足後，</p>
-        <p class="animate-line fade-in-up delay-1s">老師和家長，才終於有了<span class="highlight">餘裕</span>。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">當孩子的自主與勝任感</p>
+        <p class="animate-line fade-in-up delay-500ms">被滿足後，</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">老師和家長才終於有了餘裕。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="balloon-wrapper">
-          <div class="hot-balloon">🎈</div>
-          <div class="cloud-dec cloud-1">☁️</div>
-          <div class="cloud-dec cloud-2">☁️</div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-27">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/supportive_guide.png" class="scene-img photo-img" alt="老師和家長終於有餘裕看見孩子">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

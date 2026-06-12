@@ -3,58 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 26 幕：這樣孩子的勝任感...</title>
+  <title>第 26 幕：勝任感被滿足</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene26.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">這樣，孩子的<span class="highlight">「勝任感」</span>就被滿足了。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">這樣，孩子的「勝任感」</p>
+        <p class="animate-line fade-in-up delay-500ms emph-line">就被滿足了。</p>
       </div>
-      <div class="visual-side fade-in delay-1s">
-        <div class="progress-box">
-          <span class="progress-title" id="charge-title">勝任感充能</span>
-          <div class="progress-bg">
-            <div class="progress-fill" id="bar-fill"></div>
-          </div>
-          <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; margin-top: 0.5vw;">
-            <span class="percent-label" id="percent-label">99%</span>
-            <button class="charge-btn glow-pulse" onclick="manualCharge()">⚡ 充能</button>
-          </div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-26">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/competence.png" class="scene-img photo-img" alt="孩子完成任務後看見自己做得到">
+          <span class="photo-thread"></span>
         </div>
-        <script>
-          function manualCharge() {
-            const bar = document.getElementById('bar-fill');
-            const percent = document.getElementById('percent-label');
-            const title = document.getElementById('charge-title');
-            
-            bar.style.animation = 'none';
-            percent.style.animation = 'none';
-            void bar.offsetWidth;
-            
-            bar.style.width = '100%';
-            bar.style.background = 'var(--color-highlight-accent)';
-            bar.style.boxShadow = '0 0 1.5vw var(--color-highlight-accent)';
-            
-            percent.textContent = '100%';
-            percent.style.color = 'var(--color-highlight-accent)';
-            title.innerHTML = '勝任感滿足！🎉';
-            title.style.color = 'var(--color-highlight-accent)';
-          }
-        </script>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 4000);
+    }, 3880);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

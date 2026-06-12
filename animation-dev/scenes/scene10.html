@@ -3,34 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 10 幕：每個人吸收知識的...</title>
+  <title>第 10 幕：學習方式不同</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene10.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">每個人吸收知識的方式、速度與順序，</p>
-        <p class="animate-line fade-in-up delay-1s">其實，完全<span class="highlight">都不一樣</span>。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">學習方式不同，</p>
+        <p class="animate-line fade-in-up delay-500ms emph-line">不代表不適合學習。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="rings-wrapper">
-          <div class="ring ring-outer"></div>
-          <div class="ring ring-middle"></div>
-          <div class="ring ring-inner"></div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-10">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/neurodiversity.png" class="scene-img photo-img" alt="不同學習方式的孩子在同一個教室裡">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 3880);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

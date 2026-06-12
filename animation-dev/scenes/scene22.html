@@ -3,67 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 22 幕：AI 可以耐心拆...</title>
+  <title>第 22 幕：AI耐心拆解</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene22.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side" id="normal-text">
-        <p class="animate-line fade-in-up"><span class="highlight">AI</span> 可以耐心拆解步驟，</p>
-        <p class="animate-line fade-in-up delay-1s">甚至換個方式解釋 <span class="highlight">100 遍</span>。</p>
-        <!-- 互動按鈕 -->
-        <button class="interactive-btn fade-in delay-1500ms" onclick="tryAiExplanation()">💡 點我，聽 AI 換個方式解釋</button>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">AI 可以耐心拆解步驟，</p>
+        <p class="animate-line fade-in-up delay-500ms">甚至換個方式，</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">解釋 100 遍。</p>
       </div>
-      
-      <!-- 點擊後的互動文字，預設隱藏 -->
-      <div class="text-side" id="interactive-text" style="display: none;">
-        <p class="animate-line fade-in-up color-ai">「沒問題！我們把複雜的物理慣性，</p>
-        <p class="animate-line fade-in-up delay-500ms color-ai">想像成《瑪利歐賽車》甩尾時的衝力！🏎️」</p>
-        <button class="continue-btn next-btn fade-in delay-1500ms" onclick="finishExplanation()">真有趣，繼續播放 ➔</button>
-      </div>
-
-      <div class="visual-side fade-in delay-2s">
-        <div class="image-wrapper">
-          <img src="../assets/ai_mentor.png" class="scene-img ai-img" alt="AI陪伴學習">
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-22">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/scene22-illustration.png" class="scene-img photo-img" alt="AI把困難題目拆成小步驟">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    let interactiveClicked = false;
-    let timeoutId = null;
-
-    function tryAiExplanation() {
-      interactiveClicked = true;
-      if (timeoutId) clearTimeout(timeoutId);
-      
-      // 隱藏原本文字，顯示互動文字
-      document.getElementById('normal-text').style.display = 'none';
-      document.getElementById('interactive-text').style.display = 'flex';
-      
-      // 進入互動模式，防止自動切換
-      sessionStorage.setItem('is_interactive_mode', 'true');
-    }
-
-    function finishExplanation() {
-      sessionStorage.setItem('is_interactive_mode', 'false');
-      // 通知主播放器切換至下一幕
+    setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // 預設的自動換幕定時器
-      timeoutId = setTimeout(() => {
-        if (!interactiveClicked) {
-          window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-        }
-      }, 7000); // 提供較寬裕的時間供點擊
-    });
   </script>
 </body>
 </html>

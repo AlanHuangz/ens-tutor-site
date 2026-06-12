@@ -3,34 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 24 幕：隨時想問就問沒有...</title>
+  <title>第 24 幕：想問就問</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene24.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up"><span class="highlight">隨時想問就問</span>，沒有任何心理負擔。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">隨時想問就問，</p>
+        <p class="animate-line fade-in-up delay-500ms emph-line">沒有任何心理負擔。</p>
       </div>
-      <div class="visual-side fade-in delay-1s">
-        <div class="chat-box-wrapper">
-          <div class="chat-bubble bubble-left">我這個部分還是不懂...</div>
-          <div class="chat-bubble bubble-right">
-            <span class="typing-dots" id="dots-anim">沒問題，我們再換個方式說一遍！💡</span>
-          </div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-24">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/ai_mentor.png" class="scene-img photo-img" alt="孩子舉手向AI提問沒有心理負擔">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 4000);
+    }, 3880);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

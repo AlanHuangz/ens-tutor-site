@@ -3,32 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 28 幕：有了餘裕  才能...</title>
+  <title>第 28 幕：真正接住孩子</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene28.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
+    <div class="story-layout">
+      <div class="story-copy">
         <p class="animate-line fade-in-up">有了餘裕，</p>
-        <p class="animate-line fade-in-up delay-1s">才能真正去照顧孩子、接住孩子。</p>
+        <p class="animate-line fade-in-up delay-500ms">才能真正去照顧孩子，</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">接住孩子。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="heart-container">
-          <div class="heart-shape">💗</div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-28">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/supportive_guide.png" class="scene-img photo-img" alt="大人溫柔接住孩子">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

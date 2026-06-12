@@ -3,62 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 20 幕：不管是圖像影像還...</title>
+  <title>第 20 幕：更多選擇</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene20.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">不管是圖像、影像，還是聽覺的輸入，</p>
-        <p class="animate-line fade-in-up delay-1s">學習，開始有了更多選擇。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">不管是圖像、影像，</p>
+        <p class="animate-line fade-in-up delay-500ms">還是聽覺的輸入，</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">學習開始有了更多選擇。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="media-choices-wrapper">
-          <div class="media-card card-visual" onclick="showMediaTip('visual')">
-            <div class="media-icon">🎨</div>
-            <span>圖像</span>
-            <div class="click-badge">點選</div>
-          </div>
-          <div class="media-card card-video" onclick="showMediaTip('video')">
-            <div class="media-icon">🎬</div>
-            <span>影像</span>
-            <div class="click-badge">點選</div>
-          </div>
-          <div class="media-card card-audio" onclick="showMediaTip('audio')">
-            <div class="media-icon">🎵</div>
-            <span>聽覺</span>
-            <div class="click-badge">點選</div>
-          </div>
-          <div id="media-tip-popup" class="media-tip-popup" style="display: none;"></div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-20">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/scene20-illustration.png" class="scene-img photo-img" alt="孩子用圖像影像聽覺選擇適合自己的入口">
+          <span class="photo-thread"></span>
         </div>
-        <script>
-          function showMediaTip(type) {
-            const popup = document.getElementById('media-tip-popup');
-            const tips = {
-              visual: '🎨 <b>圖像學習</b>：心智圖、插圖與顏色對比，最容易在大腦留下直覺的結構記憶！',
-              video: '🎬 <b>影像學習</b>：動畫步驟、3D 圖形、動態原理拆解，讓概念躍然紙上！',
-              audio: '🎵 <b>聽覺學習</b>：同理心口語解說、陪伴式語音反饋，極大增強對話溫暖與歸屬感！'
-            };
-            popup.innerHTML = tips[type];
-            popup.style.display = 'block';
-            popup.classList.remove('fade-in');
-            void popup.offsetWidth;
-            popup.classList.add('fade-in');
-          }
-        </script>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

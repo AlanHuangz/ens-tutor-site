@@ -3,36 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 25 幕：只要給予足夠的時...</title>
+  <title>第 25 幕：小成功累積</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene25.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">只要給予足夠的時間，</p>
-        <p class="animate-line fade-in-up delay-1s">每個孩子，一定都能學會。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">一次次被聽懂，</p>
+        <p class="animate-line fade-in-up delay-500ms">一次次做得到，</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">孩子開始累積小成功。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="clock-wrapper">
-          <div class="clock-face">
-            <div class="clock-hand-hour"></div>
-            <div class="clock-hand-minute"></div>
-            <div class="pendulum"></div>
-          </div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-25">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/competence.png" class="scene-img photo-img" alt="孩子累積一個個小成功">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>

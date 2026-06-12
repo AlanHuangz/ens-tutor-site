@@ -3,34 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 4 幕：我們現在熟悉的教...</title>
+  <title>第 4 幕：教育來自工業時期</title>
   <link rel="stylesheet" href="../shared/reset.css">
-  <link rel="stylesheet" href="../shared/global.css?v=1.2">
+  <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene4.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 </head>
 <body>
   <div class="scene-container">
-    <div class="scene-split-container">
-      <div class="text-side">
-        <p class="animate-line fade-in-up">我們現在熟悉的教育樣貌，</p>
-        <p class="animate-line fade-in-up delay-1s">很大一部分，其實源自於<span class="highlight">工業時期</span>。</p>
+    <div class="story-layout">
+      <div class="story-copy">
+        <p class="animate-line fade-in-up">我們今天熟悉的教育，</p>
+        <p class="animate-line fade-in-up delay-500ms">很大一部分，其實源自於</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">工業時期。</p>
       </div>
-      <div class="visual-side fade-in delay-2s">
-        <div class="image-wrapper">
-          <img src="../assets/industrial_education.png" class="scene-img industrial-img" alt="工業時期教育">
-          <div class="gear gear-large">⚙️</div>
-          <div class="gear gear-small">⚙️</div>
+      <div class="story-visual fade-in delay-500ms" aria-hidden="true">
+        <div class="photo-stage photo-scene-04">
+          <span class="photo-light l1"></span>
+          <span class="photo-light l2"></span>
+          <img src="../assets/industrial_education.png" class="scene-img photo-img" alt="工業時代孕育出的教育體制">
+          <span class="photo-thread"></span>
         </div>
       </div>
     </div>
+    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
   </div>
 
   <script>
-    // 動畫播放完畢後主動通知播放器切換
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 5500);
+    }, 4520);
+    if (new URLSearchParams(window.location.search).get('qa') === 'still') {
+      document.body.classList.add('qa-still');
+    }
   </script>
 </body>
 </html>
