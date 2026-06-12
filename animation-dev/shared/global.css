@@ -99,12 +99,12 @@ body.qa-still .story-visual {
 }
 
 .brand-signature img.sig-first {
-  height: clamp(15px, 2.2vw, 28px);
+  height: clamp(15px, 2vw, 25px);
   width: auto;
 }
 
 .brand-signature img.sig-second {
-  height: clamp(11px, 1.6vw, 20px);
+  height: clamp(11px, 1.5vw, 19px);
   width: auto;
 }
 
@@ -1192,11 +1192,11 @@ body .scene-container .card-belonging .card-icon::after {
   }
 
   .brand-signature img.sig-first {
-    height: 15px !important;
+    height: 20px !important;
   }
 
   .brand-signature img.sig-second {
-    height: 11px !important;
+    height: 15px !important;
   }
 
 
