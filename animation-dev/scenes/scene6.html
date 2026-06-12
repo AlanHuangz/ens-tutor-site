@@ -13,8 +13,9 @@
   <div class="scene-container">
     <div class="story-layout">
       <div class="story-copy">
-        <p class="animate-line fade-in-up">但，我們距離工業時期，</p>
-        <p class="animate-line fade-in-up delay-500ms emph-line">已經很遠了。</p>
+        <p class="animate-line fade-in-up">but</p>
+        <p class="animate-line fade-in-up delay-500ms">我們距離工業時期</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">已經很遠了</p>
       </div>
       <div class="story-visual fade-in delay-500ms" aria-hidden="true">
         <div class="photo-stage photo-scene-06">
@@ -25,13 +26,14 @@
         </div>
       </div>
     </div>
-    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
+    <div class="brand-signature"><img src="../assets/slogan_child_math.png" class="sig-first" alt="先懂孩子，再懂數學"><img src="../assets/slogan_ai_coach.png" class="sig-second" alt="AI時代的自學教練"></div>
+
   </div>
 
   <script>
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 3880);
+    }, 4520);
     if (new URLSearchParams(window.location.search).get('qa') === 'still') {
       document.body.classList.add('qa-still');
     }

@@ -13,9 +13,10 @@
   <div class="scene-container">
     <div class="story-layout">
       <div class="story-copy">
-        <p class="animate-line fade-in-up">我相信，每個時代的孩子，</p>
-        <p class="animate-line fade-in-up delay-500ms">都有屬於他們...</p>
-        <p class="animate-line fade-in-up delay-1s emph-line">最正確的開啟方式。</p>
+        <p class="animate-line fade-in-up" style="font-size: 16px !important;">我相信，每個時代的孩子</p>
+        <p class="animate-line fade-in-up delay-500ms" style="font-size: 18px !important;">都有屬於他們</p>
+        <p class="animate-line fade-in-up delay-1s" style="font-size: 18px !important; color: #FFAF65 !important;">正確的</p>
+        <p class="animate-line fade-in-up delay-1500ms emph-line" style="color: #FFAF65 !important;">開啟方式</p>
       </div>
       <div class="story-visual fade-in delay-500ms" aria-hidden="true">
         <div class="photo-stage photo-scene-03">
@@ -26,13 +27,14 @@
         </div>
       </div>
     </div>
-    <div class="brand-signature"><span>先懂孩子，再懂數學</span><span>AI時代的自學教練</span></div>
+    <div class="brand-signature"><img src="../assets/slogan_child_math.png" class="sig-first" alt="先懂孩子，再懂數學"><img src="../assets/slogan_ai_coach.png" class="sig-second" alt="AI時代的自學教練"></div>
+
   </div>
 
   <script>
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 4520);
+    }, 5160);
     if (new URLSearchParams(window.location.search).get('qa') === 'still') {
       document.body.classList.add('qa-still');
     }

@@ -3,8 +3,12 @@
     "n": 1,
     "title": "你是否也常聽人說",
     "lines": [
-      "你是否也常聽人說？",
-      "「現在的孩子，一代不如一代？」"
+      {
+        "text": "你是否也聽過",
+        "size": "18px",
+        "color": ""
+      },
+      "「一代不如一代？」"
     ],
     "img": "scene01-illustration.png",
     "fallback": "parent_anxiety.png",
@@ -14,8 +18,8 @@
     "n": 2,
     "title": "我並不這麼認為",
     "lines": [
-      "但，",
-      "我並不這麼認為。"
+      "但",
+      "我並不這麼認為"
     ],
     "img": "scene02-illustration.png",
     "fallback": "parent_anxiety.png",
@@ -25,9 +29,26 @@
     "n": 3,
     "title": "正確的開啟方式",
     "lines": [
-      "我相信，每個時代的孩子，",
-      "都有屬於他們...",
-      "最正確的開啟方式。"
+      {
+        "text": "我相信，每個時代的孩子",
+        "size": "16px",
+        "color": ""
+      },
+      {
+        "text": "都有屬於他們",
+        "size": "18px",
+        "color": ""
+      },
+      {
+        "text": "正確的",
+        "size": "18px",
+        "color": "#FFAF65"
+      },
+      {
+        "text": "開啟方式",
+        "size": "",
+        "color": "#FFAF65"
+      }
     ],
     "img": "scene03-illustration.png",
     "fallback": "willing_to_learn.png",
@@ -37,9 +58,17 @@
     "n": 4,
     "title": "教育來自工業時期",
     "lines": [
-      "我們今天熟悉的教育，",
-      "很大一部分，其實源自於",
-      "工業時期。"
+      {
+        "text": "我們今天熟悉的教育",
+        "size": "16px",
+        "color": ""
+      },
+      {
+        "text": "很大一部分，其實是源自於",
+        "size": "16px",
+        "color": ""
+      },
+      "工業時期"
     ],
     "img": "scene04-illustration.png",
     "fallback": "industrial_education.png",
@@ -49,9 +78,22 @@
     "n": 5,
     "title": "標準效率同步",
     "lines": [
-      "那時候的教育，",
-      "追求的是：穩定、標準、",
-      "效率與同步。"
+      {
+        "text": "那時候的教育，",
+        "size": "16px",
+        "color": ""
+      },
+      {
+        "text": "追求的是：",
+        "size": "18px",
+        "color": "#5B6D8D"
+      },
+      {
+        "text": "穩定、標準",
+        "size": "22px",
+        "color": ""
+      },
+      "效率、同步"
     ],
     "img": "scene05-illustration.png",
     "fallback": "industrial_education.png",
@@ -61,8 +103,9 @@
     "n": 6,
     "title": "距離工業時期很遠",
     "lines": [
-      "但，我們距離工業時期，",
-      "已經很遠了。"
+      "but",
+      "我們距離工業時期",
+      "已經很遠了"
     ],
     "img": "scene06-illustration.png",
     "fallback": "industrial_education.png",
@@ -72,9 +115,13 @@
     "n": 7,
     "title": "科技快速前進",
     "lines": [
-      "當科技快速前進，",
-      "我們的授課方式，",
-      "卻還停留在原地。"
+      "當科技快速前進",
+      "我們的授課方式",
+      {
+        "text": "卻還停留在原地",
+        "size": "",
+        "color": "#FFAF65"
+      }
     ],
     "img": "scene07-illustration.png",
     "fallback": "industrial_education.png",
@@ -84,9 +131,10 @@
     "n": 8,
     "title": "不是孩子變差",
     "lines": [
-      "所以問題不是",
-      "孩子變差了，",
-      "而是世界變快了。"
+      "眼前問題不是",
+      "一代不如一代",
+      "更重要的是",
+      ""
     ],
     "img": "scene08-illustration.png",
     "fallback": "neurodiversity.png",
@@ -143,7 +191,6 @@
     "n": 13,
     "title": "老師同時顧很多事",
     "lines": [
-      "只是老師要同時顧：",
       "進度、考試、秩序，",
       "還要照顧情緒..."
     ],
@@ -209,7 +256,7 @@
     ],
     "img": "scene18-illustration.png",
     "fallback": "supportive_guide.png",
-    "alt": "孩子挫折時被溫暖接住"
+    "alt": "孩子挫折時被溫慢接住"
   },
   {
     "n": 19,
@@ -344,7 +391,7 @@
     "n": 30,
     "title": "不是學不會",
     "lines": [
-      "所以，很多時候",
+      "so",
       "孩子不是「學不會」，",
       "而是，他們「不願意」。"
     ],

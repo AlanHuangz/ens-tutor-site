@@ -80,34 +80,30 @@ body.qa-still .story-visual {
 
 .brand-signature {
   position: absolute;
-  right: 38px;
-  bottom: 28px;
+  right: 32px;
+  bottom: 24px;
   z-index: 9;
-  font-family: var(--font-brand);
-  text-align: right;
-  padding-top: 6px;
-  border-top: 1.5px solid rgba(255, 184, 77, 0.62);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
   text-shadow: 0 4px 12px rgba(7, 27, 70, 0.04);
 }
 
-.brand-signature span {
+.brand-signature img {
   display: block;
+  object-fit: contain;
 }
 
-.brand-signature span:first-child {
-  font-size: 11px;
-  font-weight: 900;
-  color: var(--color-primary);
-  letter-spacing: 0.08em;
+.brand-signature img.sig-first {
+  height: clamp(10px, 1.45vw, 15px);
   margin-bottom: 2px;
 }
 
-.brand-signature span:last-child {
-  font-size: 8px;
-  font-weight: 500;
-  color: rgba(7, 27, 70, 0.55);
-  letter-spacing: 0.04em;
+.brand-signature img.sig-second {
+  height: clamp(8px, 1.1vw, 11px);
 }
+
 
 @keyframes sceneBreath {
   from { transform: scale(1.012); }
@@ -1175,26 +1171,27 @@ body .scene-container .card-belonging .card-icon::after {
   }
 
   .brand-signature {
-    display: block;
+    display: flex;
     left: auto;
     right: 22px;
     bottom: 58px;
     width: max-content;
     max-width: calc(100vw - 36px);
-    padding-top: 6px;
     overflow: visible;
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(4px);
-    border-top: 1px solid rgba(255, 184, 77, 0.62);
+    padding: 4px 6px;
+    border-radius: 4px;
   }
 
-  .brand-signature span:first-child {
-    font-size: 9px !important;
+  .brand-signature img.sig-first {
+    height: 11px !important;
   }
 
-  .brand-signature span:last-child {
-    font-size: 7px !important;
+  .brand-signature img.sig-second {
+    height: 8px !important;
   }
+
 
   .scene-split-container {
     flex-direction: column;
