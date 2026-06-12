@@ -80,15 +80,15 @@ body.qa-still .story-visual {
 
 .brand-signature {
   position: absolute;
-  right: 4.5%;
-  bottom: 4%;
+  right: 3%;
+  bottom: 3%;
   z-index: 9;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.4vw;
-  padding-top: 0.6vw;
-  border-top: 1.5px solid rgba(255, 184, 77, 0.6);
+  gap: 2px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 184, 77, 0.6);
   text-shadow: 0 4px 12px rgba(7, 27, 70, 0.04);
   width: auto;
 }
@@ -1176,9 +1176,12 @@ body .scene-container .card-belonging .card-icon::after {
 
   .brand-signature {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
     left: auto;
-    right: 22px;
-    bottom: 58px;
+    right: 16px;
+    bottom: 32px;
     width: max-content;
     max-width: calc(100vw - 36px);
     overflow: visible;
