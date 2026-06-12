@@ -242,6 +242,42 @@ async function handleApi(request, response, requestUrl) {
     return true;
   }
 
+  if (request.method === "GET" && requestUrl.pathname === "/api/scenes-data") {
+    const scenesPath = path.join(root, "animation-dev", "scenes-data.json");
+    fs.readFile(scenesPath, "utf8", (err, data) => {
+      if (err) {
+        sendJson(response, 404, { error: "Scenes data not found" });
+      } else {
+        response.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+        response.end(data);
+      }
+    });
+    return true;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/scenes-data") {
+    const payload = await readBody(request);
+    const scenesPath = path.join(root, "animation-dev", "scenes-data.json");
+    fs.writeFile(scenesPath, JSON.stringify(payload, null, 2), "utf8", (err) => {
+      if (err) {
+        sendJson(response, 500, { error: err.message });
+      } else {
+        const { exec } = require("child_process");
+        const rebuildScript = path.join(root, "animation-dev", "scratch", "rebuild-31-scenes-illustrated.js");
+        exec(`node "${rebuildScript}"`, (execErr, stdout, stderr) => {
+          if (execErr) {
+            console.error(`Rebuild error: ${execErr.message}`);
+            sendJson(response, 200, { ok: true, rebuilt: false, error: execErr.message });
+          } else {
+            console.log(`Rebuilt successfully: ${stdout}`);
+            sendJson(response, 200, { ok: true, rebuilt: true });
+          }
+        });
+      }
+    });
+    return true;
+  }
+
   return false;
 }
 

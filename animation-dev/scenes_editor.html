@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>願意學 - 故事簡報幕數編輯器</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap">
+  <style>
+    :root {
+      --color-text-main: #071B46;
+      --color-primary: #10295F;
+      --color-secondary: #071B46;
+      --color-accent: #FFB84D;
+      --color-coral: #FF6B63;
+      --color-bg: #F4F8F8;
+      --color-card-bg: rgba(255, 255, 255, 0.85);
+      --color-glass-border: rgba(16, 41, 95, 0.1);
+      --font-brand: "Noto Sans TC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-brand);
+      background-color: var(--color-bg);
+      color: var(--color-text-main);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--color-primary), #1a3c7d);
+      color: white;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      height: 36px;
+      filter: brightness(0) invert(1);
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .actions-top {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(7, 27, 70, 0.08);
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: var(--color-primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 184, 77, 0.35);
+      background-color: #ffa826;
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .btn-danger {
+      background-color: var(--color-coral);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #ff5247;
+      transform: translateY(-2px);
+    }
+
+    /* Main Container */
+    .app-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Sidebar - Scenes List */
+    .sidebar {
+      width: 280px;
+      background: white;
+      border-right: 1px solid var(--color-glass-border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .sidebar-title {
+      padding: 18px;
+      font-weight: 900;
+      font-size: 16px;
+      border-bottom: 1px solid var(--color-glass-border);
+      background: rgba(16, 41, 95, 0.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .scenes-list {
+      list-style: none;
+    }
+
+    .scene-item {
+      padding: 14px 18px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(16, 41, 95, 0.04);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .scene-item:hover {
+      background-color: rgba(16, 41, 95, 0.03);
+    }
+
+    .scene-item.active {
+      background-color: rgba(16, 41, 95, 0.06);
+      border-left: 5px solid var(--color-primary);
+      font-weight: 700;
+    }
+
+    .scene-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: rgba(16, 41, 95, 0.08);
+      display: inline-grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .scene-item.active .scene-num {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .scene-label {
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--color-text-main);
+    }
+
+    /* Editor Workspace - Left side of split */
+    .workspace {
+      flex: 1.1;
+      background: var(--color-bg);
+      padding: 32px;
+      overflow-y: auto;
+      border-right: 1px solid var(--color-glass-border);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .workspace-section {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-glass-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(7, 27, 70, 0.02);
+      backdrop-filter: blur(8px);
+    }
+
+    .section-title {
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--color-primary);
+      border-bottom: 2px solid rgba(16, 41, 95, 0.05);
+      padding-bottom: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: rgba(7, 27, 70, 0.75);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--color-glass-border);
+      font-family: var(--font-brand);
+      font-size: 14px;
+      background: white;
+      color: var(--color-text-main);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(16, 41, 95, 0.1);
+    }
+
+    .lines-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .line-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--color-glass-border);
+      background: white;
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-icon:hover {
+      background-color: var(--color-bg);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .btn-icon.remove:hover {
+      background-color: #ffebeb;
+      border-color: var(--color-coral);
+      color: var(--color-coral);
+    }
+
+    /* Live Preview - Right side of split */
+    .preview-panel {
+      flex: 0.9;
+      background: #e2ecec;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .preview-header {
+      position: absolute;
+      top: 24px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .preview-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: rgba(7, 27, 70, 0.45);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .slide-wrapper {
+      width: 100%;
+      max-width: 680px;
+      aspect-ratio: 16 / 9;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(7, 27, 70, 0.12);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(16, 41, 95, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Replicating Presentation Layout */
+    .slide-container {
+      width: 100%;
+      height: 100%;
+      padding: 6% 8%;
+      box-sizing: border-box;
+      background:
+        linear-gradient(90deg, rgba(16, 41, 95, 0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(7, 27, 70, 0.035) 1px, transparent 1px),
+        #FFFFFF;
+      background-size: 5% 9%, 5% 9%, auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-container::before {
+      content: "";
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 18%;
+      height: 12%;
+      background: url("assets/logo.png") left center / contain no-repeat;
+      z-index: 8;
+    }
+
+    .slide-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 6%;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .slide-layout.final-logo-layout {
+      grid-template-columns: 1fr;
+      place-items: center;
+      text-align: center;
+    }
+
+    .slide-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .slide-line {
+      font-size: clamp(10px, 2.3vw, 22px);
+      font-weight: 850;
+      color: var(--color-text-main);
+      line-height: 1.45;
+      margin: 2% 0;
+    }
+
+    .slide-line:first-child {
+      color: rgba(7, 27, 70, 0.65);
+      font-weight: 760;
+    }
+
+    .slide-line.emph {
+      color: var(--color-text-main);
+      position: relative;
+      display: inline-block;
+    }
+
+    .slide-line.emph::after {
+      content: "";
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      bottom: 2px;
+      height: 32%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255, 184, 77, 0.45), rgba(255, 107, 99, 0.2));
+      z-index: -1;
+    }
+
+    .slide-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide-stage {
+      position: relative;
+      width: 100%;
+      height: 90%;
+      display: grid;
+      place-items: center;
+    }
+
+    .slide-img {
+      max-width: 100%;
+      max-height: 85%;
+      object-fit: contain;
+      border-radius: 43% 57% 49% 51% / 45% 45% 55% 55%;
+      filter: drop-shadow(0 14px 22px rgba(7, 27, 70, 0.1));
+    }
+
+    .final-logo-img {
+      max-height: 55%;
+      border-radius: 0;
+      filter: drop-shadow(0 8px 16px rgba(7, 27, 70, 0.08));
+    }
+
+    .slide-light {
+      position: absolute;
+      border-radius: 50%;
+      width: 50%;
+      height: 50%;
+      filter: blur(8px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .slide-light.l1 {
+      left: 10%;
+      top: 10%;
+      background: rgba(255, 184, 77, 0.35);
+    }
+
+    .slide-light.l2 {
+      right: 10%;
+      bottom: 10%;
+      background: rgba(16, 41, 95, 0.15);
+    }
+
+    .slide-thread {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: 18%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(255, 184, 77, 0.7), rgba(255, 107, 99, 0.3), transparent);
+    }
+
+    .slide-signature {
+      position: absolute;
+      right: 5%;
+      bottom: 4%;
+      z-index: 9;
+      font-size: clamp(6px, 1.1vw, 10px);
+      font-weight: 900;
+      line-height: 1.5;
+      text-align: right;
+      color: rgba(7, 27, 70, 0.6);
+      padding-top: 2px;
+      border-top: 1.5px solid rgba(255, 184, 77, 0.6);
+    }
+
+    .slide-signature span {
+      display: block;
+    }
+
+    /* Modal / JSON Export Panel */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 27, 70, 0.5);
+      backdrop-filter: blur(4px);
+      display: none;
+      place-items: center;
+      z-index: 100;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 750px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(7, 27, 70, 0.2);
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      background: var(--color-primary);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .close-modal {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      opacity: 0.7;
+      transition: 0.2s;
+    }
+
+    .close-modal:hover {
+      opacity: 1;
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 18px 24px;
+      border-top: 1px solid var(--color-glass-border);
+      background: #fcfdfd;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .json-textarea {
+      width: 100%;
+      height: 380px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid var(--color-glass-border);
+      background: #FAFBFB;
+      color: #333;
+      resize: none;
+    }
+
+    /* Notifications Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #071B46;
+      color: white;
+      padding: 16px 28px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      border-left: 5px solid var(--color-accent);
+    }
+
+    .toast.error {
+      border-left: 5px solid var(--color-coral);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="assets/logo.png" alt="願意學 logo">
+      <h1>故事簡報幕數編輯器</h1>
+    </div>
+    <div class="actions-top">
+      <button class="btn btn-secondary" onclick="openImportModal()">📥 導入 JSON</button>
+      <button class="btn btn-secondary" onclick="openExportModal()">📤 複製/導出 JSON</button>
+      <button class="btn btn-primary" onclick="saveLocally()">💾 本機存檔並重構網頁 (Rebuild)</button>
+    </div>
+  </header>
+
+  <!-- App Container -->
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-title">
+        <span>幕數清單 (31幕)</span>
+      </div>
+      <ul class="scenes-list" id="scenes-list">
+        <!-- Javascript populated -->
+      </ul>
+    </div>
+
+    <!-- Workspace -->
+    <div class="workspace">
+      <div class="workspace-section">
+        <div class="section-title">
+          <span id="current-scene-header">第 1 幕：編輯中</span>
+          <span style="font-size:12px; font-weight:normal; color:rgba(7,27,70,0.5);" id="current-scene-img-display">scene01-illustration.png</span>
+        </div>
+
+        <div class="form-group">
+          <label for="scene-title-input">幕數標題 (僅供參考/管理)</label>
+          <input type="text" id="scene-title-input" class="form-control" oninput="updateCurrentSceneData()">
+        </div>
+
+        <div class="form-group">
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>內容文字 (每行獨立顯示)</span>
+            <button class="btn-icon" onclick="addLine()" title="新增一行 text" style="width:24px; height:24px; font-size:12px;">+</button>
+          </label>
+          <div class="lines-container" id="lines-container">
+            <!-- Dynamic lines inputs -->
+          </div>
+        </div>
+      </div>
+
+      <div class="workspace-section">
+        <div class="section-title">
+          <span>視覺與配圖設定</span>
+        </div>
+
+        <div class="form-group">
+          <label for="scene-img-input">配圖檔名 (位於 assets/ 資料夾中，如 scene01-illustration.png)</label>
+          <input type="text" id="scene-img-input" class="form-control" oninput="updateCurrentSceneData()">
+        </div>
+
+        <div class="form-group">
+          <label for="scene-fallback-input">後備配圖檔名 (當主圖不存在時使用，如 parent_anxiety.png)</label>
+          <input type="text" id="scene-fallback-input" class="form-control" oninput="updateCurrentSceneData()">
+        </div>
+
+        <div class="form-group">
+          <label for="scene-alt-input">圖片 alt 替代文字 (SEO 與無障礙說明)</label>
+          <input type="text" id="scene-alt-input" class="form-control" oninput="updateCurrentSceneData()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Preview Panel -->
+    <div class="preview-panel">
+      <div class="preview-header">
+        <span class="preview-title">💻 網頁畫面模擬預覽 (即時同步)</span>
+        <span style="font-size:12px; color:rgba(7,27,70,0.5);">16:9 比例縮放效果</span>
+      </div>
+
+      <div class="slide-wrapper">
+        <div class="slide-container" id="slide-container">
+          <div class="slide-layout" id="slide-layout">
+            <div class="slide-copy" id="slide-copy">
+              <!-- Lines populated in real-time -->
+            </div>
+            <div class="slide-visual" id="slide-visual">
+              <!-- Image stage populated in real-time -->
+            </div>
+          </div>
+          <div class="slide-signature">
+            <span>先懂孩子，再懂數學</span>
+            <span>AI時代的自學教練</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal-overlay" id="export-modal" onclick="closeModalOnOverlay(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>導出幕數 JSON 配置</h3>
+        <span class="close-modal" onclick="closeExportModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 12px; font-size:14px; color: #555;">
+          這是目前您編輯完成的所有 31 幕的完整 JSON 配置。請點選下方複製，然後在與 AI 助理的對話中，<b>貼上這段 JSON 內容給 AI 助理</b>，AI 將能自動為您重新建置正式網頁！
+        </p>
+        <textarea id="export-textarea" class="json-textarea" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="downloadJsonFile()">💾 下載 scenes-data.json</button>
+        <button class="btn btn-primary" onclick="copyJsonToClipboard()">📋 複製到剪貼簿</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div class="modal-overlay" id="import-modal" onclick="closeModalOnOverlay(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>導入幕數 JSON 配置</h3>
+        <span class="close-modal" onclick="closeImportModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 12px; font-size:14px; color: #555;">
+          請在下方文字框中貼入您的 31 幕 JSON 配置資料，然後點選「確認載入」：
+        </p>
+        <textarea id="import-textarea" class="json-textarea" placeholder="在此處貼入 JSON..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeImportModal()">取消</button>
+        <button class="btn btn-primary" onclick="importJsonData()">✅ 確認載入</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Toast -->
+  <div class="toast" id="toast">
+    <span id="toast-text"></span>
+  </div>
+
+  <!-- Default data fallback if server fails to load -->
+  <script>
+    const fallbackScenesData = [
+      {
+        "n": 1,
+        "title": "你是否也常聽人說",
+        "lines": [
+          "你是否也常聽人說？",
+          "「現在的孩子，一代不如一代？」"
+        ],
+        "img": "scene01-illustration.png",
+        "fallback": "parent_anxiety.png",
+        "alt": "家長聽見孩子一代不如一代的焦慮"
+      },
+      {
+        "n": 2,
+        "title": "我並不這麼認為",
+        "lines": [
+          "但，",
+          "我並不這麼認為。"
+        ],
+        "img": "scene02-illustration.png",
+        "fallback": "parent_anxiety.png",
+        "alt": "家長換一個角度理解孩子"
+      },
+      {
+        "n": 3,
+        "title": "正確的開啟方式",
+        "lines": [
+          "我相信，每個時代的孩子，",
+          "都有屬於他們...",
+          "最正確的開啟方式。"
+        ],
+        "img": "scene03-illustration.png",
+        "fallback": "willing_to_learn.png",
+        "alt": "孩子找到屬於自己的學習入口"
+      },
+      {
+        "n": 4,
+        "title": "教育來自工業時期",
+        "lines": [
+          "我們今天熟悉的教育，",
+          "很大一部分，其實源自於",
+          "工業時期。"
+        ],
+        "img": "scene04-illustration.png",
+        "fallback": "industrial_education.png",
+        "alt": "工業時代孕育出的教育體制"
+      },
+      {
+        "n": 5,
+        "title": "標準效率同步",
+        "lines": [
+          "那時候的教育，",
+          "追求的是：穩定、標準、",
+          "效率與同步。"
+        ],
+        "img": "scene05-illustration.png",
+        "fallback": "industrial_education.png",
+        "alt": "標準化教育中的學生被同一條產線推進"
+      },
+      {
+        "n": 6,
+        "title": "距離工業時期很遠",
+        "lines": [
+          "但，我們距離工業時期，",
+          "已經很遠了。"
+        ],
+        "img": "scene06-illustration.png",
+        "fallback": "industrial_education.png",
+        "alt": "舊教育工廠逐漸遠離現代孩子"
+      },
+      {
+        "n": 7,
+        "title": "科技快速前進",
+        "lines": [
+          "當科技快速前進，",
+          "我們的授課方式，",
+          "卻還停留在原地。"
+        ],
+        "img": "scene07-illustration.png",
+        "fallback": "industrial_education.png",
+        "alt": "科技世界向前奔跑但教室停在原地"
+      },
+      {
+        "n": 8,
+        "title": "不是孩子變差",
+        "lines": [
+          "所以問題不是",
+          "孩子變差了，",
+          "而是世界變快了。"
+        ],
+        "img": "scene08-illustration.png",
+        "fallback": "neurodiversity.png",
+        "alt": "孩子站在快速變化的世界裡感到困惑"
+      },
+      {
+        "n": 9,
+        "title": "每個孩子不同",
+        "lines": [
+          "每個孩子的大腦，",
+          "本來就有不同的",
+          "理解路徑。"
+        ],
+        "img": "scene09-illustration.png",
+        "fallback": "neurodiversity.png",
+        "alt": "不同孩子有不同的大腦理解路徑"
+      },
+      {
+        "n": 10,
+        "title": "學習方式不同",
+        "lines": [
+          "學習方式不同，",
+          "不代表不適合學習。"
+        ],
+        "img": "scene10-illustration.png",
+        "fallback": "neurodiversity.png",
+        "alt": "不同學習方式的孩子在同一個教室裡"
+      },
+      {
+        "n": 11,
+        "title": "一位老師三十個孩子",
+        "lines": [
+          "可是，在體制裡，",
+          "一位老師，常常要面對",
+          "三十個孩子。"
+        ],
+        "img": "scene11-illustration.png",
+        "fallback": "one_vs_thirty.png",
+        "alt": "一位老師面對三十個孩子"
+      },
+      {
+        "n": 12,
+        "title": "老師已經很努力",
+        "lines": [
+          "老師們已經非常努力，",
+          "想在體制裡，",
+          "勾起每個孩子的學習欲望。"
+        ],
+        "img": "scene12-illustration.png",
+        "fallback": "one_vs_thirty.png",
+        "alt": "老師努力照顧每個孩子的眼神"
+      },
+      {
+        "n": 13,
+        "title": "老師同時顧很多事",
+        "lines": [
+          "進度、考試、秩序，",
+          "還要照顧情緒..."
+        ],
+        "img": "scene13-illustration.png",
+        "fallback": "one_vs_thirty.png",
+        "alt": "老師同時承擔進度考試秩序與情緒"
+      },
+      {
+        "n": 14,
+        "title": "量身打造太難",
+        "lines": [
+          "還要為每個孩子",
+          "量身打造，",
+          "這真的太難了。"
+        ],
+        "img": "scene14-illustration.png",
+        "fallback": "one_vs_thirty.png",
+        "alt": "老師想為每個孩子量身設計卻分身乏術"
+      },
+      {
+        "n": 15,
+        "title": "三種感受",
+        "lines": [
+          "所以真正要重建的，",
+          "不是只有成績，",
+          "而是三種感受。"
+        ],
+        "img": "scene15-illustration.png",
+        "fallback": "supportive_guide.png",
+        "alt": "自主感勝任感歸屬感三種感受被重新點亮"
+      },
+      {
+        "n": 16,
+        "title": "自主感",
+        "lines": [
+          "第一是「自主感」：",
+          "我可以選擇",
+          "怎麼學。"
+        ],
+        "img": "scene16-illustration.png",
+        "fallback": "autonomy.png",
+        "alt": "孩子握著方向盤選擇自己的學習路徑"
+      },
+      {
+        "n": 17,
+        "title": "勝任感",
+        "lines": [
+          "第二是「勝任感」：",
+          "我相信自己",
+          "做得到。"
+        ],
+        "img": "scene17-illustration.png",
+        "fallback": "competence.png",
+        "alt": "孩子一步一步完成挑戰建立勝任感"
+      },
+      {
+        "n": 18,
+        "title": "歸屬感",
+        "lines": [
+          "第三是「歸屬感」：",
+          "挫折時，",
+          "有人接住我。"
+        ],
+        "img": "scene18-illustration.png",
+        "fallback": "supportive_guide.png",
+        "alt": "孩子挫折時被溫慢接住"
+      },
+      {
+        "n": 19,
+        "title": "AI貼近節奏",
+        "lines": [
+          "AI 的出現，",
+          "讓學習可以更貼近",
+          "孩子的節奏。"
+        ],
+        "img": "scene19-illustration.png",
+        "fallback": "ai_mentor.png",
+        "alt": "AI教練配合孩子的節奏陪伴學習"
+      },
+      {
+        "n": 20,
+        "title": "更多選擇",
+        "lines": [
+          "不管是圖像、影像，",
+          "還是聽覺的輸入，",
+          "學習開始有了更多選擇。"
+        ],
+        "img": "scene20-illustration.png",
+        "fallback": "ai_mentor.png",
+        "alt": "孩子用圖像影像聽覺選擇適合自己的入口"
+      },
+      {
+        "n": 21,
+        "title": "自主感建立",
+        "lines": [
+          "有了選擇權，",
+          "孩子的「自主感」",
+          "自然就建立了。"
+        ],
+        "img": "scene21-illustration.png",
+        "fallback": "autonomy.png",
+        "alt": "孩子因為有選擇權而建立自主感"
+      },
+      {
+        "n": 22,
+        "title": "AI耐心拆解",
+        "lines": [
+          "AI 可以耐心拆解步驟，",
+          "甚至換個方式，",
+          "解釋 100 遍。"
+        ],
+        "img": "scene22-illustration.png",
+        "fallback": "ai_mentor.png",
+        "alt": "AI把困難題目拆成小步驟"
+      },
+      {
+        "n": 23,
+        "title": "不用面對不耐煩",
+        "lines": [
+          "孩子再也不用擔心，",
+          "面對別人的不耐煩。"
+        ],
+        "img": "scene23-illustration.png",
+        "fallback": "ai_mentor.png",
+        "alt": "孩子安心面對提問不用害怕不耐煩"
+      },
+      {
+        "n": 24,
+        "title": "想問就問",
+        "lines": [
+          "隨時想問就問，",
+          "沒有任何心理負擔。"
+        ],
+        "img": "scene24-illustration.png",
+        "fallback": "ai_mentor.png",
+        "alt": "孩子舉手向AI提問沒有心理負擔"
+      },
+      {
+        "n": 25,
+        "title": "小成功累積",
+        "lines": [
+          "一次次被聽懂，",
+          "一次次做得到，",
+          "孩子開始累積小成功。"
+        ],
+        "img": "scene25-illustration.png",
+        "fallback": "competence.png",
+        "alt": "孩子累積一個個小成功"
+      },
+      {
+        "n": 26,
+        "title": "勝任感被滿足",
+        "lines": [
+          "這樣，孩子的「勝任感」",
+          "就被滿足了。"
+        ],
+        "img": "scene26-illustration.png",
+        "fallback": "competence.png",
+        "alt": "孩子完成任務後看見自己做得到"
+      },
+      {
+        "n": 27,
+        "title": "老師家長有餘裕",
+        "lines": [
+          "當孩子的自主與勝任感",
+          "被滿足後，",
+          "老師和家長才終於有了餘裕。"
+        ],
+        "img": "scene27-illustration.png",
+        "fallback": "supportive_guide.png",
+        "alt": "老師和家長終於有餘裕看見孩子"
+      },
+      {
+        "n": 28,
+        "title": "真正接住孩子",
+        "lines": [
+          "有了餘裕，",
+          "才能真正去照顧孩子，",
+          "接住孩子。"
+        ],
+        "img": "scene28-illustration.png",
+        "fallback": "supportive_guide.png",
+        "alt": "大人溫柔接住孩子"
+      },
+      {
+        "n": 29,
+        "title": "歸屬感建立",
+        "lines": [
+          "這時，孩子最需要的",
+          "「歸屬感」，",
+          "就悄悄地建立起來了。"
+        ],
+        "img": "scene29-illustration.png",
+        "fallback": "supportive_guide.png",
+        "alt": "孩子在安全陪伴中建立歸屬感"
+      },
+      {
+        "n": 30,
+        "title": "不是學不會",
+        "lines": [
+          "所以，很多時候",
+          "孩子不是「學不會」，",
+          "而是，他們「不願意」。"
+        ],
+        "img": "scene30-illustration.png",
+        "fallback": "willing_to_learn.png",
+        "alt": "孩子從不願意走向願意學"
+      },
+      {
+        "n": 31,
+        "title": "重新願意學",
+        "lines": [
+          "願意學",
+          "先懂孩子，再懂數學",
+          "AI時代的自學教練"
+        ],
+        "img": "logo.png",
+        "fallback": "logo.png",
+        "alt": "願意學 LOGO"
+      }
+    ];
+
+    let scenes = [...fallbackScenesData];
+    let currentIndex = 0;
+
+    // Load dynamic data from server if available
+    async function fetchScenesData() {
+      try {
+        const response = await fetch('/api/scenes-data');
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            scenes = data;
+            showToast('已成功從伺服器載入最新幕數配置！', 'success');
+          }
+        }
+      } catch (err) {
+        console.warn('API /api/scenes-data is not available, using local preloaded fallback config.', err);
+      }
+      initApp();
+    }
+
+    // Initialize App
+    function initApp() {
+      renderScenesList();
+      loadScene(currentIndex);
+    }
+
+    // Render Scenes List in Sidebar
+    function renderScenesList() {
+      const listContainer = document.getElementById('scenes-list');
+      listContainer.innerHTML = '';
+      
+      scenes.forEach((scene, index) => {
+        const li = document.createElement('li');
+        li.className = `scene-item ${index === currentIndex ? 'active' : ''}`;
+        li.onclick = () => loadScene(index);
+        
+        li.innerHTML = `
+          <div class="scene-num">${scene.n}</div>
+          <div class="scene-label">${scene.title}</div>
+        `;
+        listContainer.appendChild(li);
+      });
+    }
+
+    // Load Selected Scene into Editor and Preview
+    function loadScene(index) {
+      currentIndex = index;
+      const scene = scenes[currentIndex];
+      
+      // Highlight in list
+      const items = document.querySelectorAll('.scene-item');
+      items.forEach((item, idx) => {
+        if (idx === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      // Update Form Headers
+      document.getElementById('current-scene-header').innerText = `第 ${scene.n} 幕：編輯中`;
+      document.getElementById('current-scene-img-display').innerText = scene.img;
+
+      // Populate Form Fields
+      document.getElementById('scene-title-input').value = scene.title || '';
+      document.getElementById('scene-img-input').value = scene.img || '';
+      document.getElementById('scene-fallback-input').value = scene.fallback || '';
+      document.getElementById('scene-alt-input').value = scene.alt || '';
+
+      // Populate Lines Container
+      renderLinesInputs(scene.lines || []);
+      
+      // Update Live Preview
+      updateLivePreview();
+    }
+
+    // Render text lines inputs
+    function renderLinesInputs(lines) {
+      const container = document.getElementById('lines-container');
+      container.innerHTML = '';
+      
+      lines.forEach((line, index) => {
+        const row = document.createElement('div');
+        row.className = 'line-row';
+        row.innerHTML = `
+          <span style="font-size:12px; font-weight:bold; color:rgba(7,27,70,0.4); width:30px; flex-shrink:0;">#${index+1}</span>
+          <input type="text" class="form-control line-input" value="${line.replace(/"/g, '&quot;')}" oninput="updateCurrentSceneData()">
+          <button class="btn-icon remove" onclick="removeLine(${index})" title="刪除此行">🗑️</button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    // Add new line for current scene
+    function addLine() {
+      const scene = scenes[currentIndex];
+      if (!scene.lines) scene.lines = [];
+      scene.lines.push('');
+      loadScene(currentIndex);
+    }
+
+    // Remove a line
+    function removeLine(lineIndex) {
+      const scene = scenes[currentIndex];
+      if (scene.lines && scene.lines.length > 1) {
+        scene.lines.splice(lineIndex, 1);
+        loadScene(currentIndex);
+      } else {
+        showToast('每幕至少需要保留一行文字內容！', 'error');
+      }
+    }
+
+    // Capture editor values and update memory dataset
+    function updateCurrentSceneData() {
+      const scene = scenes[currentIndex];
+      
+      scene.title = document.getElementById('scene-title-input').value;
+      scene.img = document.getElementById('scene-img-input').value;
+      scene.fallback = document.getElementById('scene-fallback-input').value;
+      scene.alt = document.getElementById('scene-alt-input').value;
+      
+      // Update lines array
+      const inputs = document.querySelectorAll('.line-input');
+      const lines = [];
+      inputs.forEach(input => {
+        lines.push(input.value);
+      });
+      scene.lines = lines;
+
+      // Sync header image filename label
+      document.getElementById('current-scene-img-display').innerText = scene.img;
+
+      // Update sidebar title immediately
+      const activeLabel = document.querySelector('.scene-item.active .scene-label');
+      if (activeLabel) {
+        activeLabel.innerText = scene.title || '（無標題）';
+      }
+
+      // Sync preview
+      updateLivePreview();
+    }
+
+    // Render Slide Preview Mockup
+    function updateLivePreview() {
+      const scene = scenes[currentIndex];
+      const copyContainer = document.getElementById('slide-copy');
+      const visualContainer = document.getElementById('slide-visual');
+      const layoutContainer = document.getElementById('slide-layout');
+      const slideContainer = document.getElementById('slide-container');
+
+      // Clear layout classes
+      slideContainer.className = 'slide-container';
+      
+      // Generate Copy
+      copyContainer.innerHTML = '';
+      
+      if (scene.n === 31) {
+        // Special layout for final LOGO scene
+        layoutContainer.className = 'slide-layout final-logo-layout';
+        
+        // Final logo layout doesn't use copy container, it just shows logo
+        visualContainer.innerHTML = `
+          <div class="slide-stage" style="height: 100%;">
+            <img src="assets/${scene.img}" class="slide-img final-logo-img" alt="${scene.alt}" onerror="this.src='assets/${scene.fallback}'">
+          </div>
+        `;
+        return;
+      }
+
+      // Normal scene layout
+      layoutContainer.className = 'slide-layout';
+      
+      // Add lines
+      (scene.lines || []).forEach((line, index) => {
+        const p = document.createElement('p');
+        p.className = 'slide-line';
+        
+        // Highlight last line in scene
+        if (index === scene.lines.length - 1) {
+          p.innerHTML = `<span class="emph">${line}</span>`;
+        } else {
+          p.innerText = line;
+        }
+        copyContainer.appendChild(p);
+      });
+
+      // Generate Visual
+      visualContainer.innerHTML = `
+        <div class="slide-stage">
+          <span class="slide-light l1"></span>
+          <span class="slide-light l2"></span>
+          <img src="assets/${scene.img}" class="slide-img" alt="${scene.alt}" onerror="this.src='assets/${scene.fallback}'">
+          <span class="slide-thread"></span>
+        </div>
+      `;
+    }
+
+    // Modal Operations
+    function openExportModal() {
+      const json = JSON.stringify(scenes, null, 2);
+      document.getElementById('export-textarea').value = json;
+      document.getElementById('export-modal').style.display = 'grid';
+    }
+
+    function closeExportModal() {
+      document.getElementById('export-modal').style.display = 'none';
+    }
+
+    function openImportModal() {
+      document.getElementById('import-textarea').value = '';
+      document.getElementById('import-modal').style.display = 'grid';
+    }
+
+    function closeImportModal() {
+      document.getElementById('import-modal').style.display = 'none';
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target.classList.contains('modal-overlay')) {
+        e.target.style.display = 'none';
+      }
+    }
+
+    // Copy JSON to clipboard
+    function copyJsonToClipboard() {
+      const textarea = document.getElementById('export-textarea');
+      textarea.select();
+      document.execCommand('copy');
+      showToast('🎉 JSON 配置已成功複製到您的剪貼簿！', 'success');
+      closeExportModal();
+    }
+
+    // Download JSON as a file
+    function downloadJsonFile() {
+      const jsonStr = JSON.stringify(scenes, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(jsonStr);
+      
+      const exportFileDefaultName = 'scenes-data.json';
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportFileDefaultName);
+      linkElement.click();
+      showToast('📥 scenes-data.json 已開始下載！', 'success');
+    }
+
+    // Import user JSON payload
+    function importJsonData() {
+      const text = document.getElementById('import-textarea').value.trim();
+      if (!text) {
+        showToast('請先貼入 JSON 資料！', 'error');
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(text);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          scenes = parsed;
+          currentIndex = 0;
+          initApp();
+          showToast('✅ JSON 資料成功載入！', 'success');
+          closeImportModal();
+        } else {
+          showToast('JSON 格式不符 (必須是包含幕數物件的陣列)！', 'error');
+        }
+      } catch (e) {
+        showToast('JSON 解析錯誤，請檢查貼入的格式是否正確！', 'error');
+      }
+    }
+
+    // Save configuration locally via API
+    async function saveLocally() {
+      showToast('💾 正在儲存至伺服器並重構網頁，請稍候...', 'success');
+      
+      try {
+        const response = await fetch('/api/scenes-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(scenes)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.ok) {
+            if (result.rebuilt) {
+              showToast('✨ 存檔成功！網頁檔案已重構完成，即時更新！', 'success');
+            } else {
+              showToast('💾 存檔成功！但伺服器端重構時發生錯誤：' + (result.error || ''), 'error');
+            }
+          } else {
+            showToast('❌ 存檔失敗：' + (result.error || '未知的錯誤'), 'error');
+          }
+        } else {
+          showToast('❌ 無法與伺服器通訊，請確保您是在本機啟動 `node server.js` 運作此網頁。', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('❌ 存檔時連線失敗。若您直接開啟靜態 HTML，請使用「複製/導出 JSON」提供給 AI 助理。', 'error');
+      }
+    }
+
+    // Show Toast notifications
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const textSpan = document.getElementById('toast-text');
+      
+      toast.className = `toast show ${type}`;
+      textSpan.innerText = message;
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4500);
+    }
+
+    // Start App
+    window.onload = fetchScenesData;
+  </script>
+</body>
+</html>
