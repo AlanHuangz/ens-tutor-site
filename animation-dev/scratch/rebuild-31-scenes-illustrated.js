@@ -30,8 +30,13 @@ function visual(scene) {
 
 function html(scene) {
   const lines = scene.lines.map((line, i) => {
+    const isObj = typeof line === 'object' && line !== null;
+    const text = isObj ? (line.text || '') : line;
+    const size = isObj && line.size ? `font-size: ${line.size} !important;` : '';
+    const color = isObj && line.color ? `color: ${line.color} !important;` : '';
+    const styleAttr = (size || color) ? ` style="${[size, color].filter(Boolean).join(' ')}"` : '';
     const strong = i === scene.lines.length - 1 && scene.n !== 31 ? ' emph-line' : '';
-    return `        <p class="animate-line fade-in-up${delay(i)}${strong}">${line}</p>`;
+    return `        <p class="animate-line fade-in-up${delay(i)}${strong}"${styleAttr}>${text}</p>`;
   }).join('\n');
   const completion = Math.max(3600, 2600 + scene.lines.length * 640);
   const finalClass = scene.n === 31 ? ' final-scene' : '';

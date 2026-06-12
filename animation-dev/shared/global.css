@@ -84,19 +84,29 @@ body.qa-still .story-visual {
   bottom: 28px;
   z-index: 9;
   font-family: var(--font-brand);
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1.55;
   text-align: right;
-  color: rgba(7, 27, 70, 0.68);
-  letter-spacing: 0;
-  padding-top: 8px;
-  border-top: 2px solid rgba(255, 184, 77, 0.62);
-  text-shadow: 0 10px 24px rgba(7, 27, 70, 0.08);
+  padding-top: 6px;
+  border-top: 1.5px solid rgba(255, 184, 77, 0.62);
+  text-shadow: 0 4px 12px rgba(7, 27, 70, 0.04);
 }
 
 .brand-signature span {
   display: block;
+}
+
+.brand-signature span:first-child {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.brand-signature span:last-child {
+  font-size: 8px;
+  font-weight: 500;
+  color: rgba(7, 27, 70, 0.55);
+  letter-spacing: 0.04em;
 }
 
 @keyframes sceneBreath {
@@ -1171,13 +1181,19 @@ body .scene-container .card-belonging .card-icon::after {
     bottom: 58px;
     width: max-content;
     max-width: calc(100vw - 36px);
-    font-size: 10px;
-    line-height: 1.45;
     padding-top: 6px;
     overflow: visible;
-    color: rgba(7, 27, 70, 0.74);
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(255, 184, 77, 0.62);
+  }
+
+  .brand-signature span:first-child {
+    font-size: 9px !important;
+  }
+
+  .brand-signature span:last-child {
+    font-size: 7px !important;
   }
 
   .scene-split-container {

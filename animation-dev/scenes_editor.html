@@ -490,17 +490,29 @@
       right: 5%;
       bottom: 4%;
       z-index: 9;
-      font-size: clamp(6px, 1.1vw, 10px);
-      font-weight: 900;
-      line-height: 1.5;
       text-align: right;
-      color: rgba(7, 27, 70, 0.6);
-      padding-top: 2px;
+      padding-top: 3px;
       border-top: 1.5px solid rgba(255, 184, 77, 0.6);
+      text-shadow: 0 4px 12px rgba(7, 27, 70, 0.04);
     }
 
     .slide-signature span {
       display: block;
+    }
+
+    .slide-signature span:first-child {
+      font-size: clamp(6px, 1.1vw, 10px);
+      font-weight: 900;
+      color: var(--color-primary);
+      letter-spacing: 0.08em;
+      margin-bottom: 1px;
+    }
+
+    .slide-signature span:last-child {
+      font-size: clamp(4px, 0.8vw, 7px);
+      font-weight: 500;
+      color: rgba(7, 27, 70, 0.55);
+      letter-spacing: 0.04em;
     }
 
     /* Modal / JSON Export Panel */
@@ -1209,15 +1221,50 @@
       container.innerHTML = '';
       
       lines.forEach((line, index) => {
+        const isObj = typeof line === 'object' && line !== null;
+        const text = isObj ? (line.text || '') : line;
+        const size = isObj ? (line.size || '') : '';
+        const color = isObj ? (line.color || '#071B46') : '#071B46';
+        
         const row = document.createElement('div');
         row.className = 'line-row';
         row.innerHTML = `
-          <span style="font-size:12px; font-weight:bold; color:rgba(7,27,70,0.4); width:30px; flex-shrink:0;">#${index+1}</span>
-          <input type="text" class="form-control line-input" value="${line.replace(/"/g, '&quot;')}" oninput="updateCurrentSceneData()">
+          <span style="font-size:12px; font-weight:bold; color:rgba(7,27,70,0.4); width:24px; flex-shrink:0;">#${index+1}</span>
+          <input type="text" class="form-control line-input" value="${text.replace(/"/g, '&quot;')}" oninput="updateCurrentSceneData()" placeholder="內容文字..." style="flex:1;">
+          
+          <select class="form-control line-size-select" onchange="updateCurrentSceneData()" style="width: 100px; flex-shrink: 0; padding: 6px 8px; font-size:12px;">
+            <option value="" ${size === '' ? 'selected' : ''}>字型: 預設</option>
+            <option value="18px" ${size === '18px' ? 'selected' : ''}>18px (極小)</option>
+            <option value="22px" ${size === '22px' ? 'selected' : ''}>22px (較小)</option>
+            <option value="26px" ${size === '26px' ? 'selected' : ''}>26px (偏小)</option>
+            <option value="30px" ${size === '30px' ? 'selected' : ''}>30px (中等)</option>
+            <option value="34px" ${size === '34px' ? 'selected' : ''}>34px (推薦)</option>
+            <option value="38px" ${size === '38px' ? 'selected' : ''}>38px (偏大)</option>
+            <option value="42px" ${size === '42px' ? 'selected' : ''}>42px (較大)</option>
+            <option value="46px" ${size === '46px' ? 'selected' : ''}>46px (極大)</option>
+          </select>
+          
+          <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+            <input type="color" class="line-color-picker" value="${color}" oninput="updateCurrentSceneData()" title="選擇文字顏色" style="width:30px; height:30px; border:1px solid var(--color-glass-border); border-radius:6px; cursor:pointer; padding:2px; background:white;">
+            <button class="btn-icon" onclick="resetLineColor(${index})" title="恢復預設顏色" style="width:24px; height:24px; font-size:10px;">🔄</button>
+          </div>
+          
           <button class="btn-icon remove" onclick="removeLine(${index})" title="刪除此行">🗑️</button>
         `;
         container.appendChild(row);
       });
+    }
+
+    // Reset line color to default
+    function resetLineColor(lineIndex) {
+      const scene = scenes[currentIndex];
+      const line = scene.lines[lineIndex];
+      if (typeof line === 'object' && line !== null) {
+        line.color = '';
+      } else {
+        scene.lines[lineIndex] = { text: line, size: '', color: '' };
+      }
+      loadScene(currentIndex);
     }
 
     // Add new line for current scene
@@ -1248,11 +1295,23 @@
       scene.fallback = document.getElementById('scene-fallback-input').value;
       scene.alt = document.getElementById('scene-alt-input').value;
       
-      // Update lines array
-      const inputs = document.querySelectorAll('.line-input');
+      // Update lines array with objects/strings
+      const rows = document.querySelectorAll('.line-row');
       const lines = [];
-      inputs.forEach(input => {
-        lines.push(input.value);
+      rows.forEach(row => {
+        const textInput = row.querySelector('.line-input');
+        const sizeSelect = row.querySelector('.line-size-select');
+        const colorPicker = row.querySelector('.line-color-picker');
+        
+        const text = textInput ? textInput.value : '';
+        const size = sizeSelect ? sizeSelect.value : '';
+        const color = colorPicker ? colorPicker.value : '#071B46';
+        
+        if (size === '' && (color === '#071B46' || color === '')) {
+          lines.push(text);
+        } else {
+          lines.push({ text, size, color: color === '#071B46' ? '' : color });
+        }
       });
       scene.lines = lines;
 
@@ -1301,14 +1360,23 @@
       
       // Add lines
       (scene.lines || []).forEach((line, index) => {
+        const isObj = typeof line === 'object' && line !== null;
+        const text = isObj ? (line.text || '') : line;
+        const size = isObj ? (line.size || '') : '';
+        const color = isObj ? (line.color || '') : '';
+        
         const p = document.createElement('p');
         p.className = 'slide-line';
         
+        if (size) p.style.fontSize = size;
+        if (color) p.style.color = color;
+        
         // Highlight last line in scene
         if (index === scene.lines.length - 1) {
-          p.innerHTML = `<span class="emph">${line}</span>`;
+          const emphStyle = color ? ` style="color: ${color} !important;"` : '';
+          p.innerHTML = `<span class="emph"${emphStyle}>${text}</span>`;
         } else {
-          p.innerText = line;
+          p.innerText = text;
         }
         copyContainer.appendChild(p);
       });
