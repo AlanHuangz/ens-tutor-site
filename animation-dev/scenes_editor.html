@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap">
   <style>
     :root {
-      --color-text-main: #071B46;
+      --color-text-main: #001B45;
       --color-primary: #10295F;
-      --color-secondary: #071B46;
+      --color-secondary: #001B45;
       --color-accent: #FFB84D;
-      --color-coral: #FF6B63;
+      --color-coral: #FFAF65;
       --color-bg: #F4F8F8;
       --color-card-bg: rgba(255, 255, 255, 0.85);
       --color-glass-border: rgba(16, 41, 95, 0.1);
@@ -597,7 +597,7 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #071B46;
+      background: #001B45;
       color: white;
       padding: 16px 28px;
       border-radius: 12px;
@@ -1238,7 +1238,7 @@
         const isObj = typeof line === 'object' && line !== null;
         const text = isObj ? (line.text || '') : line;
         const size = isObj ? (line.size || '') : '';
-        const color = isObj ? (line.color || '#071B46') : '#071B46';
+        const color = isObj ? (line.color || '#001B45') : '#001B45';
         
         const row = document.createElement('div');
         row.className = 'line-row';
@@ -1273,7 +1273,7 @@
           </select>
           
           <div class="color-swatches" style="display:flex; gap:5px; align-items:center; flex-shrink:0; background: rgba(16,41,95,0.03); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--color-glass-border);">
-            ${buildColorSwatches(color === '#071B46' || color === '' ? '#071B46' : color, index)}
+            ${buildColorSwatches(color === '#001B45' || color === '' ? '#001B45' : color, index)}
           </div>
           
           <button class="btn-icon" onclick="insertLine(${index})" title="在此行下方插入新行" style="width:30px; height:30px; font-size:12px;">➕</button>
@@ -1286,9 +1286,9 @@
     // Helper to build Preset Swatches + Color Picker
     function buildColorSwatches(currentColor, lineIndex) {
       const presets = [
-        { value: '#071B46', label: '預設深藍' },
-        { value: '#4E6082', label: '首行灰藍' },
-        { value: '#FF6B63', label: '品牌珊瑚橘' }
+        { value: '#001B45', label: '預設深藍' },
+        { value: '#5B6D8D', label: '首行灰藍' },
+        { value: '#FFAF65', label: '品牌暖橘' }
       ];
       
       let html = '';
@@ -1301,7 +1301,7 @@
       });
       
       // Custom picker
-      const customColor = matchesPreset ? '#071B46' : currentColor;
+      const customColor = matchesPreset ? '#001B45' : currentColor;
       const customActiveStyle = !matchesPreset && currentColor ? 'border: 2.5px solid #000; transform: scale(1.25); box-shadow: 0 0 6px rgba(0,0,0,0.2);' : 'border: 1px solid rgba(7,27,70,0.15);';
       
       html += `
@@ -1321,10 +1321,10 @@
       const text = isObj ? (line.text || '') : line;
       const size = isObj ? (line.size || '') : '';
       
-      if (size === '' && color === '#071B46') {
+      if (size === '' && (color === '#001B45' || color === '#071B46')) {
         scene.lines[lineIndex] = text;
       } else {
-        scene.lines[lineIndex] = { text, size, color: color === '#071B46' ? '' : color };
+        scene.lines[lineIndex] = { text, size, color: (color === '#001B45' || color === '#071B46') ? '' : color };
       }
       
       renderLinesInputs(scene.lines);
@@ -1339,10 +1339,10 @@
       const text = isObj ? (line.text || '') : line;
       const color = isObj ? (line.color || '') : '';
       
-      if (size === '' && (color === '' || color === '#071B46')) {
+      if (size === '' && (color === '' || color === '#001B45' || color === '#071B46')) {
         scene.lines[lineIndex] = text;
       } else {
-        scene.lines[lineIndex] = { text, size, color: color === '#071B46' ? '' : color };
+        scene.lines[lineIndex] = { text, size, color: (color === '#001B45' || color === '#071B46') ? '' : color };
       }
       
       renderLinesInputs(scene.lines);

@@ -1,10 +1,10 @@
 :root {
-  --color-text-main: #071B46;
+  --color-text-main: #001B45;
   --color-primary: #10295F;
-  --color-secondary: #071B46;
+  --color-secondary: #001B45;
   --color-accent: #F4F8F8;
   --color-highlight-accent: #FFB84D;
-  --color-coral: #FF6B63;
+  --color-coral: #FFAF65;
   --color-paper: #FFFFFF;
   --color-line: rgba(11, 46, 79, 0.11);
   --font-brand: "Noto Sans TC", "Microsoft JhengHei", sans-serif;

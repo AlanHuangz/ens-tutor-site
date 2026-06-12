@@ -2,7 +2,7 @@
   --player-bg: #ffffff;
   --control-bg: rgba(255, 255, 255, 0.82);
   --active-color: #10295f;
-  --text-main: #071b46;
+  --text-main: #001B45;
   --white: #ffffff;
 }
 
@@ -121,7 +121,7 @@ body {
   width: 0%;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #10295f, #ff6b63, #ffb84d);
+  background: linear-gradient(90deg, #10295f, #FFAF65, #ffb84d);
 }
 
 .player-controls {
