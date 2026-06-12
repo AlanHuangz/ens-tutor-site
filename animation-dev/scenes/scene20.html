@@ -13,9 +13,10 @@
   <div class="scene-container">
     <div class="story-layout">
       <div class="story-copy">
-        <p class="animate-line fade-in-up">不管是圖像、影像，</p>
-        <p class="animate-line fade-in-up delay-500ms">還是聽覺的輸入，</p>
-        <p class="animate-line fade-in-up delay-1s emph-line">學習開始有了更多選擇。</p>
+        <p class="animate-line fade-in-up" style="font-size: 22px !important;">不管是圖像、影像</p>
+        <p class="animate-line fade-in-up delay-500ms" style="font-size: 22px !important; color: #5B6D8D !important;">還是聽覺的輸入</p>
+        <p class="animate-line fade-in-up delay-1s" style="font-size: 18px !important;">學習開始有了</p>
+        <p class="animate-line fade-in-up delay-1500ms emph-line" style="font-size: 30px !important; color: #FFAF65 !important;">更多選擇</p>
       </div>
       <div class="story-visual fade-in delay-500ms" aria-hidden="true">
         <div class="photo-stage photo-scene-20">
@@ -33,7 +34,7 @@
   <script>
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 4520);
+    }, 5160);
     if (new URLSearchParams(window.location.search).get('qa') === 'still') {
       document.body.classList.add('qa-still');
     }

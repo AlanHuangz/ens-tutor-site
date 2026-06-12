@@ -13,9 +13,10 @@
   <div class="scene-container">
     <div class="story-layout">
       <div class="story-copy">
-        <p class="animate-line fade-in-up">可是，在體制裡，</p>
-        <p class="animate-line fade-in-up delay-500ms">一位老師，常常要面對</p>
-        <p class="animate-line fade-in-up delay-1s emph-line">三十個孩子。</p>
+        <p class="animate-line fade-in-up">可是，體制裡</p>
+        <p class="animate-line fade-in-up delay-500ms" style="color: #FFAF65 !important;">一位老師</p>
+        <p class="animate-line fade-in-up delay-1s">常常要面對</p>
+        <p class="animate-line fade-in-up delay-1500ms emph-line">二、三十個孩子</p>
       </div>
       <div class="story-visual fade-in delay-500ms" aria-hidden="true">
         <div class="photo-stage photo-scene-11">
@@ -33,7 +34,7 @@
   <script>
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 4520);
+    }, 5160);
     if (new URLSearchParams(window.location.search).get('qa') === 'still') {
       document.body.classList.add('qa-still');
     }

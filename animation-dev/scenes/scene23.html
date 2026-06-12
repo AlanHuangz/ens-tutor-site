@@ -13,14 +13,16 @@
   <div class="scene-container">
     <div class="story-layout">
       <div class="story-copy">
-        <p class="animate-line fade-in-up">孩子再也不用擔心，</p>
-        <p class="animate-line fade-in-up delay-500ms emph-line">面對別人的不耐煩。</p>
+        <p class="animate-line fade-in-up" style="font-size: 18px !important;">孩子再也不用擔心</p>
+        <p class="animate-line fade-in-up delay-500ms" style="font-size: 18px !important; color: #5B6D8D !important;">面對別人的不耐煩</p>
+        <p class="animate-line fade-in-up delay-1s">隨時想問就問</p>
+        <p class="animate-line fade-in-up delay-1500ms emph-line">沒有心理負擔</p>
       </div>
       <div class="story-visual fade-in delay-500ms" aria-hidden="true">
         <div class="photo-stage photo-scene-23">
           <span class="photo-light l1"></span>
           <span class="photo-light l2"></span>
-          <img src="../assets/scene23-illustration.png" class="scene-img photo-img" alt="孩子安心面對提問不用害怕不耐煩">
+          <img src="../assets/scene24-illustration.png" class="scene-img photo-img" alt="孩子安心面對提問不用害怕不耐煩">
           <span class="photo-thread"></span>
         </div>
       </div>
@@ -32,7 +34,7 @@
   <script>
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 3880);
+    }, 5160);
     if (new URLSearchParams(window.location.search).get('qa') === 'still') {
       document.body.classList.add('qa-still');
     }
