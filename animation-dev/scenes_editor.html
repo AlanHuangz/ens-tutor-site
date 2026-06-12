@@ -624,6 +624,20 @@
     .toast.error {
       border-left: 5px solid var(--color-coral);
     }
+
+    /* Drag and Drop styling */
+    .line-row.dragging {
+      opacity: 0.45;
+      border: 1.5px dashed var(--color-primary) !important;
+      background: #eef3f3 !important;
+    }
+    .line-row.drag-over {
+      border-top: 3px solid var(--color-accent) !important;
+    }
+    .drag-handle:hover {
+      background-color: rgba(7, 27, 70, 0.05);
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
@@ -1228,46 +1242,196 @@
         
         const row = document.createElement('div');
         row.className = 'line-row';
+        row.setAttribute('data-index', index);
+        row.setAttribute('draggable', 'false');
+        
+        // Drag events
+        row.ondragstart = (e) => handleDragStart(e, index);
+        row.ondragover = (e) => handleDragOver(e, index);
+        row.ondragleave = (e) => handleDragLeave(e, index);
+        row.ondrop = (e) => handleDrop(e, index);
+        row.ondragend = (e) => handleDragEnd(e);
+        
         row.innerHTML = `
-          <span style="font-size:12px; font-weight:bold; color:rgba(7,27,70,0.4); width:24px; flex-shrink:0;">#${index+1}</span>
+          <div class="drag-handle" onmousedown="enableRowDrag(event)" onmouseup="disableRowDrag(event)" style="cursor: grab; padding: 6px; color: rgba(7,27,70,0.3); font-size:16px; user-select: none; display: flex; align-items: center;" title="拖曳以排序">⠿</div>
+          <span style="font-size:12px; font-weight:bold; color:rgba(7,27,70,0.4); width:20px; flex-shrink:0; text-align: center;">#${index+1}</span>
           <input type="text" class="form-control line-input" value="${text.replace(/"/g, '&quot;')}" oninput="updateCurrentSceneData()" placeholder="內容文字..." style="flex:1;">
           
-          <select class="form-control line-size-select" onchange="updateCurrentSceneData()" style="width: 100px; flex-shrink: 0; padding: 6px 8px; font-size:12px;">
+          <select class="form-control line-size-select" onchange="updateCurrentSceneData()" style="width: 105px; flex-shrink: 0; padding: 6px 4px; font-size:11px; height: 36px;">
             <option value="" ${size === '' ? 'selected' : ''}>字型: 預設</option>
-            <option value="18px" ${size === '18px' ? 'selected' : ''}>18px (極小)</option>
-            <option value="22px" ${size === '22px' ? 'selected' : ''}>22px (較小)</option>
-            <option value="26px" ${size === '26px' ? 'selected' : ''}>26px (偏小)</option>
-            <option value="30px" ${size === '30px' ? 'selected' : ''}>30px (中等)</option>
-            <option value="34px" ${size === '34px' ? 'selected' : ''}>34px (推薦)</option>
-            <option value="38px" ${size === '38px' ? 'selected' : ''}>38px (偏大)</option>
-            <option value="42px" ${size === '42px' ? 'selected' : ''}>42px (較大)</option>
-            <option value="46px" ${size === '46px' ? 'selected' : ''}>46px (極大)</option>
+            <option value="12px" ${size === '12px' ? 'selected' : ''}>12px (極微小)</option>
+            <option value="14px" ${size === '14px' ? 'selected' : ''}>14px (微小)</option>
+            <option value="16px" ${size === '16px' ? 'selected' : ''}>16px (較小)</option>
+            <option value="18px" ${size === '18px' ? 'selected' : ''}>18px (偏小)</option>
+            <option value="22px" ${size === '22px' ? 'selected' : ''}>22px (中等偏小)</option>
+            <option value="26px" ${size === '26px' ? 'selected' : ''}>26px (中等)</option>
+            <option value="30px" ${size === '30px' ? 'selected' : ''}>30px (中等偏大)</option>
+            <option value="34px" ${size === '34px' ? 'selected' : ''}>34px (推薦大標)</option>
+            <option value="38px" ${size === '38px' ? 'selected' : ''}>38px (較大)</option>
+            <option value="42px" ${size === '42px' ? 'selected' : ''}>42px (大)</option>
+            <option value="46px" ${size === '46px' ? 'selected' : ''}>46px (特大)</option>
           </select>
           
-          <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
-            <input type="color" class="line-color-picker" value="${color}" oninput="updateCurrentSceneData()" title="選擇文字顏色" style="width:30px; height:30px; border:1px solid var(--color-glass-border); border-radius:6px; cursor:pointer; padding:2px; background:white;">
-            <button class="btn-icon" onclick="resetLineColor(${index})" title="恢復預設顏色" style="width:24px; height:24px; font-size:10px;">🔄</button>
+          <div class="color-swatches" style="display:flex; gap:5px; align-items:center; flex-shrink:0; background: rgba(16,41,95,0.03); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--color-glass-border);">
+            ${buildColorSwatches(color === '#071B46' || color === '' ? '#071B46' : color, index)}
           </div>
           
+          <button class="btn-icon" onclick="insertLine(${index})" title="在此行下方插入新行" style="width:30px; height:30px; font-size:12px;">➕</button>
           <button class="btn-icon remove" onclick="removeLine(${index})" title="刪除此行">🗑️</button>
         `;
         container.appendChild(row);
       });
     }
 
-    // Reset line color to default
-    function resetLineColor(lineIndex) {
+    // Helper to build Preset Swatches + Color Picker
+    function buildColorSwatches(currentColor, lineIndex) {
+      const presets = [
+        { value: '#071B46', label: '預設深藍' },
+        { value: '#FF6B63', label: '珊瑚橘' },
+        { value: '#FFB84D', label: '鵝黃色' },
+        { value: '#7A8B9E', label: '質感灰' },
+        { value: '#2EC4B6', label: '湖水綠' }
+      ];
+      
+      let html = '';
+      let matchesPreset = presets.some(p => p.value.toLowerCase() === currentColor.toLowerCase());
+      
+      presets.forEach(preset => {
+        const isActive = preset.value.toLowerCase() === currentColor.toLowerCase();
+        const activeStyle = isActive ? 'border: 2px solid #000; transform: scale(1.2); box-shadow: 0 0 6px rgba(0,0,0,0.2);' : 'border: 1px solid rgba(7,27,70,0.15);';
+        html += `<button type="button" onclick="setLineColor(${lineIndex}, '${preset.value}')" title="${preset.label}" style="width:14px; height:14px; border-radius:50%; background-color:${preset.value}; cursor:pointer; padding:0; ${activeStyle} transition: transform 0.2s;"></button>`;
+      });
+      
+      // Custom picker
+      const customColor = matchesPreset ? '#071B46' : currentColor;
+      const customActiveStyle = !matchesPreset && currentColor ? 'border: 2px solid #000; transform: scale(1.2); box-shadow: 0 0 6px rgba(0,0,0,0.2);' : 'border: 1px solid rgba(7,27,70,0.15);';
+      
+      html += `
+        <div style="position:relative; width:14px; height:14px; border-radius:50%; overflow:hidden; ${customActiveStyle} cursor:pointer; background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);" title="自訂顏色">
+          <input type="color" class="line-color-picker" value="${customColor}" oninput="setLineCustomColor(${lineIndex}, this.value)" onchange="saveCustomColor(${lineIndex}, this.value)" style="position:absolute; top:-4px; left:-4px; width:22px; height:22px; border:none; padding:0; cursor:pointer; opacity: 0;">
+        </div>
+      `;
+      
+      return html;
+    }
+
+    // Set swatch colors
+    function setLineColor(lineIndex, color) {
       const scene = scenes[currentIndex];
       const line = scene.lines[lineIndex];
-      if (typeof line === 'object' && line !== null) {
-        line.color = '';
+      const isObj = typeof line === 'object' && line !== null;
+      const text = isObj ? (line.text || '') : line;
+      const size = isObj ? (line.size || '') : '';
+      
+      if (size === '' && color === '#071B46') {
+        scene.lines[lineIndex] = text;
       } else {
-        scene.lines[lineIndex] = { text: line, size: '', color: '' };
+        scene.lines[lineIndex] = { text, size, color: color === '#071B46' ? '' : color };
       }
+      
+      renderLinesInputs(scene.lines);
+      updateLivePreview();
+    }
+
+    // Custom color slider updates in real-time
+    function setLineCustomColor(lineIndex, color) {
+      const scene = scenes[currentIndex];
+      const line = scene.lines[lineIndex];
+      const isObj = typeof line === 'object' && line !== null;
+      const text = isObj ? (line.text || '') : line;
+      const size = isObj ? (line.size || '') : '';
+      
+      // Temporary update object in place
+      scene.lines[lineIndex] = { text, size, color };
+
+      // Update preview immediately
+      const previewLines = document.querySelectorAll('#slide-copy .slide-line');
+      if (previewLines[lineIndex]) {
+        previewLines[lineIndex].style.color = color;
+        const emphSpan = previewLines[lineIndex].querySelector('.emph');
+        if (emphSpan) emphSpan.style.color = color;
+      }
+    }
+
+    // Custom color slider save on release
+    function saveCustomColor(lineIndex, color) {
+      const scene = scenes[currentIndex];
+      const line = scene.lines[lineIndex];
+      const isObj = typeof line === 'object' && line !== null;
+      const text = isObj ? (line.text || '') : line;
+      const size = isObj ? (line.size || '') : '';
+      
+      scene.lines[lineIndex] = { text, size, color };
+      renderLinesInputs(scene.lines);
+    }
+
+    // Drag control events
+    let dragSourceIndex = null;
+
+    function enableRowDrag(e) {
+      const row = e.target.closest('.line-row');
+      if (row) row.setAttribute('draggable', 'true');
+    }
+
+    function disableRowDrag(e) {
+      const row = e.target.closest('.line-row');
+      if (row) row.setAttribute('draggable', 'false');
+    }
+
+    function handleDragStart(e, index) {
+      dragSourceIndex = index;
+      e.target.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', index);
+    }
+
+    function handleDragOver(e, index) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const row = document.querySelector(`.line-row[data-index="${index}"]`);
+      if (row && dragSourceIndex !== index) {
+        row.classList.add('drag-over');
+      }
+    }
+
+    function handleDragLeave(e, index) {
+      const row = document.querySelector(`.line-row[data-index="${index}"]`);
+      if (row) row.classList.remove('drag-over');
+    }
+
+    function handleDrop(e, destIndex) {
+      e.preventDefault();
+      const rows = document.querySelectorAll('.line-row');
+      rows.forEach(row => row.classList.remove('drag-over'));
+      
+      const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+      if (sourceIndex !== destIndex && !isNaN(sourceIndex)) {
+        const scene = scenes[currentIndex];
+        const [movedLine] = scene.lines.splice(sourceIndex, 1);
+        scene.lines.splice(destIndex, 0, movedLine);
+        loadScene(currentIndex);
+      }
+    }
+
+    function handleDragEnd(e) {
+      e.target.classList.remove('dragging');
+      e.target.setAttribute('draggable', 'false');
+      const rows = document.querySelectorAll('.line-row');
+      rows.forEach(row => {
+        row.classList.remove('drag-over');
+        row.classList.remove('dragging');
+      });
+    }
+
+    // Insert line at specific position
+    function insertLine(lineIndex) {
+      const scene = scenes[currentIndex];
+      if (!scene.lines) scene.lines = [];
+      scene.lines.splice(lineIndex + 1, 0, '');
       loadScene(currentIndex);
     }
 
-    // Add new line for current scene
+    // Add new line for current scene (to the end)
     function addLine() {
       const scene = scenes[currentIndex];
       if (!scene.lines) scene.lines = [];
@@ -1305,6 +1469,8 @@
         
         const text = textInput ? textInput.value : '';
         const size = sizeSelect ? sizeSelect.value : '';
+        
+        // Find if color matches default or is selected in presets
         const color = colorPicker ? colorPicker.value : '#071B46';
         
         if (size === '' && (color === '#071B46' || color === '')) {
