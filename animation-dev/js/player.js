@@ -22,14 +22,12 @@ const sceneConfig = [
   { url: 'scenes/scene21.html', name: '第 21 幕：自主感建立', duration: 4950 },
   { url: 'scenes/scene22.html', name: '第 22 幕：AI耐心拆解', duration: 4950 },
   { url: 'scenes/scene23.html', name: '第 23 幕：不用面對不耐煩', duration: 4250 },
-  { url: 'scenes/scene24.html', name: '第 24 幕：想問就問', duration: 4250 },
-  { url: 'scenes/scene25.html', name: '第 25 幕：小成功累積', duration: 4950 },
-  { url: 'scenes/scene26.html', name: '第 26 幕：勝任感被滿足', duration: 4250 },
-  { url: 'scenes/scene27.html', name: '第 27 幕：老師家長有餘裕', duration: 4950 },
-  { url: 'scenes/scene28.html', name: '第 28 幕：真正接住孩子', duration: 4950 },
-  { url: 'scenes/scene29.html', name: '第 29 幕：歸屬感建立', duration: 4950 },
-  { url: 'scenes/scene30.html', name: '第 30 幕：不是學不會', duration: 4950 },
-  { url: 'scenes/scene31.html', name: '第 31 幕：重新願意學', duration: 4950 }
+  { url: 'scenes/scene24.html', name: '第 24 幕：小成功累積', duration: 4950 },
+  { url: 'scenes/scene25.html', name: '第 25 幕：老師家長有餘裕', duration: 4950 },
+  { url: 'scenes/scene26.html', name: '第 26 幕：真正接住孩子', duration: 4950 },
+  { url: 'scenes/scene27.html', name: '第 27 幕：歸屬感建立', duration: 4950 },
+  { url: 'scenes/scene28.html', name: '第 28 幕：不是學不會', duration: 4950 },
+  { url: 'scenes/scene29.html', name: '第 29 幕：重新願意學', duration: 4950 }
 ];
 
 let currentIndex = 0;

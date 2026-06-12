@@ -487,11 +487,14 @@
 
     .slide-signature {
       position: absolute;
-      right: 5%;
+      right: 4.5%;
       bottom: 4%;
       z-index: 9;
-      text-align: right;
-      padding-top: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4vw;
+      padding-top: 0.6vw;
       border-top: 1.5px solid rgba(255, 184, 77, 0.6);
       text-shadow: 0 4px 12px rgba(7, 27, 70, 0.04);
     }
@@ -660,7 +663,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-title">
-        <span>幕數清單 (31幕)</span>
+        <span>幕數清單 (${scenes.length}幕)</span>
       </div>
       <ul class="scenes-list" id="scenes-list">
         <!-- Javascript populated -->
@@ -730,9 +733,9 @@
               <!-- Image stage populated in real-time -->
             </div>
           </div>
-          <div class="slide-signature" style="border-top: none; padding-top: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px;">
-            <img src="assets/slogan_child_math.png" class="sig-first" style="height: clamp(8px, 1.4vw, 15px); display: block;" alt="先懂孩子，再懂數學">
-            <img src="assets/slogan_ai_coach.png" class="sig-second" style="height: clamp(6px, 1.0vw, 11px); display: block;" alt="AI時代的自學教練">
+          <div class="slide-signature">
+            <img src="assets/slogan_child_math.png" class="sig-first" style="height: clamp(15px, 2.2vw, 28px); display: block;" alt="先懂孩子，再懂數學">
+            <img src="assets/slogan_ai_coach.png" class="sig-second" style="height: clamp(11px, 1.6vw, 20px); display: block;" alt="AI時代的自學教練">
           </div>
 
         </div>
@@ -749,7 +752,7 @@
       </div>
       <div class="modal-body">
         <p style="margin-bottom: 12px; font-size:14px; color: #555;">
-          這是目前您編輯完成的所有 31 幕的完整 JSON 配置。請點選下方複製，然後在與 AI 助理的對話中，<b>貼上這段 JSON 內容給 AI 助理</b>，AI 將能自動為您重新建置正式網頁！
+          這是目前您編輯完成的所有幕數的完整 JSON 配置。請點選下方複製，然後在與 AI 助理的對話中，<b>貼上這段 JSON 內容給 AI 助理</b>，AI 將能自動為您重新建置正式網頁！
         </p>
         <textarea id="export-textarea" class="json-textarea" readonly></textarea>
       </div>
@@ -769,7 +772,7 @@
       </div>
       <div class="modal-body">
         <p style="margin-bottom: 12px; font-size:14px; color: #555;">
-          請在下方文字框中貼入您的 31 幕 JSON 配置資料，然後點選「確認載入」：
+          請在下方文字框中貼入您的幕數 JSON 配置資料，然後點選「確認載入」：
         </p>
         <textarea id="import-textarea" class="json-textarea" placeholder="在此處貼入 JSON..."></textarea>
       </div>
@@ -1108,17 +1111,6 @@
       },
       {
             "n": 24,
-            "title": "想問就問",
-            "lines": [
-                  "隨時想問就問，",
-                  "沒有任何心理負擔。"
-            ],
-            "img": "scene24-illustration.png",
-            "fallback": "ai_mentor.png",
-            "alt": "孩子舉手向AI提問沒有心理負擔"
-      },
-      {
-            "n": 25,
             "title": "小成功累積",
             "lines": [
                   "一次次被聽懂，",
@@ -1130,18 +1122,7 @@
             "alt": "孩子累積一個個小成功"
       },
       {
-            "n": 26,
-            "title": "勝任感被滿足",
-            "lines": [
-                  "這樣，孩子的「勝任感」",
-                  "就被滿足了。"
-            ],
-            "img": "scene26-illustration.png",
-            "fallback": "competence.png",
-            "alt": "孩子完成任務後看見自己做得到"
-      },
-      {
-            "n": 27,
+            "n": 25,
             "title": "老師家長有餘裕",
             "lines": [
                   "當孩子的自主與勝任感",
@@ -1153,7 +1134,7 @@
             "alt": "老師和家長終於有餘裕看見孩子"
       },
       {
-            "n": 28,
+            "n": 26,
             "title": "真正接住孩子",
             "lines": [
                   "有了餘裕，",
@@ -1165,7 +1146,7 @@
             "alt": "大人溫柔接住孩子"
       },
       {
-            "n": 29,
+            "n": 27,
             "title": "歸屬感建立",
             "lines": [
                   "這時，孩子最需要的",
@@ -1177,7 +1158,7 @@
             "alt": "孩子在安全陪伴中建立歸屬感"
       },
       {
-            "n": 30,
+            "n": 28,
             "title": "不是學不會",
             "lines": [
                   "so",
@@ -1189,7 +1170,7 @@
             "alt": "孩子從不願意走向願意學"
       },
       {
-            "n": 31,
+            "n": 29,
             "title": "重新願意學",
             "lines": [
                   "願意學",
@@ -1200,6 +1181,7 @@
             "fallback": "logo.png",
             "alt": "願意學 LOGO"
       }
+]
     ];
 
     let scenes = [...fallbackScenesData];
@@ -1231,6 +1213,8 @@
     // Render Scenes List in Sidebar
     function renderScenesList() {
       const listContainer = document.getElementById('scenes-list');
+      const countHeader = document.querySelector('.sidebar-title span');
+      if (countHeader) countHeader.innerText = `幕數清單 (${scenes.length}幕)`;
       listContainer.innerHTML = '';
       
       scenes.forEach((scene, index) => {
@@ -1563,7 +1547,7 @@
       // Generate Copy
       copyContainer.innerHTML = '';
       
-      if (scene.n === 31) {
+      if (scene.n === scenes.length) {
         // Special layout for final LOGO scene
         layoutContainer.className = 'slide-layout final-logo-layout';
         

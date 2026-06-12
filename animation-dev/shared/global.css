@@ -80,14 +80,17 @@ body.qa-still .story-visual {
 
 .brand-signature {
   position: absolute;
-  right: 32px;
-  bottom: 24px;
+  right: 4.5%;
+  bottom: 4%;
   z-index: 9;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 3px;
+  gap: 0.4vw;
+  padding-top: 0.6vw;
+  border-top: 1.5px solid rgba(255, 184, 77, 0.6);
   text-shadow: 0 4px 12px rgba(7, 27, 70, 0.04);
+  width: auto;
 }
 
 .brand-signature img {
@@ -96,12 +99,13 @@ body.qa-still .story-visual {
 }
 
 .brand-signature img.sig-first {
-  height: clamp(10px, 1.45vw, 15px);
-  margin-bottom: 2px;
+  height: clamp(15px, 2.2vw, 28px);
+  width: auto;
 }
 
 .brand-signature img.sig-second {
-  height: clamp(8px, 1.1vw, 11px);
+  height: clamp(11px, 1.6vw, 20px);
+  width: auto;
 }
 
 
@@ -1185,11 +1189,11 @@ body .scene-container .card-belonging .card-icon::after {
   }
 
   .brand-signature img.sig-first {
-    height: 11px !important;
+    height: 15px !important;
   }
 
   .brand-signature img.sig-second {
-    height: 8px !important;
+    height: 11px !important;
   }
 
 

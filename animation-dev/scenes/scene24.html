@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 24 幕：想問就問</title>
+  <title>第 24 幕：小成功累積</title>
   <link rel="stylesheet" href="../shared/reset.css">
   <link rel="stylesheet" href="../shared/global.css?v=1.7">
   <link rel="stylesheet" href="scene24.css">
@@ -13,14 +13,15 @@
   <div class="scene-container">
     <div class="story-layout">
       <div class="story-copy">
-        <p class="animate-line fade-in-up">隨時想問就問，</p>
-        <p class="animate-line fade-in-up delay-500ms emph-line">沒有任何心理負擔。</p>
+        <p class="animate-line fade-in-up">一次次被聽懂，</p>
+        <p class="animate-line fade-in-up delay-500ms">一次次做得到，</p>
+        <p class="animate-line fade-in-up delay-1s emph-line">孩子開始累積小成功。</p>
       </div>
       <div class="story-visual fade-in delay-500ms" aria-hidden="true">
         <div class="photo-stage photo-scene-24">
           <span class="photo-light l1"></span>
           <span class="photo-light l2"></span>
-          <img src="../assets/scene24-illustration.png" class="scene-img photo-img" alt="孩子舉手向AI提問沒有心理負擔">
+          <img src="../assets/competence.png" class="scene-img photo-img" alt="孩子累積一個個小成功">
           <span class="photo-thread"></span>
         </div>
       </div>
@@ -32,7 +33,7 @@
   <script>
     setTimeout(() => {
       window.parent.postMessage({ type: 'SCENE_COMPLETE' }, '*');
-    }, 3880);
+    }, 4520);
     if (new URLSearchParams(window.location.search).get('qa') === 'still') {
       document.body.classList.add('qa-still');
     }
