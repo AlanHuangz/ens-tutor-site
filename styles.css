@@ -374,30 +374,237 @@ main {
   align-items: center;
 }
 
-.video-container {
+.player-wrapper {
+  position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #FFFFFF;
+  background: #000000;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 16px 48px rgba(16, 41, 95, 0.08);
   border: 6px solid #ffffff;
 }
 
-.promo-video {
-  display: block;
+.video-container {
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #ffffff;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
 }
 
-.video-caption {
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 0.95rem;
+#scenesContainer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.big-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  z-index: 20;
+  cursor: pointer;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.big-play-overlay:hover {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.big-play-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Scene Styles */
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.scene.active {
+  opacity: 1;
+}
+
+.scene img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ken Burns Animations */
+.scene.motion-slow-zoom-in img {
+  transform: scale(1.03);
+  transition: transform 6s ease-out;
+}
+.scene.motion-slow-zoom-in.active img {
+  transform: scale(1.09);
+}
+
+.scene.motion-slow-zoom-out img {
+  transform: scale(1.09);
+  transition: transform 6s ease-out;
+}
+.scene.motion-slow-zoom-out.active img {
+  transform: scale(1.03);
+}
+
+.scene.motion-still-breathe img {
+  transform: scale(1.02);
+  transition: transform 7s ease-in-out;
+}
+.scene.motion-still-breathe.active img {
+  transform: scale(1.04);
+}
+
+.scene.motion-slow-pan-right img {
+  width: 104%;
+  height: 100%;
+  transform: translateX(-2%);
+  transition: transform 6s ease-out;
+}
+.scene.motion-slow-pan-right.active img {
+  transform: translateX(0);
+}
+
+.scene.motion-slow-pan-left img {
+  width: 104%;
+  height: 100%;
+  transform: translateX(2%);
+  transition: transform 6s ease-out;
+}
+.scene.motion-slow-pan-left.active img {
+  transform: translateX(0);
+}
+
+/* Subtitle/Caption Styles */
+.caption {
+  position: absolute;
+  z-index: 10;
+  max-width: 38vw;
+  font-size: clamp(24px, 2.8vw, 48px);
+  line-height: 1.55;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: #f6efe5;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.45);
+  font-family: "Noto Serif TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  pointer-events: none;
+}
+
+.caption-line {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(2px);
+  transition: opacity 1.1s ease, transform 1.1s ease, filter 1.1s ease;
+  margin-bottom: 6px;
+}
+
+.caption-line.show {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Caption Positions */
+.caption.left-center {
+  left: 8vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.caption.left-bottom {
+  left: 8vw;
+  bottom: 12%;
+}
+.caption.right-center {
+  right: 8vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .caption {
+    max-width: 80vw;
+    font-size: clamp(18px, 5.5vw, 28px);
+  }
+  .caption.left-center, .caption.left-bottom, .caption.right-center {
+    left: 8vw;
+    right: 8vw;
+    transform: none;
+    top: auto;
+    bottom: 12%;
+  }
+}
+
+/* Controls Bar */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  background: #2C3D4D;
+  padding: 12px 20px;
+  gap: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.time-display {
+  color: #f6efe5;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
   font-weight: 500;
-  text-align: center;
+  user-select: none;
+}
+
+.progress-container {
+  flex-grow: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: height 0.15s ease;
+}
+
+.progress-container:hover {
+  height: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #DCA842;
+  border-radius: 3px;
+  pointer-events: none;
+  transition: width 0.1s linear;
 }
 
 /* CTA Section styling */
