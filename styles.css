@@ -400,25 +400,7 @@ main {
 }
 
 .big-play-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  z-index: 20;
-  cursor: pointer;
-  transition: opacity 0.3s, background-color 0.3s;
-}
-
-.big-play-overlay:hover {
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.big-play-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
+  display: none !important;
 }
 
 /* Scene Styles */
@@ -545,66 +527,7 @@ main {
 
 /* Controls Bar */
 .controls-bar {
-  display: flex;
-  align-items: center;
-  background: #2C3D4D;
-  padding: 12px 20px;
-  gap: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.control-btn {
-  background: none;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border-radius: 6px;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.control-btn:active {
-  transform: scale(0.95);
-}
-
-.time-display {
-  color: #f6efe5;
-  font-size: 0.85rem;
-  font-variant-numeric: tabular-nums;
-  opacity: 0.9;
-  font-weight: 500;
-  user-select: none;
-}
-
-.progress-container {
-  flex-grow: 1;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: height 0.15s ease;
-}
-
-.progress-container:hover {
-  height: 8px;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: #DCA842;
-  border-radius: 3px;
-  pointer-events: none;
-  transition: width 0.1s linear;
+  display: none !important;
 }
 
 /* CTA Section styling */

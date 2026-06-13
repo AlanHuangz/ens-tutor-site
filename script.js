@@ -387,14 +387,10 @@ function initIntroVideoPlayer() {
         }
       });
     } else if (currentTime >= TOTAL_DURATION) {
-      // End of video
-      pause();
-      currentTime = TOTAL_DURATION;
-      if (progressBar) progressBar.style.width = '100%';
-      if (timeDisplay) timeDisplay.textContent = formatTime(currentTime);
-      if (iconPause) iconPause.style.display = 'none';
-      if (iconPlay) iconPlay.style.display = 'none';
-      if (iconReplay) iconReplay.style.display = 'block';
+      // End of video - Loop back to start (GIF style)
+      currentTime = 0;
+      currentSceneId = null;
+      updateUI();
     }
   }
 
@@ -494,6 +490,7 @@ function initIntroVideoPlayer() {
   // Init
   initScenes();
   updateUI();
+  play();
 }
 
 // 初始化
