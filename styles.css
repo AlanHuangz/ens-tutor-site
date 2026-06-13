@@ -361,14 +361,15 @@ main {
 
 /* Video Section styling */
 .video-section {
-  padding: 20px 24px 60px;
+  padding: 20px 0 60px;
   background: #F5F1E6;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .video-wrapper {
-  width: min(960px, 100%);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -378,10 +379,7 @@ main {
   position: relative;
   width: 100%;
   background: #000000;
-  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 16px 48px rgba(16, 41, 95, 0.08);
-  border: 6px solid #ffffff;
 }
 
 .video-container {
