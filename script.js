@@ -212,7 +212,7 @@ const introScenes = [
     id: 10,
     start: 47.0,
     end: 52.0,
-    image: "assets/images/logo.png",
+    image: "assets/images/logo.png?v=7.0",
     motion: "still-breathe",
     captionPosition: "left-center"
   }
