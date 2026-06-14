@@ -212,7 +212,7 @@ const introScenes = [
     id: 10,
     start: 47.0,
     end: 52.0,
-    image: "assets/images/scene10.png",
+    image: "assets/images/logo.png",
     motion: "still-breathe",
     captionPosition: "left-center"
   }
@@ -284,8 +284,7 @@ const introCaptions = [
   {
     scene: 10,
     lines: [
-      { text: "願意學", at: 47.8 },
-      { text: "先懂孩子，再懂數學", at: 49.2 }
+      { text: "讓我一起陪伴孩子", at: 47.8 }
     ]
   }
 ];
@@ -359,7 +358,7 @@ function initIntroVideoPlayer() {
         
         // 3. Setup captions for the new scene
         currentSceneId = activeScene.id;
-        captionContainer.className = `caption ${activeScene.captionPosition}`;
+        captionContainer.className = `caption ${activeScene.captionPosition} scene-${activeScene.id}`;
         
         const sceneCaption = introCaptions.find(c => c.scene === activeScene.id);
         captionContainer.innerHTML = ''; // Clear previous

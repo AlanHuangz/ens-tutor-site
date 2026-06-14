@@ -434,6 +434,20 @@ main {
   object-fit: cover;
 }
 
+#scene-10 {
+  background-color: var(--paper);
+}
+
+#scene-10 img {
+  object-fit: contain;
+  transform: scale(0.65);
+}
+
+.caption.scene-10 {
+  color: var(--teal-dark);
+  text-shadow: none;
+}
+
 /* Ken Burns Animations */
 .scene.motion-slow-zoom-in img {
   transform: scale(1.03);
